@@ -10,7 +10,7 @@ import 'package:zibzo_app/features/zibzo/data/repositories/auth/user_repositorie
 import '../../../constants/signin_params.dart';
 import '../../../constants/signup_params.dart';
 
-class MockRemoteDataSource extends Mock implements UserRemoteDataSource {}
+class MockRemoteDataSource extends Mock implements UserDataSource {}
 
 class MockNetWorkInfo extends Mock implements NetworkInfo {}
 
