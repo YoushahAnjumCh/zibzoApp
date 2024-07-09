@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:zibzo_app/common/password_notifier.dart';
 
 class InputTextFormFieldAttributes {
   final TextEditingController controller;
@@ -13,6 +14,7 @@ class InputTextFormFieldAttributes {
   final TextInputAction? textInputAction;
   final Function(String)? onFieldSubmitted;
   final VoidCallback? onPasswordVisible;
+  final PasswordVisibilityNotifier? passwordVisibilityNotifier;
   InputTextFormFieldAttributes(
       {required this.controller,
       this.isSecureField = false,
@@ -23,6 +25,7 @@ class InputTextFormFieldAttributes {
       this.contentPadding,
       this.textInputAction,
       this.hintTextSize = 14,
+      this.passwordVisibilityNotifier,
       this.onFieldSubmitted,
       this.onPasswordVisible});
 }

@@ -5,7 +5,7 @@ import 'package:zibzo_app/features/zibzo/data/models/auth/user_model.dart';
 import 'package:zibzo_app/features/zibzo/domain/entities/signup/user.dart';
 
 import '../../../../fixture_reader/fixture_reader.dart';
-import '../../../constants/signup_params/signup_params.dart';
+import '../../../constants/signup_params.dart';
 
 void main() {
   test('should be a sub class of User Entity', () {

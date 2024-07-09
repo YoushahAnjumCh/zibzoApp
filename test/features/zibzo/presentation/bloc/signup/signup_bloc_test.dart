@@ -7,7 +7,7 @@ import 'package:zibzo_app/features/zibzo/domain/usecases/signup/signup_usecase.d
 import 'package:zibzo_app/features/zibzo/presentation/signup/bloc/signup/signup_bloc.dart';
 import 'package:zibzo_app/features/zibzo/presentation/signup/bloc/signup/signup_state.dart';
 
-import '../../../../constants/signup_params/signup_params.dart';
+import '../../../../constants/signup_params.dart';
 
 class MockUserUseCase extends Mock implements SignUpUseCase {}
 

@@ -1,13 +1,13 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-//TODO : we need to pass token in every api call
-abstract class AppSecureStorage {
+abstract class AppLocalStorage {
   Future<void> writeToStorage(String key, String value);
   Future<String?> readFromStorage(String key);
   Future<void> deleteFromStorage(String key);
 }
 
-class FlutterSecureStorageAdapter implements AppSecureStorage {
+class FlutterSecureStorageAdapter implements AppLocalStorage {
   final _storage = const FlutterSecureStorage();
 
   @override
@@ -23,5 +23,24 @@ class FlutterSecureStorageAdapter implements AppSecureStorage {
   @override
   Future<void> deleteFromStorage(String key) async {
     await _storage.delete(key: key);
+  }
+}
+
+class FlutterSharedPreferenceStorageAdapter implements AppLocalStorage {
+  final SharedPreferences _sharedPreferences;
+  FlutterSharedPreferenceStorageAdapter(this._sharedPreferences);
+  @override
+  Future<void> writeToStorage(String key, String value) async {
+    await _sharedPreferences.setString(key, value);
+  }
+
+  @override
+  Future<String?> readFromStorage(String key) async {
+    return _sharedPreferences.getString(key);
+  }
+
+  @override
+  Future<void> deleteFromStorage(String key) async {
+    await _sharedPreferences.remove(key);
   }
 }

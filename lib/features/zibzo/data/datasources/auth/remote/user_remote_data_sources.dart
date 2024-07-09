@@ -10,12 +10,12 @@ import '../../../models/auth/user_model.dart';
 const _statusCode201 = 201;
 const _statusCode200 = 200;
 
-abstract class UserRemoteDataSource {
+abstract class UserDataSource {
   Future<UserModel> signUp(SignUpParams params);
   Future<UserModel> signIn(SignInParams params);
 }
 
-class UserRemoteDataSourceImpl implements UserRemoteDataSource {
+class UserRemoteDataSourceImpl implements UserDataSource {
   final http.Client client;
   const UserRemoteDataSourceImpl({required this.client});
 
@@ -29,7 +29,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       "password": params.password
     });
     if (response.statusCode == _statusCode201) {
-      return userModelFromJson(response.body);
+      return UserModel.fromJson(jsonDecode(response.body));
     } else {
       throw ServerFailure(response.body, response.statusCode);
     }
@@ -41,10 +41,9 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         Uri.parse('${StringConstant.kBaseUrl}auth/login/'),
         body: {"email": params.email, "password": params.password});
     if (response.statusCode == _statusCode200) {
-      return userModelFromJson(response.body);
+      return UserModel.fromJson(jsonDecode(response.body));
     } else {
       final errorMessage = jsonDecode(response.body);
-
       throw ServerFailure(errorMessage['msg'], response.statusCode);
     }
   }

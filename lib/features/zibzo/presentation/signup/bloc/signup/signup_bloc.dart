@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:zibzo_app/core/constant/constant.dart';
 import 'package:zibzo_app/core/failure/failure.dart';
 import 'package:zibzo_app/features/zibzo/domain/usecases/signup/signup_usecase.dart';
 import 'package:zibzo_app/features/zibzo/presentation/signup/bloc/signup/signup_state.dart';
@@ -21,14 +20,12 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       final result = await _useCase(event.params);
       result.fold(
         (failure) {
-          final errorMessage = getFailureMessage(failure);
-          emit(UserLoggedFail(errorMessage));
+          emit(UserLoggedFail(failure.errorMessage.toString()));
         },
         (user) => emit(UserLogged()),
       );
     } on ServerFailure catch (e) {
-      final errorMessage = getFailureMessage(e);
-      emit(UserLoggedFail(errorMessage));
+      emit(UserLoggedFail(e.errorMessage.toString()));
     }
   }
 }

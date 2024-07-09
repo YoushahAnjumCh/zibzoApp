@@ -7,8 +7,8 @@ import 'package:zibzo_app/features/zibzo/data/datasources/auth/remote/user_remot
 import 'package:zibzo_app/features/zibzo/data/models/auth/user_model.dart';
 
 import '../../../../../../fixture_reader/fixture_reader.dart';
-import '../../../../../constants/signin_params/signin_params.dart';
-import '../../../../../constants/signup_params/signup_params.dart';
+import '../../../../../constants/signin_params.dart';
+import '../../../../../constants/signup_params.dart';
 
 // Create a mock for http.Client
 class MockHttpClient extends Mock implements http.Client {}

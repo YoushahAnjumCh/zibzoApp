@@ -7,8 +7,8 @@ import 'package:zibzo_app/features/zibzo/data/datasources/auth/remote/user_remot
 
 import 'package:zibzo_app/features/zibzo/data/repositories/auth/user_repositories.dart';
 
-import '../../../constants/signin_params/signin_params.dart';
-import '../../../constants/signup_params/signup_params.dart';
+import '../../../constants/signin_params.dart';
+import '../../../constants/signup_params.dart';
 
 class MockRemoteDataSource extends Mock implements UserRemoteDataSource {}
 

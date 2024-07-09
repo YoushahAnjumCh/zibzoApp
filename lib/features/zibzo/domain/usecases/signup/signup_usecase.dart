@@ -1,5 +1,4 @@
-import 'package:either_dart/either.dart';
-import 'package:zibzo_app/core/failure/failure.dart';
+import 'package:zibzo_app/core/typedef/typedef.dart';
 import 'package:zibzo_app/core/usecase/usecase.dart';
 import 'package:zibzo_app/features/zibzo/domain/repositories/signup/signup_repository.dart';
 
@@ -8,7 +7,7 @@ class SignUpUseCase implements UseCase<void, SignUpParams> {
   SignUpUseCase(this.repository);
 
   @override
-  Future<Either<Failure, void>> call(SignUpParams params) async {
+  ResultVoid call(SignUpParams params) async {
     return await repository.signUp(params);
   }
 }

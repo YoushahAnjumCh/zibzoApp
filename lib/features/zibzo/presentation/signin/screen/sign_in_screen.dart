@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:zibzo_app/common/password_notifier.dart';
 import 'package:zibzo_app/core/constant/assets_path.dart';
 import 'package:zibzo_app/core/constant/string_constant.dart';
 import 'package:zibzo_app/core/constant/text_style_constant.dart';
@@ -30,7 +32,10 @@ class SignInScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final AppSecureStorage appSecureStorage = sl<AppSecureStorage>();
+    final AppLocalStorage appSharedPrefStorage =
+        sl<AppLocalStorage>(instanceName: 'sharedPreferences');
+    final AppLocalStorage appSecureStorage =
+        sl<AppLocalStorage>(instanceName: 'secureStorage');
 
     return BlocListener<SignInBloc, SignInState>(
         listener: (context, state) async {
@@ -40,9 +45,14 @@ class SignInScreen extends StatelessWidget {
             EasyLoading.showError(state.message);
           } else if (state is SignInSuccess &&
               state.user.token.toString().isNotEmpty) {
-            EasyLoading.showSuccess("Signed in successfully");
             await appSecureStorage.writeToStorage(
                 "token", state.user.token.toString());
+            await appSharedPrefStorage.writeToStorage(
+                "email", state.user.email);
+            await appSharedPrefStorage.writeToStorage(
+                "firstName", state.user.firstName);
+            context.go(GoRouterPaths.homeScreenRoute);
+            EasyLoading.dismiss();
           }
         },
         child: Scaffold(
@@ -89,16 +99,24 @@ class SignInScreen extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    InputTextFormField(
-                        key: const Key(WidgetsKeys.tPasswordKey),
-                        attributes: InputTextFormFieldAttributes(
-                          contentPadding: const EdgeInsets.all(8),
-                          controller: password,
-                          hint: StringConstant.password,
-                          isSecureField: true,
-                          validation: FormValidator.validatePassword,
-                          textInputAction: TextInputAction.next,
-                        )),
+                    ChangeNotifierProvider(
+                      create: (_) => PasswordVisibilityNotifier(),
+                      child: Consumer<PasswordVisibilityNotifier>(
+                        builder: (context, value, child) {
+                          return InputTextFormField(
+                              key: const Key(WidgetsKeys.tPasswordKey),
+                              attributes: InputTextFormFieldAttributes(
+                                passwordVisibilityNotifier: value,
+                                contentPadding: const EdgeInsets.all(8),
+                                controller: password,
+                                hint: StringConstant.password,
+                                isSecureField: true,
+                                validation: FormValidator.validatePassword,
+                                textInputAction: TextInputAction.next,
+                              ));
+                        },
+                      ),
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -110,8 +128,8 @@ class SignInScreen extends StatelessWidget {
                                 context.read<SignInBloc>().add(
                                     SignInButtonEvent(
                                         params: SignInParams(
-                                            email: email.text,
-                                            password: password.text)));
+                                            email: email.text.trim(),
+                                            password: password.text.trim())));
                               }
                             },
                             color: Colors.orangeAccent,

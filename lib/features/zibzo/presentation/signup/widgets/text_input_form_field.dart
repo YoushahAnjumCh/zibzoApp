@@ -2,46 +2,41 @@
 import 'package:flutter/material.dart';
 import 'package:zibzo_app/features/zibzo/presentation/signup/widgets/attributes/text_input_form_field_attributes.dart';
 
-bool _passwordVisible = false;
-
-class InputTextFormField extends StatefulWidget {
+class InputTextFormField extends StatelessWidget {
   final InputTextFormFieldAttributes attributes;
   const InputTextFormField({super.key, required this.attributes});
 
   @override
-  State<InputTextFormField> createState() => _InputTextFormFieldState();
-}
-
-class _InputTextFormFieldState extends State<InputTextFormField> {
-  @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: widget.attributes.controller,
-      obscureText: widget.attributes.isSecureField && !_passwordVisible,
-      enableSuggestions: !widget.attributes.isSecureField,
-      autocorrect: widget.attributes.autoCorrect,
-      validator: widget.attributes.validation,
+      controller: attributes.controller,
+      obscureText: attributes.isSecureField &&
+          !(attributes.passwordVisibilityNotifier?.passwordVisible ?? false),
+      enableSuggestions: !attributes.isSecureField,
+      autocorrect: attributes.autoCorrect,
+      validator: attributes.validation,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      enabled: widget.attributes.enable,
-      textInputAction: widget.attributes.textInputAction,
-      onFieldSubmitted: widget.attributes.onFieldSubmitted,
+      enabled: attributes.enable,
+      textInputAction: attributes.textInputAction,
+      onFieldSubmitted: attributes.onFieldSubmitted,
       decoration: InputDecoration(
         filled: true,
-        hintText: widget.attributes.hint,
+        hintText: attributes.hint,
         hintStyle: TextStyle(
-          fontSize: widget.attributes.hintTextSize,
+          fontSize: attributes.hintTextSize,
         ),
-        contentPadding: widget.attributes.contentPadding,
-        suffixIcon: widget.attributes.isSecureField
+        contentPadding: attributes.contentPadding,
+        suffixIcon: attributes.isSecureField
             ? IconButton(
                 icon: Icon(
-                  _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                  attributes.passwordVisibilityNotifier?.passwordVisible ??
+                          false
+                      ? Icons.visibility
+                      : Icons.visibility_off,
                   color: Colors.black87,
                 ),
                 onPressed: () {
-                  setState(() {
-                    _passwordVisible = !_passwordVisible;
-                  });
+                  attributes.passwordVisibilityNotifier?.changeVisibility();
                 },
               )
             : null,

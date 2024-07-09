@@ -4,8 +4,8 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zibzo_app/features/zibzo/domain/repositories/signup/signup_repository.dart';
 import 'package:zibzo_app/features/zibzo/domain/usecases/signin/signin_usecase.dart';
 
-import '../../../../constants/signin_params/signin_params.dart';
-import '../../../../constants/signup_params/signup_params.dart';
+import '../../../../constants/signin_params.dart';
+import '../../../../constants/signup_params.dart';
 
 class MockSignRepository extends Mock implements UserRepository {}
 

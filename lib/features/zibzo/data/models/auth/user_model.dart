@@ -1,10 +1,7 @@
-import 'dart:convert';
-
+import 'package:json_annotation/json_annotation.dart';
 import 'package:zibzo_app/features/zibzo/domain/entities/signup/user.dart';
 
-UserModel userModelFromJson(String str) => UserModel.fromMap(json.decode(str));
-
-String userModelToJson(UserModel data) => json.encode(data.toMap());
+part 'user_model.g.dart';
 
 const kidKey = '_id';
 const kfirstNameKey = 'firstName';
@@ -12,6 +9,7 @@ const klastNameKey = 'lastName';
 const kemailKey = 'email';
 const ktokenKey = 'token';
 
+@JsonSerializable()
 class UserModel extends User {
   const UserModel({
     required String id,
@@ -26,22 +24,7 @@ class UserModel extends User {
             lastName: lastName,
             token: token);
 
-  Map<String, dynamic> toMap() {
-    return {
-      kidKey: id,
-      kfirstNameKey: firstName,
-      klastNameKey: lastName,
-      kemailKey: email,
-      ktokenKey: token,
-    };
-  }
-
-  factory UserModel.fromMap(Map<String, dynamic> map) {
-    return UserModel(
-        email: map['email'],
-        firstName: map['firstName'],
-        id: map['id'],
-        lastName: map['lastName'],
-        token: map['token']);
-  }
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
 }

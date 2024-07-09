@@ -1,9 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:provider/provider.dart';
+import 'package:zibzo_app/common/password_notifier.dart';
 import 'package:zibzo_app/core/constant/assets_path.dart';
 import 'package:zibzo_app/core/constant/string_constant.dart';
 import 'package:zibzo_app/core/constant/text_style_constant.dart';
+import 'package:zibzo_app/core/secure_storage/app_secure_storage.dart';
+import 'package:zibzo_app/core/service/service_locator.dart';
 import 'package:zibzo_app/core/validation/validation.dart';
 import 'package:zibzo_app/features/zibzo/domain/usecases/signup/signup_usecase.dart';
 import 'package:zibzo_app/features/zibzo/presentation/signup/bloc/signup/signup_bloc.dart';
@@ -30,6 +36,10 @@ class SignUpScreen extends StatelessWidget {
       TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+  final AppLocalStorage appSharedPrefStorage =
+      sl<AppLocalStorage>(instanceName: 'sharedPreferences');
+  final AppLocalStorage appSecureStorage =
+      sl<AppLocalStorage>(instanceName: 'secureStorage');
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +48,11 @@ class SignUpScreen extends StatelessWidget {
           if (state is UserLoading) {
             EasyLoading.show(status: 'Loading...');
           } else if (state is UserLogged) {
-            Navigator.of(context).pop();
+            final email = await appSharedPrefStorage.readFromStorage("email");
+            log(email.toString());
+            final token = await appSecureStorage.readFromStorage("token");
+            log(token.toString());
+
             EasyLoading.dismiss();
           } else if (state is UserLoggedFail) {
             EasyLoading.showToast(state.failure);
@@ -80,6 +94,7 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         InputTextFormField(
                           attributes: InputTextFormFieldAttributes(
+                              contentPadding: const EdgeInsets.all(8),
                               controller: firstNameController,
                               hint: StringConstant.firstName,
                               textInputAction: TextInputAction.next,
@@ -90,6 +105,7 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         InputTextFormField(
                           attributes: InputTextFormFieldAttributes(
+                              contentPadding: const EdgeInsets.all(8),
                               controller: lastNameController,
                               hint: StringConstant.lastName,
                               textInputAction: TextInputAction.next,
@@ -100,6 +116,7 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         InputTextFormField(
                           attributes: InputTextFormFieldAttributes(
+                              contentPadding: const EdgeInsets.all(8),
                               controller: emailController,
                               hint: StringConstant.email,
                               textInputAction: TextInputAction.next,
@@ -108,40 +125,58 @@ class SignUpScreen extends StatelessWidget {
                         const SizedBox(
                           height: 12,
                         ),
-                        InputTextFormField(
-                          attributes: InputTextFormFieldAttributes(
-                              controller: passwordController,
-                              hint: StringConstant.password,
-                              textInputAction: TextInputAction.next,
-                              isSecureField: true,
-                              validation: FormValidator.validatePassword),
+                        ChangeNotifierProvider(
+                          create: (_) => PasswordVisibilityNotifier(),
+                          child: Consumer<PasswordVisibilityNotifier>(
+                            builder: (context, value, child) {
+                              return InputTextFormField(
+                                attributes: InputTextFormFieldAttributes(
+                                    contentPadding: const EdgeInsets.all(8),
+                                    passwordVisibilityNotifier: value,
+                                    controller: passwordController,
+                                    hint: StringConstant.password,
+                                    textInputAction: TextInputAction.next,
+                                    isSecureField: true,
+                                    validation: FormValidator.validatePassword),
+                              );
+                            },
+                          ),
                         ),
                         const SizedBox(
                           height: 12,
                         ),
-                        InputTextFormField(
-                          attributes: InputTextFormFieldAttributes(
-                            controller: confirmPasswordController,
-                            hint: StringConstant.confirmPassword,
-                            isSecureField: true,
-                            textInputAction: TextInputAction.go,
-                            validation: FormValidator.validatePassword,
-                            onFieldSubmitted: (_) {
-                              if (_formKey.currentState!.validate()) {
-                                if (passwordController.text !=
-                                    confirmPasswordController.text) {
-                                  // Handle password mismatch
-                                } else {
-                                  context
-                                      .read<UserBloc>()
-                                      .add(SignupUser(SignUpParams(
-                                        firstName: firstNameController.text,
-                                        lastName: lastNameController.text,
-                                        email: emailController.text,
-                                        password: passwordController.text,
-                                      )));
-                                }
-                              }
+                        ChangeNotifierProvider(
+                          create: (_) => PasswordVisibilityNotifier(),
+                          child: Consumer<PasswordVisibilityNotifier>(
+                            builder: (context, passwordValue, child) {
+                              return InputTextFormField(
+                                attributes: InputTextFormFieldAttributes(
+                                  contentPadding: const EdgeInsets.all(8),
+                                  passwordVisibilityNotifier: passwordValue,
+                                  controller: confirmPasswordController,
+                                  hint: StringConstant.confirmPassword,
+                                  isSecureField: true,
+                                  textInputAction: TextInputAction.go,
+                                  validation: FormValidator.validatePassword,
+                                  onFieldSubmitted: (_) {
+                                    if (_formKey.currentState!.validate()) {
+                                      if (passwordController.text !=
+                                          confirmPasswordController.text) {
+                                      } else {
+                                        context
+                                            .read<UserBloc>()
+                                            .add(SignupUser(SignUpParams(
+                                              firstName:
+                                                  firstNameController.text,
+                                              lastName: lastNameController.text,
+                                              email: emailController.text,
+                                              password: passwordController.text,
+                                            )));
+                                      }
+                                    }
+                                  },
+                                ),
+                              );
                             },
                           ),
                         ),

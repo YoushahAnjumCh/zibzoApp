@@ -6,7 +6,8 @@ class AppTheme {
       OutlineInputBorder(borderSide: BorderSide(color: color));
 
   static final lightThemeMode = ThemeData.light().copyWith(
-      appBarTheme: AppBarTheme(backgroundColor: AppPalatte.colorTransparent),
+      appBarTheme: AppBarTheme(
+          elevation: 0, backgroundColor: AppPalatte.colorTransparent),
       inputDecorationTheme: InputDecorationTheme(
           enabledBorder: border(),
           border: border(),

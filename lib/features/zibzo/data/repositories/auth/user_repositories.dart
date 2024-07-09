@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:either_dart/either.dart';
 import 'package:zibzo_app/core/constant/string_constant.dart';
 import 'package:zibzo_app/core/failure/failure.dart';
@@ -12,7 +11,7 @@ import 'package:zibzo_app/features/zibzo/domain/usecases/signin/signin_usecase.d
 import 'package:zibzo_app/features/zibzo/domain/usecases/signup/signup_usecase.dart';
 
 class UserRepositoryImpl extends UserRepository {
-  final UserRemoteDataSource remoteDataSource;
+  final UserDataSource remoteDataSource;
   final NetworkInfo networkInfo;
   UserRepositoryImpl(
       {required this.remoteDataSource, required this.networkInfo});
@@ -24,7 +23,7 @@ class UserRepositoryImpl extends UserRepository {
         await remoteDataSource.signUp(params);
         return const Right(null);
       } on ServerFailure catch (e) {
-        return Left(ServerFailure(e.toString(), e.errorCode));
+        return Left(ServerFailure(e.errorMessage.toString(), e.errorCode));
       } on SocketException catch (e) {
         return Left(ServerFailure(e.message, 500));
       }
@@ -40,7 +39,7 @@ class UserRepositoryImpl extends UserRepository {
         final result = await remoteDataSource.signIn(params);
         return Right(result);
       } on ServerFailure catch (e) {
-        return Left(ServerFailure(e.toString(), e.errorCode));
+        return Left(ServerFailure(e.errorMessage.toString(), e.errorCode));
       } on SocketException catch (e) {
         return Left(ServerFailure(e.message, 500));
       }

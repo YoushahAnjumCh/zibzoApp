@@ -3,25 +3,28 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:zibzo_app/core/routes/app_routes.dart';
 import 'package:zibzo_app/core/theme/theme.dart';
+import 'package:zibzo_app/features/zibzo/presentation/home_screen/bloc/product_bloc.dart';
 import 'package:zibzo_app/features/zibzo/presentation/signin/bloc/signin_bloc.dart';
 import 'package:zibzo_app/features/zibzo/presentation/signup/bloc/signup/signup_bloc.dart';
 import 'core/service/service_locator.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await init();
   runApp(const MyApp());
-  init();
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     final AppRouter appRouter = AppRouter();
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => sl<UserBloc>()),
-        BlocProvider(create: (context) => sl<SignInBloc>())
+        BlocProvider(create: (context) => sl<SignInBloc>()),
+        BlocProvider(
+            create: (context) => sl<ProductBloc>()..add(ProductFetchEvent())),
       ],
       child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
