@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:zibzo_app/core/constant/string_constant.dart';
 import 'package:zibzo_app/core/failure/failure.dart';
@@ -23,8 +22,7 @@ class UserRemoteDataSourceImpl implements UserDataSource {
   Future<UserModel> signUp(SignUpParams params) async {
     final response = await client
         .post(Uri.parse('${StringConstant.kBaseUrl}auth/signup/'), body: {
-      "firstName": params.firstName,
-      "lastName": params.lastName,
+      "userName": params.userName,
       "email": params.email,
       "password": params.password
     });

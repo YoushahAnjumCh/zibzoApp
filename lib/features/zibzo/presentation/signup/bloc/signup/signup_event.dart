@@ -1,10 +1,7 @@
 part of 'signup_bloc.dart';
 
-abstract class UserEvent extends Equatable {
+abstract class UserEvent {
   const UserEvent();
-
-  @override
-  List<Object> get props => [];
 }
 
 class SignupUser extends UserEvent {
@@ -12,7 +9,4 @@ class SignupUser extends UserEvent {
   const SignupUser(this.params);
 }
 
-class TogglePasswordVisibility extends UserEvent {
-  @override
-  List<Object> get props => [];
-}
+class TogglePasswordVisibility extends UserEvent {}

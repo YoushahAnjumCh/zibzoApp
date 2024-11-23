@@ -31,4 +31,13 @@ class FormValidator {
     }
     return null;
   }
+
+  static String? validateConfirmPassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Confirm Password is required';
+    } else if (value.length < 8) {
+      return 'Password should minimum 8 characters';
+    }
+    return null;
+  }
 }

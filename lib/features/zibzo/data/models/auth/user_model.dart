@@ -5,24 +5,24 @@ part 'user_model.g.dart';
 
 const kidKey = '_id';
 const kfirstNameKey = 'firstName';
-const klastNameKey = 'lastName';
+const kuserNameKey = 'userName';
 const kemailKey = 'email';
 const ktokenKey = 'token';
 
 @JsonSerializable()
 class UserModel extends User {
-  const UserModel({
-    required String id,
-    required String firstName,
-    required String lastName,
-    required String email,
-    String? token,
-  }) : super(
+  const UserModel(
+      {required String id,
+      required String userName,
+      required String email,
+      String? token,
+      String? image})
+      : super(
             email: email,
-            firstName: firstName,
             id: id,
-            lastName: lastName,
-            token: token);
+            userName: userName,
+            token: token,
+            image: image);
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);

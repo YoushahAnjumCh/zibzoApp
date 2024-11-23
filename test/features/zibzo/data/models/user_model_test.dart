@@ -34,10 +34,11 @@ void main() {
       /// Assert
       final expectedMap = {
         "email": "john.doe@example.com",
-        "firstName": "John",
-        "lastName": "Doe",
-        "_id": "6614938b95a5d403caa6628f",
-        "token": "token"
+        "userName": "Doe",
+        "id": "6614938b95a5d403caa6628f",
+        "token": "token",
+        "image":
+            "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
       };
       expect(result, expectedMap);
     },

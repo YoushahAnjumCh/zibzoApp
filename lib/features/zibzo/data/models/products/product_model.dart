@@ -1,46 +1,47 @@
-import 'package:json_annotation/json_annotation.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/products/products.dart';
+import 'package:zibzo_app/features/zibzo/domain/entities/home/home_products_entity.dart';
 
-part 'product_model.g.dart';
-
-@JsonSerializable()
-class ProductModel extends Products {
+class ProductModel extends ProductEntity {
   const ProductModel({
-    required int id,
+    required String id,
     required String title,
-    required String description,
-    required double price,
-    required String category,
-    required String image,
-    required RatingModel rating,
+    required double offerPrice,
+    required String subtitle,
+    required double offerPercentage,
+    required double actualPrice,
+    required List<String> image,
   }) : super(
-          category: category,
-          description: description,
           id: id,
-          image: image,
-          price: price,
           title: title,
-          rating: rating,
+          subtitle: subtitle,
+          image: image,
+          offerPercentage: offerPercentage,
+          actualPrice: actualPrice,
+          offerPrice: offerPrice,
         );
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) =>
-      _$ProductModelFromJson(json);
+  // Factory constructor to create a ProductEntity from a JSON map
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
+    return ProductModel(
+      id: json['_id'],
+      title: json['title'],
+      offerPrice: (json['offerPrice'] as num).toDouble(),
+      actualPrice: (json['actualPrice'] as num).toDouble(),
+      subtitle: json['subtitle'],
+      offerPercentage: (json['offerPercentage'] as num).toDouble(),
+      image: List<String>.from(json['image'] as List),
+    );
+  }
 
-  Map<String, dynamic> toJson() => _$ProductModelToJson(this);
-}
-
-@JsonSerializable()
-class RatingModel extends Rating {
-  const RatingModel({
-    required double rate,
-    required int count,
-  }) : super(
-          rate: rate,
-          count: count,
-        );
-
-  factory RatingModel.fromJson(Map<String, dynamic> json) =>
-      _$RatingModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$RatingModelToJson(this);
+  // Method to convert a ProductEntity instance to a JSON map
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'title': title,
+      'offerPrice': offerPrice,
+      'actualPrice': actualPrice,
+      'subtitle': subtitle,
+      'offerPercentage': offerPercentage,
+      'image': image,
+    };
+  }
 }

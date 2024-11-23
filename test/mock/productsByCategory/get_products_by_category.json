@@ -1,0 +1,63 @@
+[
+    {
+      "_id": "6728cbd124fece9ffe991115",
+      "title": "Crewneck Mixed Texture",
+      "subtitle": "Sweater",
+      "category": "Men",
+      "image": [
+        "ProductImage_1730726865575.avif",
+        "ProductImage_1730726865577.webp",
+        "ProductImage_1730726865581.avif",
+        "ProductImage_1730726865581.avif"
+      ],
+      "offerPrice": 1899,
+      "actualPrice": 2600,
+      "offerPercentage": 10,
+      "__v": 0
+    },
+    {
+      "_id": "6728ccdb24fece9ffe99111f",
+      "title": "Trucker Faux",
+      "subtitle": "Jacket",
+      "category": "Men",
+      "image": [
+        "ProductImage_1730727131353.avif",
+        "ProductImage_1730727131353.avif",
+        "ProductImage_1730727131354.avif"
+      ],
+      "offerPrice": 2099,
+      "actualPrice": 2800,
+      "offerPercentage": 7,
+      "__v": 0
+    },
+    {
+      "_id": "6728cdbc24fece9ffe99113b",
+      "title": "Pile Lined Zip-Up",
+      "subtitle": "Hoodie",
+      "category": "Men",
+      "image": [
+        "ProductImage_1730727356248.avif",
+        "ProductImage_1730727356256.webp"
+      ],
+      "offerPrice": 1300,
+      "actualPrice": 1899,
+      "offerPercentage": 7,
+      "__v": 0
+    },
+    {
+      "_id": "67290e76e8226d9a7f83636b",
+      "title": "Blue Pattern",
+      "subtitle": "Zibzo",
+      "category": "Men",
+      "image": [
+        "ProductImage_1730743926790.avif",
+        "ProductImage_1730743926791.avif",
+        "ProductImage_1730743926791.avif",
+        "ProductImage_1730743926791.avif"
+      ],
+      "offerPrice": 1099,
+      "actualPrice": 1299,
+      "offerPercentage": 10,
+      "__v": 0
+    }
+  ]

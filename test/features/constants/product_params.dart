@@ -1,36 +1,40 @@
 import 'package:zibzo_app/features/zibzo/data/models/products/product_model.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/products/products.dart';
+import 'package:zibzo_app/features/zibzo/data/models/products/product_response_model.dart';
+import 'package:zibzo_app/features/zibzo/domain/entities/home/home_products_entity.dart';
+import 'package:zibzo_app/features/zibzo/domain/entities/home/home_response_entity.dart';
 import 'package:zibzo_app/features/zibzo/domain/usecases/home_page/product_use_case.dart';
 
 const tProductParams = ProductsParams(limit: 1, offset: 10);
 
-const tProducts = [
-  Products(
-      id: 1,
-      title: "title",
-      price: 1200,
-      description: "description",
-      category: "Laptop",
-      image: "image",
-      rating: RatingModel(count: 1, rate: 3.2))
-];
+const tProducts = [tProduct];
 
-const tProduct = Products(
-    id: 1,
-    title: "title",
-    price: 1200,
-    description: "description",
-    category: "Laptop",
-    image: "image",
-    rating: RatingModel(count: 1, rate: 3.2));
+const tProduct = ProductEntity(
+  actualPrice: 1200,
+  id: "1",
+  image: ["image"],
+  offerPercentage: 20,
+  offerPrice: 20,
+  subtitle: "subtitle",
+  title: "title",
+);
 
 const tProductModel = ProductModel(
-    id: 1,
-    title: "title",
-    description: "description",
-    price: 1200,
-    category: "laptop",
-    image: "image",
-    rating: tRating);
+  actualPrice: 1200,
+  id: "1",
+  image: ["image"],
+  offerPercentage: 20,
+  offerPrice: 20,
+  subtitle: "subtitle",
+  title: "title",
+);
 
-const tRating = RatingModel(count: 1, rate: 3.2);
+const tProductResponse = ProductResponseModel(products: [
+  tProductModel,
+], homebanner: [], offerbanner: [], category: []);
+
+const tHomeResponseEntity = HomeResponseEntity(
+  category: [],
+  homebanner: [],
+  offerbanner: [],
+  products: tProducts,
+);

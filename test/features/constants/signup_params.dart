@@ -3,17 +3,19 @@ import 'package:zibzo_app/features/zibzo/domain/entities/signup/user.dart';
 import 'package:zibzo_app/features/zibzo/domain/usecases/signup/signup_usecase.dart';
 
 const tSignUpParams = SignUpParams(
-    email: "email",
-    firstName: "firstname",
-    lastName: "lastName",
-    password: "password");
+    email: "email@gmail.com", userName: "userName", password: "password");
 
 const tUserModel = UserModel(
+    email: "john.doe@example.com",
+    userName: "Doe",
     id: "6614938b95a5d403caa6628f",
-    firstName: "John",
     token: "token",
-    lastName: "Doe",
-    email: "john.doe@example.com");
+    image:
+        "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png");
 
-const tUser =
-    User(id: "1", firstName: "firstName", lastName: "lastName", email: "email");
+const tUser = User(
+    id: "1",
+    email: "email",
+    userName: "userName",
+    image: "image",
+    token: "token");

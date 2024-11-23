@@ -46,6 +46,12 @@ dependencies:
   shared_preferences: ^2.2.3
   json_annotation: ^4.9.0
   flutter_rating_bar: ^4.0.1
+  cached_network_image: ^3.4.0
+  flutter_screenutil: ^5.9.3
+  responsive_framework: ^1.5.1
+  carousel_slider: ^5.0.0
+  flutter_svg: ^2.0.10+1
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:
@@ -57,7 +63,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
   bloc_test: ^9.1.7
-  mocktail: ^1.0.3
+  mocktail:
   build_runner: ^2.1.0
   json_serializable: ^6.0.1
 # For information on the generic Dart part of this file, see the
@@ -85,11 +91,12 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/SFPRO_BOLD.OTF
+        - asset: assets/fonts/SFPRO_REGULAR.OTF
+        - asset: assets/fonts/SFPRO_MEDIUM.OTF
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:zibzo_app/common/password_notifier.dart';
 
@@ -9,8 +8,10 @@ class InputTextFormFieldAttributes {
   final String? hint;
   final EdgeInsets? contentPadding;
   final String? Function(String?)? validation;
+  final Widget? prefixIcon;
   final double hintTextSize;
   final bool enable;
+  final Color? hintColor;
   final TextInputAction? textInputAction;
   final Function(String)? onFieldSubmitted;
   final VoidCallback? onPasswordVisible;
@@ -24,6 +25,8 @@ class InputTextFormFieldAttributes {
       this.validation,
       this.contentPadding,
       this.textInputAction,
+      this.prefixIcon,
+      this.hintColor,
       this.hintTextSize = 14,
       this.passwordVisibilityNotifier,
       this.onFieldSubmitted,

@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:zibzo_app/features/zibzo/presentation/signup/widgets/attributes/text_input_form_field_attributes.dart';
 
@@ -9,6 +8,10 @@ class InputTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: Theme.of(context)
+          .textTheme
+          .labelMedium
+          ?.copyWith(color: Colors.black),
       controller: attributes.controller,
       obscureText: attributes.isSecureField &&
           !(attributes.passwordVisibilityNotifier?.passwordVisible ?? false),
@@ -20,9 +23,10 @@ class InputTextFormField extends StatelessWidget {
       textInputAction: attributes.textInputAction,
       onFieldSubmitted: attributes.onFieldSubmitted,
       decoration: InputDecoration(
-        filled: true,
+        prefixIcon: attributes.prefixIcon,
         hintText: attributes.hint,
         hintStyle: TextStyle(
+          color: attributes.hintColor,
           fontSize: attributes.hintTextSize,
         ),
         contentPadding: attributes.contentPadding,
@@ -40,7 +44,6 @@ class InputTextFormField extends StatelessWidget {
                 },
               )
             : null,
-        border: OutlineInputBorder(borderSide: BorderSide.none),
       ),
     );
   }

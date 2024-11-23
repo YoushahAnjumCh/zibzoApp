@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:either_dart/either.dart';
@@ -7,9 +6,8 @@ import 'package:zibzo_app/core/failure/failure.dart';
 import 'package:zibzo_app/core/network_info/network_info.dart';
 import 'package:zibzo_app/core/typedef/typedef.dart';
 import 'package:zibzo_app/features/zibzo/data/datasources/products/product_remote_data_source.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/products/products.dart';
-import 'package:zibzo_app/features/zibzo/domain/repositories/product/product_repository.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/home_page/product_use_case.dart';
+import 'package:zibzo_app/features/zibzo/domain/entities/home/home_response_entity.dart';
+import 'package:zibzo_app/features/zibzo/domain/repositories/home/home_repository.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
   final NetworkInfo networkInfo;
@@ -18,34 +16,14 @@ class ProductRepositoryImpl implements ProductRepository {
   ProductRepositoryImpl({required this.dataSource, required this.networkInfo});
 
   @override
-  ResultFuture<List<Products>> getProducts(ProductsParams params) async {
+  ResultFuture<HomeResponseEntity> getProducts() async {
     if (await networkInfo.isConnected) {
       try {
-        final products = await dataSource.getProducts(params);
+        final products = await dataSource.getProducts();
         return Right(products);
       } on ServerFailure catch (e) {
-        log(e.errorMessage.toString());
         return Left(ServerFailure(e.errorMessage.toString(), e.errorCode));
       } on SocketException catch (e) {
-        log(e.message.toString());
-        return Left(ServerFailure(e.message, 500));
-      }
-    } else {
-      return Left(ConnectionFailure(StringConstant.kInternetFailureText));
-    }
-  }
-
-  @override
-  ResultFuture<Products> getProductById(int id) async {
-    if (await networkInfo.isConnected) {
-      try {
-        final products = await dataSource.getProductById(id);
-        return Right(products);
-      } on ServerFailure catch (e) {
-        log(e.errorMessage.toString());
-        return Left(ServerFailure(e.errorMessage.toString(), e.errorCode));
-      } on SocketException catch (e) {
-        log(e.message.toString());
         return Left(ServerFailure(e.message, 500));
       }
     } else {

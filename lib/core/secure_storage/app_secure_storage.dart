@@ -1,46 +1,35 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zibzo_app/core/constant/string_constant.dart';
 
 abstract class AppLocalStorage {
-  Future<void> writeToStorage(String key, String value);
-  Future<String?> readFromStorage(String key);
-  Future<void> deleteFromStorage(String key);
+  Future<void> saveToken([String key = StringConstant.authToken, String value]);
+  Future<String?> getToken([String key = StringConstant.authToken]);
+  Future<void> clearToken([String key = StringConstant.authToken]);
+  Future<bool> isLoggedIn();
 }
 
 class FlutterSecureStorageAdapter implements AppLocalStorage {
   final _storage = const FlutterSecureStorage();
 
   @override
-  Future<void> writeToStorage(String key, String value) async {
+  Future<void> saveToken(
+      [String key = StringConstant.authToken, String? value]) async {
     await _storage.write(key: key, value: value);
   }
 
   @override
-  Future<String?> readFromStorage(String key) async {
+  Future<String?> getToken([String key = StringConstant.authToken]) async {
     return await _storage.read(key: key);
   }
 
   @override
-  Future<void> deleteFromStorage(String key) async {
+  Future<void> clearToken([String key = StringConstant.authToken]) async {
     await _storage.delete(key: key);
   }
-}
-
-class FlutterSharedPreferenceStorageAdapter implements AppLocalStorage {
-  final SharedPreferences _sharedPreferences;
-  FlutterSharedPreferenceStorageAdapter(this._sharedPreferences);
-  @override
-  Future<void> writeToStorage(String key, String value) async {
-    await _sharedPreferences.setString(key, value);
-  }
 
   @override
-  Future<String?> readFromStorage(String key) async {
-    return _sharedPreferences.getString(key);
-  }
-
-  @override
-  Future<void> deleteFromStorage(String key) async {
-    await _sharedPreferences.remove(key);
+  Future<bool> isLoggedIn() async {
+    String? token = await getToken(StringConstant.authToken);
+    return token != null;
   }
 }

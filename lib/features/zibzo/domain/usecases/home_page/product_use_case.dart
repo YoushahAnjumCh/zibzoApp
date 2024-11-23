@@ -1,15 +1,15 @@
 import 'package:zibzo_app/core/typedef/typedef.dart';
 import 'package:zibzo_app/core/usecase/usecase.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/products/products.dart';
-import 'package:zibzo_app/features/zibzo/domain/repositories/product/product_repository.dart';
+import 'package:zibzo_app/features/zibzo/domain/entities/home/home_response_entity.dart';
+import 'package:zibzo_app/features/zibzo/domain/repositories/home/home_repository.dart';
 
-class ProductUseCase extends UseCase<List<Products>, ProductsParams> {
+class ProductUseCase extends UseCaseNoParams<HomeResponseEntity> {
   final ProductRepository repository;
   ProductUseCase(this.repository);
 
   @override
-  ResultFuture<List<Products>> call(ProductsParams params) async {
-    return await repository.getProducts(params);
+  ResultFuture<HomeResponseEntity> call() async {
+    return await repository.getProducts();
   }
 }
 

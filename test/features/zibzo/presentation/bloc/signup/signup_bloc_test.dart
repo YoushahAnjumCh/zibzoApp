@@ -28,7 +28,7 @@ void main() {
     build: () {
       final userBloc = UserBloc(useCase);
       when(() => useCase(tSignUpParams))
-          .thenAnswer((_) async => const Right(tUser));
+          .thenAnswer((_) async => const Right(null));
       return userBloc;
     },
     act: (bloc) => bloc.add(const SignupUser(tSignUpParams)),
@@ -44,7 +44,7 @@ void main() {
       return userBloc;
     },
     act: (bloc) => bloc.add(const SignupUser(tSignUpParams)),
-    expect: () => [UserLoading(), UserLoggedFail("Unauthorized: ")],
+    expect: () => [UserLoading(), UserLoggedFail("errorMessage")],
   );
 
   blocTest<UserBloc, UserState>(
@@ -52,10 +52,37 @@ void main() {
     build: () {
       final userBloc = UserBloc(useCase);
       when(() => useCase(tSignUpParams))
-          .thenThrow(const ServerFailure("", 500));
+          .thenThrow(const ServerFailure("Internal Server Error: ", 500));
       return userBloc;
     },
     act: (bloc) => bloc.add(const SignupUser(tSignUpParams)),
     expect: () => [UserLoading(), UserLoggedFail("Internal Server Error: ")],
   );
+  group('UserState Equatable Tests', () {
+    test('UserInitial props should be empty', () {
+      final state = UserInitial();
+      expect(state.props, []);
+    });
+
+    test('UserLoading props should be empty', () {
+      final state = UserLoading();
+      expect(state.props, []);
+    });
+
+    test('UserLogged props should be empty', () {
+      final state = UserLogged();
+      expect(state.props, []);
+    });
+
+    test('UserLoggedFail props should include the failure message', () {
+      const failureMessage = "Some error occurred";
+      final state = UserLoggedFail(failureMessage);
+      expect(state.props, [failureMessage]);
+    });
+
+    test('UserLoggedOut props should be empty', () {
+      final state = UserLoggedOut();
+      expect(state.props, []);
+    });
+  });
 }

@@ -23,13 +23,14 @@ void main() {
     () async {
       /// Arrange
       when(() => mockRepository.signUp(tSignUpParams))
-          .thenAnswer((_) async => const Right(tUser));
+          .thenAnswer((_) async => const Right(null));
 
       /// Act
       final result = await usecase(tSignUpParams);
 
       /// Assert
-      expect(result, const Right(tUser));
+      expect(result, const Right(null));
+
       verify(() => mockRepository.signUp(tSignUpParams));
       verifyNoMoreInteractions(mockRepository);
     },

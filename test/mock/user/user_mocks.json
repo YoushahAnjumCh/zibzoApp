@@ -1,7 +1,7 @@
 {
   "email": "john.doe@example.com",
-  "firstName": "John",
-  "lastName": "Doe",
+  "userName": "Doe",
   "id": "6614938b95a5d403caa6628f",
-  "token":"token"
+  "token":"token",
+  "image": "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
 }

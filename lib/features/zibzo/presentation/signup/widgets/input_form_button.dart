@@ -23,7 +23,10 @@ class InputFormButton extends StatelessWidget {
         child: attributes.titleText != null
             ? Text(
                 attributes.titleText!,
-                style: TextStyle(color: attributes.titleColor),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge!
+                    .copyWith(color: Colors.white),
               )
             : Container());
   }
