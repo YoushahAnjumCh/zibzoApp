@@ -97,7 +97,7 @@ class _MultipleImages extends StatelessWidget {
       height: 105,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Colors.black.withOpacity(0.5),
+        color: Color.fromRGBO(0, 0, 0, 0.5),
       ),
       alignment: Alignment.center,
       child: Center(

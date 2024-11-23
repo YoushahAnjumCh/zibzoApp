@@ -13,10 +13,11 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
-            color: Colors.white60.withOpacity(0.4), // Custom shadow color
-            offset: const Offset(0, 2), // Shadow position
+            color: Color.fromRGBO(255, 255, 255, 0.4),
+
+            offset: Offset(0, 2), // Shadow position
           ),
         ],
       ),
