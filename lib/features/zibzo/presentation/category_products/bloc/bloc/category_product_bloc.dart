@@ -1,9 +1,8 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:zibzo_app/core/failure/failure.dart';
 import 'package:zibzo_app/features/zibzo/domain/entities/home/home_products_entity.dart';
 import 'package:zibzo_app/features/zibzo/domain/usecases/category_products/category_products_use_case.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 part 'category_product_event.dart';
 part 'category_product_state.dart';
 

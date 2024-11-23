@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:zibzo_app/core/constant/assets_path.dart';
 import 'package:zibzo_app/core/secure_storage/app_secure_storage.dart';
 import 'package:zibzo_app/core/service/service_locator.dart';
 import 'package:zibzo_app/features/zibzo/domain/usecases/home_page/product_use_case.dart';

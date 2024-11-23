@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zibzo_app/core/failure/failure.dart';
 import 'package:zibzo_app/features/zibzo/domain/entities/home/home_response_entity.dart';
 import 'package:zibzo_app/features/zibzo/domain/usecases/home_page/product_use_case.dart';

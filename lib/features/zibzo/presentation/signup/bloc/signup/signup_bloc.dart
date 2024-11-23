@@ -1,7 +1,5 @@
 import 'dart:async';
-
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zibzo_app/core/failure/failure.dart';
 import 'package:zibzo_app/features/zibzo/domain/usecases/signup/signup_usecase.dart';
 import 'package:zibzo_app/features/zibzo/presentation/signup/bloc/signup/signup_state.dart';

@@ -36,6 +36,8 @@ class HomeScreen extends StatelessWidget {
 }
 
 class SearchView extends StatelessWidget {
+  const SearchView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(child: Text('Search View'));
@@ -43,6 +45,8 @@ class SearchView extends StatelessWidget {
 }
 
 class WishListView extends StatelessWidget {
+  const WishListView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(child: Text('Wishlist View'));
@@ -50,6 +54,8 @@ class WishListView extends StatelessWidget {
 }
 
 class CartView extends StatelessWidget {
+  const CartView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(child: Text('Cart View'));
@@ -57,6 +63,8 @@ class CartView extends StatelessWidget {
 }
 
 class ProfileView extends StatelessWidget {
+  const ProfileView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(child: Text('Profile View'));

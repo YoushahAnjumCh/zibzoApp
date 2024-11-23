@@ -7,14 +7,9 @@ import 'package:provider/provider.dart';
 import 'package:zibzo_app/common/bottom_nav_bar_notifier.dart';
 import 'package:zibzo_app/core/secure_storage/app_secure_storage.dart';
 import 'package:zibzo_app/core/service/service_locator.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/signup/user.dart';
 import 'package:zibzo_app/features/zibzo/domain/usecases/home_page/product_use_case.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/signin/signin_usecase.dart';
 import 'package:zibzo_app/features/zibzo/presentation/home_screen/bloc/product_bloc.dart';
 import 'package:zibzo_app/features/zibzo/presentation/home_screen/screen/home_screen.dart';
-import 'package:zibzo_app/features/zibzo/presentation/home_screen/screen/home_view.dart';
-import 'package:zibzo_app/features/zibzo/presentation/home_screen/widgets/bottom_navigation_bar.dart';
-import 'package:zibzo_app/features/zibzo/presentation/home_screen/widgets/custom_appbar_widget.dart';
 import 'package:zibzo_app/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_cubit.dart';
 import 'package:zibzo_app/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_state.dart';
 
