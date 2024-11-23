@@ -23,7 +23,7 @@ jobs:
           java-version: "12.x"
       # Install Flutter
       - name: Setup Flutter
-        uses: subosito/flutter-action@v1
+        uses: subosito/flutter-action@v2
         with:
           flutter-version: "3.19.5"
 
