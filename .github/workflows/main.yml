@@ -28,6 +28,10 @@ jobs:
           channel: master
 
       # Install dependencies
+      - name: CleanLutter
+        run: flutter clean
+
+      # Install dependencies
       - name: Install Dependencies
         run: flutter pub get
 
