@@ -15,12 +15,7 @@ class ProductCard extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Color.fromRGBO(
-              Colors.white60.red, // Red component
-              Colors.white60.green, // Green component
-              Colors.white60.blue, // Blue component
-              0.4, // Opacity (0.0 - 1.0)
-            ),
+            color: Colors.white60.withOpacity(0.4), // Custom shadow color
             offset: const Offset(0, 2), // Shadow position
           ),
         ],

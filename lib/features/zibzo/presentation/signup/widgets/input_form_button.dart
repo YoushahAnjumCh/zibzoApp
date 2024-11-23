@@ -8,30 +8,25 @@ class InputFormButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         onPressed: attributes.onClick,
-        style: ButtonStyle(
-          padding: MaterialStateProperty.resolveWith<EdgeInsets>(
-              (Set<MaterialState> states) {
-            return attributes.padding;
-          }),
-          minimumSize: MaterialStateProperty.resolveWith<Size?>(
-            (Set<MaterialState> states) {
-              return attributes.buttonWidthHeight; // Same value for all states
-            },
-          ),
-          backgroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              return attributes.color ??
-                  Theme.of(context)
-                      .primaryColor; // Default color or theme color
-            },
-          ),
-          shape: MaterialStateProperty.resolveWith<RoundedRectangleBorder>(
-            (Set<MaterialState> states) {
-              return RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.circular(attributes.cornerRadius ?? 12.0),
-              ); // Same shape for all states
-            },
+        // style: ButtonStyle(
+        //   padding: MaterialStateProperty.all<EdgeInsets>(attributes.padding),
+        //   minimumSize:
+        //       MaterialStateProperty.all<Size?>(attributes.buttonWidthHeight),
+        //   backgroundColor: MaterialStateProperty.all<Color>(
+        //       attributes.color ?? Theme.of(context).primaryColor),
+        //   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        //     RoundedRectangleBorder(
+        //         borderRadius:
+        //             BorderRadius.circular(attributes.cornerRadius ?? 12.0)),
+        //   ),
+        // ),
+        style: ElevatedButton.styleFrom(
+          padding: attributes.padding,
+          minimumSize: attributes.buttonWidthHeight ??
+              Size(100, 48), // Default size if null
+          shape: RoundedRectangleBorder(
+            borderRadius:
+                BorderRadius.circular(attributes.cornerRadius ?? 12.0),
           ),
         ),
         child: attributes.titleText != null
