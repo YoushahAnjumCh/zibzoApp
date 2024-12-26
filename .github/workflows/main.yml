@@ -3,11 +3,11 @@ name: ZibZo APP CI/CD Pipeline
 on:
   push:
     branches:
-      - "**"
+      - "**" # This will trigger for all branches
   pull_request:
     branches:
       - main
-      - test
+      - test # Trigger on pull requests targeting 'main' or 'test'
 
 jobs:
   test:
@@ -51,8 +51,8 @@ jobs:
   build:
     name: Build APK
     runs-on: macos-latest
-    needs: test # Ensures tests are completed first
-    if: github.event_name == 'pull_request' # Run only on PR events
+    needs: test # Ensures that the test job runs before this job
+    if: github.event_name == 'pull_request' && (github.base_ref == 'main' || github.base_ref == 'test') # Only build on PR to main or test branches
     steps:
       # Checkout the repository
       - name: Checkout Code
@@ -76,11 +76,11 @@ jobs:
       - name: Build APK
         run: flutter build apk --debug --split-per-abi
 
-      # Display Flutter version
+      # Display Flutter Version
       - name: Flutter Version
         run: flutter --version
 
-      # Upload the built APK (optional)
+      # Upload Build Artifact (Optional)
       - name: Push to Release
         uses: ncipollo/release-action@v1
         with:
