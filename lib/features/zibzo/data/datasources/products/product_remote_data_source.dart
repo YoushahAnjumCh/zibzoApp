@@ -19,10 +19,12 @@ class ProductRemoteDataSourceImpl implements ProductDataSource {
 
   @override
   Future<ProductResponseModel> getProducts() async {
-    final token = await appSecureStorage.getToken(StringConstant.authToken);
+    final token =
+        await appSecureStorage.getCredential(StringConstant.authToken);
+    final userID = await appSecureStorage.getCredential(StringConstant.userID);
 
     final uri = Uri.parse(
-      '${StringConstant.kBaseUrl}products',
+      '${StringConstant.kBaseUrl}products?userID=$userID',
     );
     final response = await client.get(uri, headers: {
       'Content-Type': 'application/json',

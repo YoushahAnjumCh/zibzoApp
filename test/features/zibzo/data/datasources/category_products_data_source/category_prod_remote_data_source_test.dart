@@ -37,7 +37,7 @@ void main() {
   group("get Products By Category", () {
     test("should return ProductsModel when request is successfull", () async {
       // Mock token retrieval
-      when(() => mockAppLocalStorage.getToken(StringConstant.authToken))
+      when(() => mockAppLocalStorage.getCredential(StringConstant.authToken))
           .thenAnswer((_) async => 'fake_token');
 
       //Arrange
@@ -63,7 +63,7 @@ void main() {
       // Mock token retrieval
       final errorMessage = jsonEncode({"message": "server error"});
 
-      when(() => mockAppLocalStorage.getToken(StringConstant.authToken))
+      when(() => mockAppLocalStorage.getCredential(StringConstant.authToken))
           .thenAnswer((_) async => 'fake_token');
 
       // Arrange

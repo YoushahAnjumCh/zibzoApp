@@ -18,12 +18,13 @@ class ProductResponseModel extends HomeResponseEntity {
     required List<HomeBannerModel> homebanner,
     required List<OfferBannerModel> offerbanner,
     required List<CategoryModel> category,
+    required int cartProductCount,
   }) : super(
-          products: products,
-          homebanner: homebanner,
-          offerbanner: offerbanner,
-          category: category,
-        );
+            products: products,
+            homebanner: homebanner,
+            offerbanner: offerbanner,
+            category: category,
+            cartProductCount: cartProductCount);
 
   // Factory method to create an instance of ProductModel from JSON
   factory ProductResponseModel.fromJson(Map<String, dynamic> json) {
@@ -36,6 +37,7 @@ class ProductResponseModel extends HomeResponseEntity {
           json["category"].map((x) => CategoryModel.fromJson(x))),
       offerbanner: List<OfferBannerModel>.from(
           json["offerbanner"].map((x) => OfferBannerModel.fromJson(x))),
+      cartProductCount: json["cartProductCount"] ?? 0,
     );
   }
 
@@ -49,6 +51,7 @@ class ProductResponseModel extends HomeResponseEntity {
           (category as List<CategoryModel>).map((x) => x.toJson())),
       'offerbanner': List<dynamic>.from(
           (offerbanner as List<OfferBannerModel>).map((x) => x.toJson())),
+      'cartProductCount': cartProductCount,
     };
   }
 }

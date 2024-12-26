@@ -19,7 +19,7 @@ void main() {
       expect(model.products.first.title, 'Crewneck Mixed Texture');
       expect(model.homebanner.length, 4);
       expect(model.category.length, 3);
-      expect(model.offerbanner.isEmpty, true);
+      expect(model.offerbanner.length, 1);
     });
 
     test('homeResponseModelFromJson should correctly parse JSON string',
@@ -35,7 +35,7 @@ void main() {
       expect(model.products.first.title, 'Crewneck Mixed Texture');
       expect(model.homebanner.length, 4);
       expect(model.category.length, 3);
-      expect(model.offerbanner.isEmpty, true);
+      expect(model.offerbanner.length, 1);
     });
 
     test(
@@ -55,7 +55,7 @@ void main() {
       expect(decodedJson['products'].length, 8);
       expect(decodedJson['homebanner'].length, 4);
       expect(decodedJson['category'].length, 3);
-      expect(decodedJson['offerbanner'], isEmpty);
+      expect(decodedJson['offerbanner'].length, 1);
     });
 
     test('should serialize to JSON correctly', () async {
@@ -71,7 +71,7 @@ void main() {
       expect(serializedJson['products'].length, 8);
       expect(serializedJson['homebanner'].length, 4);
       expect(serializedJson['category'].length, 3);
-      expect(serializedJson['offerbanner'], isEmpty);
+      expect(serializedJson['offerbanner'].length, 1);
     });
 
     test('should handle empty lists gracefully', () async {
@@ -81,7 +81,8 @@ void main() {
         "products": [],
         "homebanner": [],
         "category": [],
-        "offerbanner": []
+        "offerbanner": [],
+        "cartProductCount:": 0
       }
       ''';
 
@@ -93,6 +94,7 @@ void main() {
       expect(model.homebanner, isEmpty);
       expect(model.category, isEmpty);
       expect(model.offerbanner, isEmpty);
+      expect(model.cartProductCount, 0);
     });
   });
 }

@@ -33,7 +33,7 @@ class CarouselImageSlider extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   margin: EdgeInsets.symmetric(horizontal: 5.0),
                   child: CachedNetworkImage(
-                    imageUrl: "http://localhost:4000/${url.image}",
+                    imageUrl: url.image,
                     imageBuilder: (context, imageProvider) => Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(

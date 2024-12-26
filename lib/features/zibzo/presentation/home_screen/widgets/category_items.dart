@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:zibzo_app/core/constant/assets_path.dart';
 import 'package:zibzo_app/core/constant/string_constant.dart';
-import 'package:zibzo_app/core/theme/color_theme.dart';
 import 'package:zibzo_app/features/zibzo/domain/entities/home/category_entity.dart';
 
 class CategoryItems extends StatelessWidget {
@@ -31,7 +30,7 @@ class CategoryItems extends StatelessWidget {
                     width: 62,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: ColorTheme.lightBlueColor,
+                      color: Theme.of(context).colorScheme.primaryContainer,
                     ),
                     child: Center(
                       child: SizedBox(
@@ -71,8 +70,7 @@ class CategoryItems extends StatelessWidget {
                         shape: BoxShape.circle,
                       ),
                       child: CachedNetworkImage(
-                        imageUrl:
-                            "http://localhost:4000/${categoryitems.image}",
+                        imageUrl: categoryitems.image,
                         imageBuilder: (context, imageProvider) => Container(
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,

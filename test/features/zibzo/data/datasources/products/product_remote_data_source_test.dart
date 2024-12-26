@@ -28,19 +28,21 @@ void main() {
     dataSource = ProductRemoteDataSourceImpl(client: mockHttpClient);
   });
   tearDown(() {
-    sl.reset(); // Clean up the service locator after each test
+    sl.reset();
   });
   group("get all products and categories", () {
     test("should return Product Response Model when request is successfull ",
         () async {
       // Mock token retrieval
-      when(() => mockAppLocalStorage.getToken(StringConstant.authToken))
+      when(() => mockAppLocalStorage.getCredential(StringConstant.authToken))
           .thenAnswer((_) async => 'fake_token');
+      when(() => mockAppLocalStorage.getCredential(StringConstant.userID))
+          .thenAnswer((_) async => 'userID');
 
       //Arrange
       final fakeResponse = fixture('products/home_page_products.json');
       when(() => mockHttpClient.get(
-            Uri.parse('${StringConstant.kBaseUrl}products'),
+            Uri.parse('${StringConstant.kBaseUrl}products?userID=userID'),
             headers: {
               'Content-Type': 'application/json',
               'Authorization': 'Bearer fake_token',
@@ -57,12 +59,14 @@ void main() {
       // Mock token retrieval
       final errorMessage = jsonEncode({"message": "server error"});
 
-      when(() => mockAppLocalStorage.getToken(StringConstant.authToken))
+      when(() => mockAppLocalStorage.getCredential(StringConstant.authToken))
           .thenAnswer((_) async => 'fake_token');
+      when(() => mockAppLocalStorage.getCredential(StringConstant.userID))
+          .thenAnswer((_) async => 'userID');
 
       // Arrange
       when(() => mockHttpClient.get(
-            Uri.parse('${StringConstant.kBaseUrl}products'),
+            Uri.parse('${StringConstant.kBaseUrl}products?userID=userID'),
             headers: {
               'Content-Type': 'application/json',
               'Authorization': 'Bearer fake_token',

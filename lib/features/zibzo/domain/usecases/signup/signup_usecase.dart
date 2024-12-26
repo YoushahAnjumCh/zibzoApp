@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:zibzo_app/core/typedef/typedef.dart';
 import 'package:zibzo_app/core/usecase/usecase.dart';
 import 'package:zibzo_app/features/zibzo/domain/repositories/signup/signup_repository.dart';
@@ -16,9 +18,11 @@ class SignUpParams {
   final String userName;
   final String email;
   final String password;
+  final File? selectedImage;
   const SignUpParams({
     required this.userName,
     required this.email,
     required this.password,
+    this.selectedImage,
   });
 }

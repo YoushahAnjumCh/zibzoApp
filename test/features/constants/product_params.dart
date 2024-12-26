@@ -1,17 +1,22 @@
 import 'package:zibzo_app/features/zibzo/data/models/products/product_model.dart';
 import 'package:zibzo_app/features/zibzo/data/models/products/product_response_model.dart';
+import 'package:zibzo_app/features/zibzo/domain/entities/home/category_entity.dart';
+import 'package:zibzo_app/features/zibzo/domain/entities/home/home_banner_entity.dart';
 import 'package:zibzo_app/features/zibzo/domain/entities/home/home_products_entity.dart';
 import 'package:zibzo_app/features/zibzo/domain/entities/home/home_response_entity.dart';
+import 'package:zibzo_app/features/zibzo/domain/entities/home/offer_banner_entity.dart';
 import 'package:zibzo_app/features/zibzo/domain/usecases/home_page/product_use_case.dart';
 
 const tProductParams = ProductsParams(limit: 1, offset: 10);
 
-const tProducts = [tProduct];
+const tProducts = [tProduct, tProduct, tProduct];
 
 const tProduct = ProductEntity(
   actualPrice: 1200,
   id: "1",
-  image: ["image"],
+  image: [
+    "https://via.placeholder.com/150",
+  ],
   offerPercentage: 20,
   offerPrice: 20,
   subtitle: "subtitle",
@@ -21,20 +26,44 @@ const tProduct = ProductEntity(
 const tProductModel = ProductModel(
   actualPrice: 1200,
   id: "1",
-  image: ["image"],
+  image: ["image", "image"],
   offerPercentage: 20,
   offerPrice: 20,
   subtitle: "subtitle",
   title: "title",
 );
 
-const tProductResponse = ProductResponseModel(products: [
+const tProductResponse = ProductResponseModel(cartProductCount: 1, products: [
   tProductModel,
 ], homebanner: [], offerbanner: [], category: []);
 
 const tHomeResponseEntity = HomeResponseEntity(
-  category: [],
-  homebanner: [],
-  offerbanner: [],
+  cartProductCount: 4,
+  category: [
+    CategoryEntity(
+        id: "1", image: "https://via.placeholder.com/150", title: "title"),
+    CategoryEntity(
+        id: "1", image: "https://via.placeholder.com/150", title: "title"),
+    CategoryEntity(
+        id: "1", image: "https://via.placeholder.com/150", title: "title"),
+    CategoryEntity(
+        id: "1", image: "https://via.placeholder.com/150", title: "title"),
+  ],
+  homebanner: [
+    HomeBannerEntity(
+        id: "id", title: "title", image: "https://via.placeholder.com/150"),
+    HomeBannerEntity(
+        id: "id", title: "title", image: "https://via.placeholder.com/150"),
+    HomeBannerEntity(
+        id: "id", title: "title", image: "https://via.placeholder.com/150"),
+    HomeBannerEntity(
+        id: "id", title: "title", image: "https://via.placeholder.com/150"),
+    HomeBannerEntity(
+        id: "id", title: "title", image: "https://via.placeholder.com/150"),
+  ],
+  offerbanner: [
+    OfferBannerEntity(
+        id: "id", title: "title", image: "https://via.placeholder.com/150")
+  ],
   products: tProducts,
 );
