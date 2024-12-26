@@ -26,7 +26,7 @@ class TrendingOfferWidget extends StatelessWidget {
                 height: 227,
                 width: 207,
                 child: CachedNetworkImage(
-                  imageUrl: "http://localhost:4000/${trendingOffers.image}",
+                  imageUrl: trendingOffers.image,
                   imageBuilder: (context, imageProvider) => Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),

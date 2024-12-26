@@ -1,8 +1,10 @@
 class StringConstant {
   static const appName = "Zibzo";
-  static const kBaseUrl = 'http://localhost:4000/';
+  static const kBaseUrl = 'https://api.zibzo.youshah.com/';
 
   static const authToken = "token";
+  static const userID = "userID";
+
   //Repository
   static const String kInternetFailureText = 'Failed to connect to the network';
   //SignUp
@@ -34,4 +36,7 @@ class StringConstant {
   static const somethingWrong = 'Something went wrong';
   static const categories = "Categories";
   static const endInDays = "Ends in 2 days";
+
+  //Cart
+  static const checkout = "Checkout";
 }

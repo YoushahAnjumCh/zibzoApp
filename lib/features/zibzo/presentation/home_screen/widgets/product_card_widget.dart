@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:provider/provider.dart';
+import 'package:zibzo_app/common/provider/cart_count_provider.dart';
 import 'package:zibzo_app/core/constant/string_formatter.dart';
-import 'package:zibzo_app/core/theme/color_theme.dart';
+import 'package:zibzo_app/core/secure_storage/app_secure_storage.dart';
+import 'package:zibzo_app/core/service/service_locator.dart';
 import 'package:zibzo_app/features/zibzo/domain/entities/home/home_products_entity.dart';
+import 'package:zibzo_app/features/zibzo/domain/usecases/cart/add_cart_usecase.dart';
+import 'package:zibzo_app/features/zibzo/presentation/home_screen/cubit/add_cart/add_cart_cubit.dart';
 import 'package:zibzo_app/features/zibzo/presentation/home_screen/widgets/product_images_widget.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductEntity products;
+  final bool isLoading;
 
-  const ProductCard({Key? key, required this.products}) : super(key: key);
+  ProductCard({
+    Key? key,
+    required this.products,
+    required this.isLoading,
+  }) : super(key: key);
+
+  final AppLocalStorage appSecureStorage = sl<AppLocalStorage>();
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +30,6 @@ class ProductCard extends StatelessWidget {
         boxShadow: const [
           BoxShadow(
             color: Color.fromRGBO(255, 255, 255, 0.4),
-
             offset: Offset(0, 2), // Shadow position
           ),
         ],
@@ -59,7 +72,7 @@ class ProductCard extends StatelessWidget {
         Text(
           '₹ ${Stringformatter.removeTrailingZeros(actualPrice)}',
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: ColorTheme.borderColor,
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
                 decoration: TextDecoration.lineThrough,
               ),
         ),
@@ -72,7 +85,7 @@ class ProductCard extends StatelessWidget {
         Text(
           "(${Stringformatter.removeTrailingZeros(offerPercentage)}% Off)",
           style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: ColorTheme.successColor,
+                color: Theme.of(context).colorScheme.scrim,
               ),
         ),
       ],
@@ -88,32 +101,69 @@ class ProductCard extends StatelessWidget {
         }),
         const SizedBox(width: 10),
         Expanded(
-          child: OutlinedButton(
-            style: OutlinedButton.styleFrom(
-              backgroundColor: ColorTheme.secondary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              padding: const EdgeInsets.symmetric(vertical: 16),
-            ),
-            onPressed: () {
-              // Add to Bag button action
+          child: BlocConsumer<AddCartCubit, AddCartState>(
+            listener: (context, state) {
+              if (state is AddCartLoaded) {
+                EasyLoading.showSuccess("Product added to cart");
+              } else if (state is AddCartFailure) {
+                EasyLoading.showError(state.errorMessage);
+              }
             },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
-                Text(
-                  "Add to Bag",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
+            builder: (context, state) {
+              return OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
-                Icon(Icons.shopping_bag_outlined, color: Colors.white),
-              ],
-            ),
+                onPressed: () async {
+                  final params = AddCartParams(
+                    productId: products.id,
+                  );
+                  final cartCount =
+                      await context.read<AddCartCubit>().addCart(params);
+
+                  if (cartCount != null) {
+                    Provider.of<CartCountProvider>(context, listen: false)
+                        .saveCartCount(
+                      cartCount,
+                    );
+                  }
+                },
+                child: BlocSelector<AddCartCubit, AddCartState, bool>(
+                  selector: (state) =>
+                      context.read<AddCartCubit>().isLoading(products.id),
+                  builder: (context, isLoading) {
+                    return isLoading
+                        ? SizedBox(
+                            height: 15,
+                            width: 15,
+                            child: const CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: const [
+                              Text(
+                                "Add to Bag",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              Icon(Icons.shopping_bag_outlined,
+                                  color: Colors.white),
+                            ],
+                          );
+                  },
+                ),
+              );
+            },
           ),
-        ),
+        )
       ],
     );
   }

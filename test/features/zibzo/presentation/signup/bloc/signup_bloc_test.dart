@@ -4,8 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zibzo_app/core/failure/failure.dart';
 import 'package:zibzo_app/features/zibzo/domain/usecases/signup/signup_usecase.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/bloc/signup/signup_bloc.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/bloc/signup/signup_state.dart';
+import 'package:zibzo_app/features/zibzo/presentation/signup/bloc/signup_bloc.dart';
+import 'package:zibzo_app/features/zibzo/presentation/signup/bloc/signup_state.dart';
 
 import '../../../../constants/signup_params.dart';
 
@@ -31,7 +31,7 @@ void main() {
           .thenAnswer((_) async => const Right(null));
       return userBloc;
     },
-    act: (bloc) => bloc.add(const SignupUser(tSignUpParams)),
+    act: (bloc) => bloc.add(SignupUser(tSignUpParams)),
     expect: () => [UserLoading(), UserLogged()],
   );
 
@@ -43,7 +43,7 @@ void main() {
           (_) async => const Left(ServerFailure("errorMessage", 401)));
       return userBloc;
     },
-    act: (bloc) => bloc.add(const SignupUser(tSignUpParams)),
+    act: (bloc) => bloc.add(SignupUser(tSignUpParams)),
     expect: () => [UserLoading(), UserLoggedFail("errorMessage")],
   );
 
@@ -55,7 +55,7 @@ void main() {
           .thenThrow(const ServerFailure("Internal Server Error: ", 500));
       return userBloc;
     },
-    act: (bloc) => bloc.add(const SignupUser(tSignUpParams)),
+    act: (bloc) => bloc.add(SignupUser(tSignUpParams)),
     expect: () => [UserLoading(), UserLoggedFail("Internal Server Error: ")],
   );
   group('UserState Equatable Tests', () {

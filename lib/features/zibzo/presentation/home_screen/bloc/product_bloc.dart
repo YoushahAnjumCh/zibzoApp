@@ -9,6 +9,7 @@ part 'product_state.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final ProductUseCase useCase;
+
   ProductBloc(this.useCase) : super(ProductInitial()) {
     on<ProductFetchEvent>(_getProducts);
   }
@@ -20,7 +21,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       products.fold(
           (left) =>
               emit(ProductFail(errorMessage: left.errorMessage.toString())),
-          (products) => emit(ProductLoaded(product: products)));
+          (products) {
+        emit(ProductLoaded(product: products));
+      });
     } on ServerFailure catch (e) {
       emit(ProductFail(errorMessage: e.errorMessage.toString()));
     }

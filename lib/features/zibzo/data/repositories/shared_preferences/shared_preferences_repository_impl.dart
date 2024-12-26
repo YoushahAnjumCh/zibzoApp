@@ -8,7 +8,7 @@ class SharedPreferencesRepositoryImpl implements SharedPreferencesRepository {
 
   @override
   Future<void> login(String username) async {
-    await localDataSource.saveToken(username);
+    await localDataSource.saveCredential(username);
   }
 
   @override
@@ -18,6 +18,6 @@ class SharedPreferencesRepositoryImpl implements SharedPreferencesRepository {
 
   @override
   Future<void> logout() async {
-    await localDataSource.clearToken();
+    await localDataSource.clearCredential();
   }
 }

@@ -22,14 +22,14 @@ void main() {
   group('SharedPreferencesLoginUseCase', () {
     test("Should call saveToken on AppLocalStorage when logging in", () async {
       // Arrange
-      when(() => mockLocalStorage.saveToken("username"))
+      when(() => mockLocalStorage.saveCredential("username"))
           .thenAnswer((_) async => Future.value(null));
 
       // Act
       await loginUseCase.logIn("username", "key");
 
       // Assert
-      verify(() => mockLocalStorage.saveToken("username")).called(1);
+      verify(() => mockLocalStorage.saveCredential("username")).called(1);
     });
   });
 
@@ -63,14 +63,14 @@ void main() {
     test("Should call clearToken on AppLocalStorage when logging out",
         () async {
       // Arrange
-      when(() => mockLocalStorage.clearToken())
+      when(() => mockLocalStorage.clearCredential())
           .thenAnswer((_) async => Future.value(null));
 
       // Act
       await logoutUseCase.logOut("key");
 
       // Assert
-      verify(() => mockLocalStorage.clearToken()).called(1);
+      verify(() => mockLocalStorage.clearCredential()).called(1);
     });
   });
 }

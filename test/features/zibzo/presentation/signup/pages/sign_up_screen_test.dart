@@ -7,9 +7,9 @@ import 'package:zibzo_app/core/constant/string_constant.dart';
 import 'package:zibzo_app/core/secure_storage/app_secure_storage.dart';
 import 'package:zibzo_app/core/service/service_locator.dart';
 import 'package:zibzo_app/features/zibzo/domain/usecases/signup/signup_usecase.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/bloc/signup/signup_bloc.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/bloc/signup/signup_state.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/pages/sign_up_screen.dart';
+import 'package:zibzo_app/features/zibzo/presentation/signup/bloc/signup_bloc.dart';
+import 'package:zibzo_app/features/zibzo/presentation/signup/bloc/signup_state.dart';
+import 'package:zibzo_app/features/zibzo/presentation/signup/screen/sign_up_screen.dart';
 
 // Mock dependencies
 class MockAppLocalStorage extends Mock implements AppLocalStorage {}

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:zibzo_app/common/bottom_nav_bar_notifier.dart';
+import 'package:zibzo_app/core/service/service_locator.dart';
+import 'package:zibzo_app/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
+import 'package:zibzo_app/features/zibzo/presentation/cart/view/cart_screen.dart';
 import 'package:zibzo_app/features/zibzo/presentation/home_screen/screen/home_view.dart';
 import 'package:zibzo_app/features/zibzo/presentation/home_screen/widgets/bottom_navigation_bar.dart';
 
@@ -14,20 +18,21 @@ class HomeScreen extends StatelessWidget {
       create: (context) => BottomNavBarNotifier(),
       child: Consumer<BottomNavBarNotifier>(
         builder: (context, bottomNavBarNotifier, child) {
-          return Scaffold(
-            body: IndexedStack(
-              index: bottomNavBarNotifier
-                  .currentIndex, // Display widget based on current index
-              children: [
-                HomeView(),
-                SearchView(),
-                WishListView(),
-                CartView(),
-                ProfileView()
-              ],
+          return BlocProvider<CartBloc>(
+            create: (context) => sl<CartBloc>(),
+            child: Scaffold(
+              body: IndexedStack(
+                index: bottomNavBarNotifier.currentIndex,
+                children: [
+                  HomeView(),
+                  SearchView(),
+                  WishListView(),
+                  CartScreen(),
+                  ProfileView(),
+                ],
+              ),
+              bottomNavigationBar: const CustomBottomNavBar(),
             ),
-            bottomNavigationBar:
-                const CustomBottomNavBar(), // No need to pass index, it uses notifier
           );
         },
       ),
@@ -35,6 +40,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+//TODO will update once screen is ready
 class SearchView extends StatelessWidget {
   const SearchView({super.key});
 
@@ -50,15 +56,6 @@ class WishListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(child: Text('Wishlist View'));
-  }
-}
-
-class CartView extends StatelessWidget {
-  const CartView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('Cart View'));
   }
 }
 

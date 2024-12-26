@@ -168,5 +168,13 @@
         "__v": 0
       }
     ],
-    "offerbanner": []
+    "offerbanner": [
+      {
+        "_id": "6762b484757a30f5aa42e868",
+        "image": "https://d3o9xza3ibzeyy.cloudfront.net/3adc33ee705bf4cbd06594be9fc35d3a28f3d198fe9cb2f017c6ef3c275eab08",
+        "title": "OfferSale",
+        "__v": 0
+      }
+    ],
+    "cartProductCount": 0
   }

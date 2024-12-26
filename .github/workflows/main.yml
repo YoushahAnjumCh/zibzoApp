@@ -1,58 +1,86 @@
-name: ZibZo CI/CD Pipeline
+name: ZibZo APP CI/CD Pipeline
 
 on:
   push:
     branches:
-      - main
-      - develop
+      - "**"
   pull_request:
     branches:
       - main
+      - test
 
 jobs:
-  flutter:
-    name: Zibzo
+  test:
+    name: Analyze and Test
     runs-on: macos-latest
     steps:
       # Checkout the repository
       - name: Checkout Code
         uses: actions/checkout@v3
+
+      # Setup Java
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
           java-version: "12.x"
-      # Install Flutter
+
+      # Setup Flutter
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: master
           architecture: x64
+          cache: true
 
-      # Install dependencies
-      - name: CleanLutter
+      # Clean previous builds
+      - name: Clean Flutter
         run: flutter clean
 
       # Install dependencies
       - name: Install Dependencies
         run: flutter pub get
 
-      # Run Flutter Analyzer
+      # Analyze the code
       - name: Analyze Code
         run: flutter analyze
 
-      # Run Flutter Tests
+      # Run tests
       - name: Run Tests
         run: flutter test
 
-      # Build APK (or iOS app)
+  build:
+    name: Build APK
+    runs-on: macos-latest
+    needs: test # Ensures tests are completed first
+    if: github.event_name == 'pull_request' # Run only on PR events
+    steps:
+      # Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Setup Java
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+
+      # Setup Flutter
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: master
+          architecture: x64
+          cache: true
+
+      # Build APK
       - name: Build APK
         run: flutter build apk --debug --split-per-abi
 
-      # Display Flutter Version
+      # Display Flutter version
       - name: Flutter Version
         run: flutter --version
 
-      # Upload Build Artifact (Optional)
+      # Upload the built APK (optional)
       - name: Push to Release
         uses: ncipollo/release-action@v1
         with:
