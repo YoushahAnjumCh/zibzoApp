@@ -7,7 +7,7 @@ class GetCartUseCase extends UseCaseNoParams<CartResponseEntity> {
   final CartRepository cartRepository;
 
   GetCartUseCase({required this.cartRepository});
-
+  @override
   ResultFuture<CartResponseEntity> call() async {
     return await cartRepository.getCart();
   }

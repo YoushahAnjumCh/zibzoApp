@@ -7,7 +7,7 @@ class DeleteCartUseCase extends UseCase<CartResponseEntity, DeleteCartParams> {
   final CartRepository cartRepository;
 
   DeleteCartUseCase({required this.cartRepository});
-
+  @override
   ResultFuture<CartResponseEntity> call(DeleteCartParams params) async {
     return await cartRepository.removeCart(params);
   }

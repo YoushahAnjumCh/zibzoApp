@@ -36,8 +36,6 @@ class AppTheme {
       onPrimary: AppColors.onPrimaryLight,
       primaryContainer: AppColors.primaryContainerLight,
       onPrimaryContainer: AppColors.onPrimaryContainerLight,
-      background: AppColors.backgroundLight,
-      onBackground: AppColors.onBackgroundLight,
       onSecondary: AppColors.onSecondaryLight,
       onError: AppColors.error,
       outline: AppColors.outline,

@@ -119,17 +119,17 @@ class ProductCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
                 onPressed: () async {
+                  // Access the provider before the async operation
+                  final cartCountProvider =
+                      Provider.of<CartCountProvider>(context, listen: false);
+
                   final params = AddCartParams(
                     productId: products.id,
                   );
                   final cartCount =
                       await context.read<AddCartCubit>().addCart(params);
-
                   if (cartCount != null) {
-                    Provider.of<CartCountProvider>(context, listen: false)
-                        .saveCartCount(
-                      cartCount,
-                    );
+                    cartCountProvider.saveCartCount(cartCount);
                   }
                 },
                 child: BlocSelector<AddCartCubit, AddCartState, bool>(

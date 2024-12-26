@@ -6,7 +6,7 @@ import 'package:zibzo_app/features/zibzo/domain/entities/signup/user.dart';
 import 'package:zibzo_app/features/zibzo/domain/usecases/signup/signup_usecase.dart';
 
 final tSignUpParams = SignUpParams(
-    email: "em@gmail.com",
+    email: "sample@gmail.com",
     userName: "userName",
     password: "password",
     selectedImage: File(AssetsPath.appLogo));

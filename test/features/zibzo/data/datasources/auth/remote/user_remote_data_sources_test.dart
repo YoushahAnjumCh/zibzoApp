@@ -28,14 +28,13 @@ void main() {
   group('signUp', () {
     test('should return UserModel when the request is successful', () async {
       // Arrange
-
-      final fakeResponse = fixture('user/user_mocks.json');
+      final fakeResponse =
+          fixture('user/user_mocks.json'); // Load the mock data
 
       when(() => mockHttpClient.post(
             Uri.parse('${StringConstant.kBaseUrl}auth/signup/'),
-            body: any(named: 'body'),
+            body: tSignUpParams,
           )).thenAnswer((_) async => http.Response(fakeResponse, 201));
-
       // Act
       final result = await dataSource.signUp(tSignUpParams);
 

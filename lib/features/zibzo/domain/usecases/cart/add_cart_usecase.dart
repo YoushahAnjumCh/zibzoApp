@@ -7,7 +7,7 @@ class AddCartUseCase extends UseCase<CartCountEntity, AddCartParams> {
   final CartRepository cartRepository;
 
   AddCartUseCase({required this.cartRepository});
-
+  @override
   ResultFuture<CartCountEntity> call(AddCartParams params) async {
     return await cartRepository.addCart(params);
   }
