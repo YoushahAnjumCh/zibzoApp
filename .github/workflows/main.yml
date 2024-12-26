@@ -52,7 +52,9 @@ jobs:
     name: Build APK
     runs-on: macos-latest
     needs: test # Ensures that the test job runs before this job
-    if: github.event_name == 'pull_request' && (github.base_ref == 'main' || github.base_ref == 'test') # Only build on PR to main or test branches
+    if: |
+      github.event_name == 'pull_request' && (github.base_ref == 'main' || github.base_ref == 'test') || 
+      github.ref == 'refs/heads/main' || github.ref == 'refs/heads/test'
     steps:
       # Checkout the repository
       - name: Checkout Code
