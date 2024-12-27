@@ -56,7 +56,8 @@ jobs:
           channel: stable
           architecture: x64
           cache: true
-
+      - name: Clean Gradle Cache
+        run: rm -rf ~/.gradle/caches/
       # Build APK
       - name: Build APK
         run: |
