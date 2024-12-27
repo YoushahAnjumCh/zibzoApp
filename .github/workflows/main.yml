@@ -3,11 +3,7 @@ name: ZibZo APP CI/CD Pipeline
 on:
   push:
     branches:
-      - "**" # This will trigger for all branches
-  pull_request:
-    branches:
-      - main
-      - test # Trigger on pull requests targeting 'main' or 'test'
+      - "**" # Trigger for all branches
 
 jobs:
   test:
@@ -52,9 +48,7 @@ jobs:
     name: Build APK
     runs-on: macos-latest
     needs: test # Ensures that the test job runs before this job
-    if: |
-      github.event_name == 'pull_request' && (github.base_ref == 'main' || github.base_ref == 'test') || 
-      github.ref == 'refs/heads/main' || github.ref == 'refs/heads/test'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/test'
     steps:
       # Checkout the repository
       - name: Checkout Code
@@ -76,7 +70,7 @@ jobs:
 
       # Build APK
       - name: Build APK
-        run: flutter build apk --debug --split-per-abi
+        run: flutter build apk --release --split-per-abi
 
       # Display Flutter Version
       - name: Flutter Version
