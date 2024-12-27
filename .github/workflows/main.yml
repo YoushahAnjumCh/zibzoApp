@@ -3,7 +3,7 @@ name: ZibZo APP CI/CD Pipeline
 on:
   push:
     branches:
-      - "**" # Trigger for all branches
+      - "**"
 
 jobs:
   test:
