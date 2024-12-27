@@ -73,6 +73,8 @@ jobs:
       - name: Build APK
         run: |
           flutter clean
+          flutter pub cache repair
+          flutter pub get
           flutter build apk --release --split-per-abi
 
       # Display Flutter Version
