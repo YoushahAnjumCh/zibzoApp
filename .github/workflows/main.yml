@@ -44,15 +44,13 @@ jobs:
           channel: stable
           architecture: x64
           cache: true
-      - name: Clean Gradle Cache
-        run: rm -rf ~/.gradle/caches/
       # Build APK
       - name: Build APK
         run: |
           flutter clean
           flutter pub get
           flutter --version
-          flutter build apk --debug --split-per-abi
+          flutter build apk
 
       # Display Flutter Version
       - name: Flutter Version
