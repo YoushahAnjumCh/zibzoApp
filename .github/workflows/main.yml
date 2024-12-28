@@ -53,8 +53,9 @@ jobs:
       - name: Start release build
         run: |
           flutter clean
+          rm -rf build
           flutter pub get
-          flutter build appbundle --release --no-tree-shake-icons
+          flutter build apk --release
 
       # Upload Build Artifact (Optional)
       - name: Push to Release
