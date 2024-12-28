@@ -51,7 +51,9 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Start release build
-        run: flutter build appbundle
+        run: flutter clean
+          flutter pub get
+          flutter build appbundle --release --no-tree-shake-icons
 
       # Upload Build Artifact (Optional)
       - name: Push to Release
