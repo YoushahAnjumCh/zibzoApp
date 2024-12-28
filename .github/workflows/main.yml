@@ -48,14 +48,17 @@ jobs:
       # 12
       - name: Get dependencies
         run: flutter pub get
-
+      - name: Clean
+        run: flutter clean
+      - name: upgrade
+        run: flutter pub upgrade
+      - name: pub get
+        run: flutter pub get
+      - name: upgrade win32
+        run: flutter pub upgrade win32
       # Runs a set of commands using the runner's shell
       - name: Start release build
-        run: |
-          flutter clean
-          rm -rf build
-          flutter pub get
-          flutter build apk --release
+        run: flutter build apk --release
 
       # Upload Build Artifact (Optional)
       - name: Push to Release
