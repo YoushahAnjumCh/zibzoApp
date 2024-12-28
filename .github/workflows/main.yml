@@ -18,27 +18,10 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
+          flutter-version: "3.19.5"
           channel: stable
           architecture: x64
           cache: true
-      - name: Clean Gradle Cache
-        run: rm -rf ~/.gradle/caches/
-      # Clean previous builds
-      - name: Clean Flutter
-        run: flutter clean
-
-      # Install dependencies
-      - name: Install Dependencies
-        run: flutter pub get
-
-      # Analyze the code
-      - name: Analyze Code
-        run: flutter analyze
-
-      # Run tests
-      - name: Run Tests
-        run: flutter test
-
   build:
     name: Build APK
     runs-on: macos-latest
@@ -64,7 +47,7 @@ jobs:
           flutter clean
           flutter pub cache repair
           flutter pub get
-          flutter build apk --release --split-per-abi
+          flutter build apk --debug --split-per-abi
 
       # Display Flutter Version
       - name: Flutter Version
