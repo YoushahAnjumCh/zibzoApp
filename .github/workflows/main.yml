@@ -49,9 +49,10 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
-      # Runs a set of commands using the runners shell
+      # Runs a set of commands using the runner's shell
       - name: Start release build
-        run: flutter clean
+        run: |
+          flutter clean
           flutter pub get
           flutter build appbundle --release --no-tree-shake-icons
 
