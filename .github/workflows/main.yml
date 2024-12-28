@@ -44,17 +44,14 @@ jobs:
           channel: stable
           architecture: x64
           cache: true
-      # Build APK
-      - name: Build APK
-        run: |
-          flutter clean
-          flutter pub get
-          flutter --version
-          flutter build apk
 
-      # Display Flutter Version
-      - name: Flutter Version
-        run: flutter --version
+      # 12
+      - name: Get dependencies
+        run: flutter pub get
+
+      # Runs a set of commands using the runners shell
+      - name: Start release build
+        run: flutter build appbundle
 
       # Upload Build Artifact (Optional)
       - name: Push to Release
