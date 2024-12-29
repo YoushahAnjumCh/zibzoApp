@@ -14,22 +14,23 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Setup Java
-      - name: Setup Java
-        uses: actions/setup-java@v1
-        with:
-          java-version: "11.x"
-
       # Setup Flutter
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
+          flutter-version: "3.19.5"
           channel: stable
           architecture: x64
           cache: true
-      - name: Clean Gradle Cache
-        run: rm -rf ~/.gradle/caches/
-      # Clean previous builds
+
+      # Setup Java for Android builds
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "zulu"
+          java-version: "11.x"
+
+      # Flutter clean
       - name: Clean Flutter
         run: flutter clean
 
@@ -59,21 +60,22 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
+          flutter-version: "3.19.5"
           channel: stable
           architecture: x64
           cache: true
 
-      # Build APK
-      - name: Build APK
-        run: |
-          flutter clean
-          flutter pub cache repair
-          flutter pub get
-          flutter build apk --release --split-per-abi
+      # Get dependencies
+      - name: Get dependencies
+        run: flutter pub get
 
-      # Display Flutter Version
-      - name: Flutter Version
-        run: flutter --version
+      # Flutter clean
+      - name: Flutter Clean
+        run: flutter clean
+
+      # Start release build
+      - name: Start release build
+        run: flutter build apk --release --split-per-abi
 
       # Upload Build Artifact (Optional)
       - name: Push to Release
