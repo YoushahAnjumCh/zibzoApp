@@ -21,6 +21,7 @@ class InputFormButton extends StatelessWidget {
         //   ),
         // ),
         style: ElevatedButton.styleFrom(
+          backgroundColor: attributes.color,
           padding: attributes.padding,
           minimumSize: attributes.buttonWidthHeight ??
               Size(100, 48), // Default size if null

@@ -24,7 +24,7 @@ class DealOfTheDayWidget extends StatelessWidget {
                   height: 194,
                   margin: const EdgeInsets.symmetric(horizontal: 6),
                   child: CachedNetworkImage(
-                    imageUrl: "http://localhost:4000/${trendingOffers.image}",
+                    imageUrl: trendingOffers.image,
                     imageBuilder: (context, imageProvider) => Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),

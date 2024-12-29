@@ -6,7 +6,7 @@ class SharedPreferencesLoginUseCase {
   SharedPreferencesLoginUseCase(this.authRepository);
 
   Future<void> logIn(String username, String key) async {
-    return await authRepository.saveToken(username);
+    return await authRepository.saveCredential(username);
   }
 }
 
@@ -20,13 +20,12 @@ class SharedPreferencesLoginStatusUseCase {
   }
 }
 
-// domain/usecases/logout_usecase.dart
 class SharedPreferencesLogoutUseCase {
   final AppLocalStorage authRepository;
 
   SharedPreferencesLogoutUseCase(this.authRepository);
 
   Future<void> logOut(String key) async {
-    return await authRepository.clearToken();
+    return await authRepository.clearCredential();
   }
 }

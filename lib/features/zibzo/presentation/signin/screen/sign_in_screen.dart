@@ -10,7 +10,6 @@ import 'package:zibzo_app/core/constant/widgets_keys.dart';
 import 'package:zibzo_app/core/routes/app_routes.dart';
 import 'package:zibzo_app/core/secure_storage/app_secure_storage.dart';
 import 'package:zibzo_app/core/service/service_locator.dart';
-import 'package:zibzo_app/core/theme/color_theme.dart';
 import 'package:zibzo_app/core/validation/validation.dart';
 import 'package:zibzo_app/features/zibzo/domain/usecases/signin/signin_usecase.dart';
 import 'package:zibzo_app/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_cubit.dart';
@@ -57,7 +56,6 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  // Listener method to handle SignIn state changes
   void _signInStateListener(BuildContext context, SignInState state,
       AppLocalStorage appSecureStorage) async {
     if (state is SignInLoading) {
@@ -72,9 +70,12 @@ class SignInScreen extends StatelessWidget {
       });
     } else if (state is SignInSuccess &&
         state.user.token.toString().isNotEmpty) {
-      await appSecureStorage.saveToken("token", state.user.token.toString());
-      await appSecureStorage.saveToken("image", state.user.image.toString());
-      await appSecureStorage.saveToken(
+      await appSecureStorage.saveCredential(
+          "token", state.user.token.toString());
+      await appSecureStorage.saveCredential(
+          "image", state.user.image.toString());
+      await appSecureStorage.saveCredential("userID", state.user.id.toString());
+      await appSecureStorage.saveCredential(
           "userName", state.user.userName.toString());
 
       if (context.mounted) {
@@ -100,7 +101,7 @@ class SignInScreen extends StatelessWidget {
             SizedBox(height: 40),
             _buildWelcomeText(context),
             _buildErrorMessage(),
-            _buildSignInFields(),
+            _buildSignInFields(context),
             _buildSignInButton(context),
             SizedBox(height: 40),
           ],
@@ -127,14 +128,14 @@ class SignInScreen extends StatelessWidget {
         Text(
           StringConstant.welcomeSignIn,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: ColorTheme.darkBlueColor,
+                color: Theme.of(context).colorScheme.primaryContainer,
                 fontWeight: FontWeight.bold,
               ),
         ),
         Text(
           StringConstant.signIn,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: ColorTheme.borderColor,
+                color: Theme.of(context).colorScheme.primaryContainer,
               ),
         ),
       ],
@@ -150,7 +151,7 @@ class SignInScreen extends StatelessWidget {
             ? Text(
                 errorMessage,
                 style: TextStyle(
-                  color: ColorTheme.errorColor,
+                  color: Theme.of(context).colorScheme.error,
                   fontWeight: FontWeight.bold,
                 ),
               )
@@ -160,14 +161,14 @@ class SignInScreen extends StatelessWidget {
   }
 
   // Sign-in fields (email and password)
-  Widget _buildSignInFields() {
+  Widget _buildSignInFields(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 62),
-          _buildEmailField(),
+          _buildEmailField(context),
           SizedBox(height: 20),
           _buildPasswordField(),
           SizedBox(height: 40),
@@ -177,15 +178,16 @@ class SignInScreen extends StatelessWidget {
   }
 
   // Email input field
-  Widget _buildEmailField() {
+  Widget _buildEmailField(BuildContext context) {
     return InputTextFormField(
       key: const Key(WidgetsKeys.tEmailKey),
       attributes: InputTextFormFieldAttributes(
-        prefixIcon: Icon(Icons.email_rounded, color: ColorTheme.borderColor),
+        prefixIcon: Icon(Icons.email_rounded,
+            color: Theme.of(context).colorScheme.onPrimaryContainer),
         contentPadding: EdgeInsets.all(8),
         controller: email,
         hint: StringConstant.email,
-        hintColor: ColorTheme.borderColor,
+        hintColor: Theme.of(context).colorScheme.onPrimaryContainer,
         validation: FormValidator.validateEmail,
         textInputAction: TextInputAction.next,
       ),
@@ -201,11 +203,12 @@ class SignInScreen extends StatelessWidget {
           return InputTextFormField(
             key: const Key(WidgetsKeys.tPasswordKey),
             attributes: InputTextFormFieldAttributes(
-              prefixIcon: Icon(Icons.lock, color: ColorTheme.borderColor),
+              prefixIcon: Icon(Icons.lock,
+                  color: Theme.of(context).colorScheme.onPrimaryContainer),
               passwordVisibilityNotifier: value,
               contentPadding: EdgeInsets.all(8),
               controller: password,
-              hintColor: ColorTheme.borderColor,
+              hintColor: Theme.of(context).colorScheme.onPrimaryContainer,
               hint: StringConstant.password,
               isSecureField: true,
               validation: FormValidator.validatePassword,
@@ -236,7 +239,7 @@ class SignInScreen extends StatelessWidget {
                   );
             }
           },
-          color: ColorTheme.secondary,
+          color: Theme.of(context).colorScheme.primary,
           titleColor: Colors.white,
           buttonWidthHeight: Size(double.maxFinite, 50),
           titleText: StringConstant.login,
@@ -258,7 +261,7 @@ class SignInScreen extends StatelessWidget {
             Text(
               StringConstant.dontHaveAccount,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: ColorTheme.borderColor,
+                    color: Theme.of(context).colorScheme.primaryContainer,
                   ),
             ),
             GestureDetector(
@@ -268,7 +271,7 @@ class SignInScreen extends StatelessWidget {
               child: Text(
                 StringConstant.register,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ColorTheme.secondary,
+                      color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,
                     ),
               ),

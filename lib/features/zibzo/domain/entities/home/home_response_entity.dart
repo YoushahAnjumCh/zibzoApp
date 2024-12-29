@@ -9,11 +9,13 @@ class HomeResponseEntity {
   final List<HomeBannerEntity> homebanner;
   final List<CategoryEntity> category;
   final List<OfferBannerEntity> offerbanner;
+  final int? cartProductCount;
 
   const HomeResponseEntity({
     required this.products,
     required this.homebanner,
     required this.category,
     required this.offerbanner,
+    required this.cartProductCount,
   });
 }

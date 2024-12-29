@@ -19,7 +19,8 @@ class CategoryProductRemoteDataSourceImpl implements CategoryProductDataSource {
 
   @override
   Future<List<ProductModel>> getCategoryProducts(String params) async {
-    final token = await appSecureStorage.getToken(StringConstant.authToken);
+    final token =
+        await appSecureStorage.getCredential(StringConstant.authToken);
     final uri = Uri.parse(
       '${StringConstant.kBaseUrl}products/category/$params',
     );

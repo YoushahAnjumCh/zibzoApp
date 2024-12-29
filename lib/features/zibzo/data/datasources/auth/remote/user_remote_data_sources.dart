@@ -17,15 +17,30 @@ abstract class UserDataSource {
 class UserRemoteDataSourceImpl implements UserDataSource {
   final http.Client client;
   const UserRemoteDataSourceImpl({required this.client});
-
   @override
   Future<UserModel> signUp(SignUpParams params) async {
-    final response = await client
-        .post(Uri.parse('${StringConstant.kBaseUrl}auth/signup/'), body: {
-      "userName": params.userName,
-      "email": params.email,
-      "password": params.password
-    });
+    var request = http.MultipartRequest(
+      'POST',
+      Uri.parse('${StringConstant.kBaseUrl}auth/signup/'),
+    );
+
+    // Add text fields
+    request.fields['userName'] = params.userName;
+    request.fields['email'] = params.email;
+    request.fields['password'] = params.password;
+
+    // Add image file if available
+    if (params.selectedImage != null) {
+      request.files.add(await http.MultipartFile.fromPath(
+        'userImage', // Field name expected by the backend
+        params.selectedImage!.path,
+      ));
+    }
+
+    // Send request
+    final streamedResponse = await request.send();
+    final response = await http.Response.fromStream(streamedResponse);
+
     if (response.statusCode == _statusCode201) {
       return UserModel.fromJson(jsonDecode(response.body));
     } else {

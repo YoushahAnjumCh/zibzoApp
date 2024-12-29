@@ -1,56 +1,81 @@
-name: ZibZo CI/CD Pipeline
+name: ZibZo APP CI/CD Pipeline
 
 on:
   push:
     branches:
-      - main
-      - develop
-  pull_request:
-    branches:
-      - main
+      - "**"
 
 jobs:
-  flutter:
-    name: Zibzo
+  test:
+    name: Analyze and Test
     runs-on: macos-latest
     steps:
       # Checkout the repository
       - name: Checkout Code
         uses: actions/checkout@v3
-      - name: Setup Java
-        uses: actions/setup-java@v1
-        with:
-          java-version: "12.x"
-      # Install Flutter
+
+      # Setup Flutter
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: master
+          flutter-version: "3.19.5"
+          channel: stable
           architecture: x64
+          cache: true
 
-      # Install dependencies
-      - name: CleanLutter
+      # Setup Java for Android builds
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "zulu"
+          java-version: "11.x"
+
+      # Flutter clean
+      - name: Clean Flutter
         run: flutter clean
 
       # Install dependencies
       - name: Install Dependencies
         run: flutter pub get
 
-      # Run Flutter Analyzer
+      # Analyze the code
       - name: Analyze Code
         run: flutter analyze
 
-      # Run Flutter Tests
+      # Run tests
       - name: Run Tests
         run: flutter test
 
-      # Build APK (or iOS app)
-      - name: Build APK
-        run: flutter build apk --debug --split-per-abi
+  build:
+    name: Build APK
+    runs-on: macos-latest
+    needs: test # Ensures that the test job runs before this job
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/test'
+    steps:
+      # Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-      # Display Flutter Version
-      - name: Flutter Version
-        run: flutter --version
+      # Setup Flutter
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.19.5"
+          channel: stable
+          architecture: x64
+          cache: true
+
+      # Get dependencies
+      - name: Get dependencies
+        run: flutter pub get
+
+      # Flutter clean
+      - name: Flutter Clean
+        run: flutter clean
+
+      # Start release build
+      - name: Start release build
+        run: flutter build apk --release --split-per-abi
 
       # Upload Build Artifact (Optional)
       - name: Push to Release

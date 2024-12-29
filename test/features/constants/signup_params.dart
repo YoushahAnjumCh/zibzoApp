@@ -1,9 +1,15 @@
+import 'dart:io';
+
+import 'package:zibzo_app/core/constant/assets_path.dart';
 import 'package:zibzo_app/features/zibzo/data/models/auth/user_model.dart';
 import 'package:zibzo_app/features/zibzo/domain/entities/signup/user.dart';
 import 'package:zibzo_app/features/zibzo/domain/usecases/signup/signup_usecase.dart';
 
-const tSignUpParams = SignUpParams(
-    email: "email@gmail.com", userName: "userName", password: "password");
+final tSignUpParams = SignUpParams(
+    email: "sample@gmail.com",
+    userName: "userName",
+    password: "password",
+    selectedImage: File(AssetsPath.appLogo));
 
 const tUserModel = UserModel(
     email: "john.doe@example.com",

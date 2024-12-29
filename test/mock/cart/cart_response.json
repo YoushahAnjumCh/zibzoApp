@@ -1,0 +1,26 @@
+{
+    "cart": {
+      "_id": "676bc73777f0fa0f514d4a73",
+      "userID": "674c425013b675865fa26bf7",
+      "productID": [
+        "6762b6ca757a30f5aa42e8ac"
+      ],
+      "__v": 0
+    },
+    "products": [
+      {
+        "_id": "6762b6ca757a30f5aa42e8ac",
+        "title": "Women Overcoat",
+        "subtitle": "Overcoat",
+        "category": "Women",
+        "image": [
+          "https://d3o9xza3ibzeyy.cloudfront.net/6d8f7b9e44d33984a624614dd33514cc8db6cbe1323e535dcbb804ad0e5a3187"
+        ],
+        "offerPrice": 3399,
+        "actualPrice": 3227,
+        "offerPercentage": 5,
+        "__v": 0
+      }
+    ],
+    "cartProductCount": 1
+  }
