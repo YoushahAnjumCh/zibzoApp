@@ -47,8 +47,9 @@ void main() {
     return '$username@gmail.com';
   }
 
+  final email = generateRandomEmail();
   final tSignUpParam = SignUpParams(
-      email: generateRandomEmail(),
+      email: email.toString(),
       userName: "userName",
       password: "password",
       selectedImage: File(AssetsPath.appLogo));
