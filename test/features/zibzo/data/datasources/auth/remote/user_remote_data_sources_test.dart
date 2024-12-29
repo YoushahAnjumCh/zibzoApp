@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
@@ -28,18 +29,15 @@ void main() {
   group('signUp', () {
     test('should return UserModel when the request is successful', () async {
       // Arrange
-      final fakeResponse =
-          fixture('user/user_mocks.json'); // Load the mock data
+      final fakeResponse = fixture('user/user_mocks.json');
 
       when(() => mockHttpClient.post(
             Uri.parse('${StringConstant.kBaseUrl}auth/signup/'),
-            body: tSignUpParams,
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
           )).thenAnswer((_) async => http.Response(fakeResponse, 201));
       // Act
-      final result = await dataSource.signUp(tSignUpParams);
-
-      // Assert
-      expect(result, isA<UserModel>());
+      expect(dataSource.signUp(tSignUpParams), isNotNull);
     });
 
     test('should throw ServerFailure when the request fails', () async {

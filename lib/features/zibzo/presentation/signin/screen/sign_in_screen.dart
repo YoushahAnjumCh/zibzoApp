@@ -46,10 +46,13 @@ class SignInScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _buildSignInForm(context),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _buildSignUpPrompt(context),
                 ],
               ),
             ),
-            _buildSignUpPrompt(context),
           ],
         ),
       ),
