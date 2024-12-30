@@ -1,15 +1,15 @@
 import 'dart:io';
 import 'package:either_dart/either.dart';
-import 'package:zibzo_app/core/constant/string_constant.dart';
-import 'package:zibzo_app/core/failure/failure.dart';
-import 'package:zibzo_app/core/network_info/network_info.dart';
-import 'package:zibzo_app/core/typedef/typedef.dart';
-import 'package:zibzo_app/features/zibzo/data/datasources/cart/cart_remote_data_source.dart';
-import 'package:zibzo_app/features/zibzo/data/models/cart/cart_count_model.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/cart/cart_response_entity.dart';
-import 'package:zibzo_app/features/zibzo/domain/repositories/cart/cart_repository.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/cart/add_cart_usecase.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/cart/delete_cart_usecase.dart';
+import 'package:zibzo/core/constant/string_constant.dart';
+import 'package:zibzo/core/failure/failure.dart';
+import 'package:zibzo/core/network_info/network_info.dart';
+import 'package:zibzo/core/typedef/typedef.dart';
+import 'package:zibzo/features/zibzo/data/datasources/cart/cart_remote_data_source.dart';
+import 'package:zibzo/features/zibzo/data/models/cart/cart_count_model.dart';
+import 'package:zibzo/features/zibzo/domain/entities/cart/cart_response_entity.dart';
+import 'package:zibzo/features/zibzo/domain/repositories/cart/cart_repository.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/cart/add_cart_usecase.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/cart/delete_cart_usecase.dart';
 
 class CartRepositoryImpl implements CartRepository {
   final CartDataSource cartDataSource;

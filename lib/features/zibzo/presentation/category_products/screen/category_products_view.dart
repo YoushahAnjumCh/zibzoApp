@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:zibzo_app/common/provider/cart_count_provider.dart';
-import 'package:zibzo_app/core/routes/app_routes.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/home_products_entity.dart';
-import 'package:zibzo_app/features/zibzo/presentation/category_products/bloc/bloc/category_product_bloc.dart';
-import 'package:zibzo_app/features/zibzo/presentation/home_screen/cubit/add_cart/add_cart_cubit.dart';
-import 'package:zibzo_app/features/zibzo/presentation/home_screen/widgets/product_card_widget.dart';
+import 'package:zibzo/common/provider/cart_count_provider.dart';
+import 'package:zibzo/core/routes/app_routes.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/home_products_entity.dart';
+import 'package:zibzo/features/zibzo/presentation/category_products/bloc/bloc/category_product_bloc.dart';
+import 'package:zibzo/features/zibzo/presentation/home_screen/cubit/add_cart/add_cart_cubit.dart';
+import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/product_card_widget.dart';
 
 class CategoryProductsView extends StatelessWidget {
   final String categoryName;

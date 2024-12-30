@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zibzo_app/core/failure/failure.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/signin/signin_usecase.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signin/bloc/signin_event.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signin/bloc/signin_state.dart';
+import 'package:zibzo/core/failure/failure.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/signin/signin_usecase.dart';
+import 'package:zibzo/features/zibzo/presentation/signin/bloc/signin_event.dart';
+import 'package:zibzo/features/zibzo/presentation/signin/bloc/signin_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final SignInUseCase useCase;

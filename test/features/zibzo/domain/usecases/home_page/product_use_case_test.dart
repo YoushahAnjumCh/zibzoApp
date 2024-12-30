@@ -1,10 +1,10 @@
 import 'package:either_dart/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:zibzo_app/core/failure/failure.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/home_response_entity.dart';
-import 'package:zibzo_app/features/zibzo/domain/repositories/home/home_repository.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/home_page/product_use_case.dart';
+import 'package:zibzo/core/failure/failure.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/home_response_entity.dart';
+import 'package:zibzo/features/zibzo/domain/repositories/home/home_repository.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/home_page/product_use_case.dart';
 
 import '../../../../constants/product_params.dart';
 

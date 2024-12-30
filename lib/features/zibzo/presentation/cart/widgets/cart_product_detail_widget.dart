@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zibzo_app/core/theme/app_colors.dart';
-import 'package:zibzo_app/core/theme/app_text_styles.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/home_products_entity.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/cart/delete_cart_usecase.dart';
-import 'package:zibzo_app/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
+import 'package:zibzo/core/theme/app_colors.dart';
+import 'package:zibzo/core/theme/app_text_styles.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/home_products_entity.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/cart/delete_cart_usecase.dart';
+import 'package:zibzo/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
 
 class CartProductDetailWidget extends StatelessWidget {
   final ProductEntity product;

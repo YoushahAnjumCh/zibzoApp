@@ -5,10 +5,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:provider/provider.dart';
-import 'package:zibzo_app/common/provider/cart_count_provider.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/cart/cart_response_entity.dart';
-import 'package:zibzo_app/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
-import 'package:zibzo_app/features/zibzo/presentation/cart/view/cart_screen.dart';
+import 'package:zibzo/common/provider/cart_count_provider.dart';
+import 'package:zibzo/features/zibzo/domain/entities/cart/cart_response_entity.dart';
+import 'package:zibzo/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
+import 'package:zibzo/features/zibzo/presentation/cart/view/cart_screen.dart';
 
 import '../../../../constants/product_params.dart';
 

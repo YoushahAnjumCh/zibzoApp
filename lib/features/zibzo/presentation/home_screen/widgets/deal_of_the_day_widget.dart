@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:zibzo_app/core/constant/string_constant.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/home_banner_entity.dart';
+import 'package:zibzo/core/constant/string_constant.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/home_banner_entity.dart';
 
 class DealOfTheDayWidget extends StatelessWidget {
   final List<HomeBannerEntity> homebanner;

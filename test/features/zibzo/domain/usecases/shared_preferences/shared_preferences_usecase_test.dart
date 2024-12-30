@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:zibzo_app/core/secure_storage/app_secure_storage.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/shared_preferences/shared_preferences_usecase.dart';
+import 'package:zibzo/core/secure_storage/app_secure_storage.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/shared_preferences/shared_preferences_usecase.dart';
 
 // Mock class for AppLocalStorage
 class MockAppLocalStorage extends Mock implements AppLocalStorage {}

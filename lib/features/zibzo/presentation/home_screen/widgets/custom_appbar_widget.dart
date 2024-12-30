@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:zibzo_app/core/constant/assets_path.dart';
-import 'package:zibzo_app/core/secure_storage/app_secure_storage.dart';
-import 'package:zibzo_app/core/service/service_locator.dart';
+import 'package:zibzo/core/constant/assets_path.dart';
+import 'package:zibzo/core/secure_storage/app_secure_storage.dart';
+import 'package:zibzo/core/service/service_locator.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   CustomAppBar({Key? key}) : super(key: key);

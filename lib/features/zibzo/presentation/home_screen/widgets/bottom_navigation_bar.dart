@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:zibzo_app/common/bottom_nav_bar_notifier.dart';
-import 'package:zibzo_app/common/provider/cart_count_provider.dart';
-import 'package:zibzo_app/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
+import 'package:zibzo/common/bottom_nav_bar_notifier.dart';
+import 'package:zibzo/common/provider/cart_count_provider.dart';
+import 'package:zibzo/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({Key? key}) : super(key: key);

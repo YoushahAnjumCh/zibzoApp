@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zibzo_app/core/failure/failure.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/cart/cart_count_entity.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/cart/add_cart_usecase.dart';
+import 'package:zibzo/core/failure/failure.dart';
+import 'package:zibzo/features/zibzo/domain/entities/cart/cart_count_entity.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/cart/add_cart_usecase.dart';
 
 part 'add_cart_state.dart';
 

@@ -2,9 +2,9 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:either_dart/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:zibzo_app/core/failure/failure.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/home_page/product_use_case.dart';
-import 'package:zibzo_app/features/zibzo/presentation/home_screen/bloc/product_bloc.dart';
+import 'package:zibzo/core/failure/failure.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/home_page/product_use_case.dart';
+import 'package:zibzo/features/zibzo/presentation/home_screen/bloc/product_bloc.dart';
 
 import '../../../../constants/product_params.dart';
 

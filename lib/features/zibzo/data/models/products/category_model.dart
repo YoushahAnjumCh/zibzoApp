@@ -1,4 +1,4 @@
-import 'package:zibzo_app/features/zibzo/domain/entities/home/category_entity.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/category_entity.dart';
 
 class CategoryModel extends CategoryEntity {
   const CategoryModel({

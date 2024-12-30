@@ -1,8 +1,8 @@
-// import 'package:zibzo_app/features/zibzo/domain/entities/home/home_banner_entity.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/category_entity.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/home_banner_entity.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/home_products_entity.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/offer_banner_entity.dart';
+// import 'package:zibzo/features/zibzo/domain/entities/home/home_banner_entity.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/category_entity.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/home_banner_entity.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/home_products_entity.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/offer_banner_entity.dart';
 
 class HomeResponseEntity {
   final List<ProductEntity> products;

@@ -1,4 +1,4 @@
-# zibzo_app
+# zibzo
 
 A new Flutter project.
 

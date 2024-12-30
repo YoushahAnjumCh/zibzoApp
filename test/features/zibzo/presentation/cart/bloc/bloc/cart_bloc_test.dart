@@ -2,11 +2,11 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:either_dart/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:zibzo_app/core/failure/failure.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/cart/cart_response_entity.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/cart/delete_cart_usecase.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/cart/get_cart_usecase.dart';
-import 'package:zibzo_app/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
+import 'package:zibzo/core/failure/failure.dart';
+import 'package:zibzo/features/zibzo/domain/entities/cart/cart_response_entity.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/cart/delete_cart_usecase.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/cart/get_cart_usecase.dart';
+import 'package:zibzo/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
 
 import '../../../../../constants/product_params.dart';
 

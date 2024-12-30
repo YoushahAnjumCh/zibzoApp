@@ -3,9 +3,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:zibzo_app/core/constant/assets_path.dart';
-import 'package:zibzo_app/core/constant/string_constant.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/category_entity.dart';
+import 'package:zibzo/core/constant/assets_path.dart';
+import 'package:zibzo/core/constant/string_constant.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/category_entity.dart';
 
 class CategoryItems extends StatelessWidget {
   final List<CategoryEntity> category;

@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:zibzo_app/core/constant/string_constant.dart';
-import 'package:zibzo_app/core/constant/widgets_keys.dart';
-import 'package:zibzo_app/core/secure_storage/app_secure_storage.dart';
-import 'package:zibzo_app/core/service/service_locator.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/signin/signin_usecase.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signin/bloc/signin_bloc.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signin/bloc/signin_event.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signin/bloc/signin_state.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signin/screen/sign_in_screen.dart';
+import 'package:zibzo/core/constant/string_constant.dart';
+import 'package:zibzo/core/constant/widgets_keys.dart';
+import 'package:zibzo/core/secure_storage/app_secure_storage.dart';
+import 'package:zibzo/core/service/service_locator.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/signin/signin_usecase.dart';
+import 'package:zibzo/features/zibzo/presentation/signin/bloc/signin_bloc.dart';
+import 'package:zibzo/features/zibzo/presentation/signin/bloc/signin_event.dart';
+import 'package:zibzo/features/zibzo/presentation/signin/bloc/signin_state.dart';
+import 'package:zibzo/features/zibzo/presentation/signin/screen/sign_in_screen.dart';
 
 // Mock dependencies
 class MockAppLocalStorage extends Mock implements AppLocalStorage {}

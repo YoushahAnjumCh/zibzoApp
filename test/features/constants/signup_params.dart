@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:zibzo_app/core/constant/assets_path.dart';
-import 'package:zibzo_app/features/zibzo/data/models/auth/user_model.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/signup/user.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/signup/signup_usecase.dart';
+import 'package:zibzo/core/constant/assets_path.dart';
+import 'package:zibzo/features/zibzo/data/models/auth/user_model.dart';
+import 'package:zibzo/features/zibzo/domain/entities/signup/user.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/signup/signup_usecase.dart';
 
 final tSignUpParams = SignUpParams(
     email: "sample@gmail.com",

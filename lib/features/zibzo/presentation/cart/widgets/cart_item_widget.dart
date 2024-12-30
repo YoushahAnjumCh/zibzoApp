@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/home_products_entity.dart';
-import 'package:zibzo_app/features/zibzo/presentation/cart/widgets/cart_product_detail_widget.dart';
-import 'package:zibzo_app/features/zibzo/presentation/cart/widgets/cart_product_image_widget.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/home_products_entity.dart';
+import 'package:zibzo/features/zibzo/presentation/cart/widgets/cart_product_detail_widget.dart';
+import 'package:zibzo/features/zibzo/presentation/cart/widgets/cart_product_image_widget.dart';
 
 class CartItemWidget extends StatelessWidget {
   final ProductEntity product;

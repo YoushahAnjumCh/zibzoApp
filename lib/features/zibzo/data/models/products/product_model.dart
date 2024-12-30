@@ -1,4 +1,4 @@
-import 'package:zibzo_app/features/zibzo/domain/entities/home/home_products_entity.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/home_products_entity.dart';
 
 class ProductModel extends ProductEntity {
   const ProductModel({

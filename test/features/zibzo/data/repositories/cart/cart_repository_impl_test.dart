@@ -2,14 +2,14 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:zibzo_app/core/failure/failure.dart';
-import 'package:zibzo_app/core/network_info/network_info.dart';
-import 'package:zibzo_app/features/zibzo/data/datasources/cart/cart_remote_data_source.dart';
-import 'package:zibzo_app/features/zibzo/data/models/cart/cart_count_model.dart';
-import 'package:zibzo_app/features/zibzo/data/models/cart/cart_response_model.dart';
-import 'package:zibzo_app/features/zibzo/data/repositories/cart/cart_repository_impl.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/cart/add_cart_usecase.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/cart/delete_cart_usecase.dart';
+import 'package:zibzo/core/failure/failure.dart';
+import 'package:zibzo/core/network_info/network_info.dart';
+import 'package:zibzo/features/zibzo/data/datasources/cart/cart_remote_data_source.dart';
+import 'package:zibzo/features/zibzo/data/models/cart/cart_count_model.dart';
+import 'package:zibzo/features/zibzo/data/models/cart/cart_response_model.dart';
+import 'package:zibzo/features/zibzo/data/repositories/cart/cart_repository_impl.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/cart/add_cart_usecase.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/cart/delete_cart_usecase.dart';
 
 class MockCartDataSource extends Mock implements CartDataSource {}
 

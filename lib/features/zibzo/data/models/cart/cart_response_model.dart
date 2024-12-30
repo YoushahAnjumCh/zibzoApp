@@ -1,5 +1,5 @@
-import 'package:zibzo_app/features/zibzo/data/models/products/product_model.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/cart/cart_response_entity.dart';
+import 'package:zibzo/features/zibzo/data/models/products/product_model.dart';
+import 'package:zibzo/features/zibzo/domain/entities/cart/cart_response_entity.dart';
 
 class CartResponseModel extends CartResponseEntity {
   CartResponseModel({

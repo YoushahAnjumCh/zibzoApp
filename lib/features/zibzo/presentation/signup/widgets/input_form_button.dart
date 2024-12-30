@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/widgets/attributes/text_form_button_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/text_form_button_attributes.dart';
 
 class InputFormButton extends StatelessWidget {
   final TextFormButtonAttributes attributes;

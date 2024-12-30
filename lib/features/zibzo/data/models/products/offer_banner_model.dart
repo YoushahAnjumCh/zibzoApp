@@ -1,4 +1,4 @@
-import 'package:zibzo_app/features/zibzo/domain/entities/home/offer_banner_entity.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/offer_banner_entity.dart';
 
 class OfferBannerModel extends OfferBannerEntity {
   const OfferBannerModel({

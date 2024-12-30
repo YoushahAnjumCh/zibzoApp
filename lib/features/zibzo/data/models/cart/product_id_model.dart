@@ -1,4 +1,4 @@
-import 'package:zibzo_app/features/zibzo/domain/entities/cart/product_id_entity.dart';
+import 'package:zibzo/features/zibzo/domain/entities/cart/product_id_entity.dart';
 
 class ProductIDModel extends ProductIDEntity {
   ProductIDModel({

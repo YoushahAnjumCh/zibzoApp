@@ -1,5 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:zibzo_app/core/constant/string_constant.dart';
+import 'package:zibzo/core/constant/string_constant.dart';
 
 abstract class AppLocalStorage {
   Future<void> saveCredential(

@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zibzo_app/core/failure/failure.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/cart/cart_response_entity.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/cart/delete_cart_usecase.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/cart/get_cart_usecase.dart';
+import 'package:zibzo/core/failure/failure.dart';
+import 'package:zibzo/features/zibzo/domain/entities/cart/cart_response_entity.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/cart/delete_cart_usecase.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/cart/get_cart_usecase.dart';
 
 part 'cart_event.dart';
 part 'cart_state.dart';

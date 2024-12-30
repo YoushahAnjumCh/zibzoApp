@@ -2,10 +2,10 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:either_dart/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:zibzo_app/core/failure/failure.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/cart/cart_count_entity.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/cart/add_cart_usecase.dart';
-import 'package:zibzo_app/features/zibzo/presentation/home_screen/cubit/add_cart/add_cart_cubit.dart';
+import 'package:zibzo/core/failure/failure.dart';
+import 'package:zibzo/features/zibzo/domain/entities/cart/cart_count_entity.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/cart/add_cart_usecase.dart';
+import 'package:zibzo/features/zibzo/presentation/home_screen/cubit/add_cart/add_cart_cubit.dart';
 
 class MockAddCartUseCase extends Mock implements AddCartUseCase {}
 

@@ -1,4 +1,4 @@
-import 'package:zibzo_app/features/zibzo/domain/entities/cart/cart_count_entity.dart';
+import 'package:zibzo/features/zibzo/domain/entities/cart/cart_count_entity.dart';
 
 class CartCountModel extends CartCountEntity {
   CartCountModel({

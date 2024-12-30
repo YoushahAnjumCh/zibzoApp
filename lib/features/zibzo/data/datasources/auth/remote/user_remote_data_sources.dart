@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:zibzo_app/core/constant/string_constant.dart';
-import 'package:zibzo_app/core/failure/failure.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/signin/signin_usecase.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/signup/signup_usecase.dart';
+import 'package:zibzo/core/constant/string_constant.dart';
+import 'package:zibzo/core/failure/failure.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/signin/signin_usecase.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/signup/signup_usecase.dart';
 import '../../../models/auth/user_model.dart';
 
 const _statusCode201 = 201;

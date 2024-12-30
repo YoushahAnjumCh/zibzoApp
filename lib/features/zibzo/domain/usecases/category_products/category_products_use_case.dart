@@ -1,7 +1,7 @@
-import 'package:zibzo_app/core/typedef/typedef.dart';
-import 'package:zibzo_app/core/usecase/usecase.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/home_products_entity.dart';
-import 'package:zibzo_app/features/zibzo/domain/repositories/category_products/category_products_repository.dart';
+import 'package:zibzo/core/typedef/typedef.dart';
+import 'package:zibzo/core/usecase/usecase.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/home_products_entity.dart';
+import 'package:zibzo/features/zibzo/domain/repositories/category_products/category_products_repository.dart';
 
 class CategoryProductsUseCase extends UseCase<List<ProductEntity>, String> {
   final CategoryProductsRepository repository;

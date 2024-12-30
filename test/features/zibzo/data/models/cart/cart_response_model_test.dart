@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zibzo_app/features/zibzo/data/models/cart/cart_response_model.dart';
+import 'package:zibzo/features/zibzo/data/models/cart/cart_response_model.dart';
 import '../../../../../fixture_reader/fixture_reader.dart';
 
 void main() {

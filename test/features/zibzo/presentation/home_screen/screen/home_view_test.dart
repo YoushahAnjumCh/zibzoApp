@@ -4,16 +4,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
-import 'package:zibzo_app/common/provider/cart_count_provider.dart';
-import 'package:zibzo_app/core/secure_storage/app_secure_storage.dart';
-import 'package:zibzo_app/core/service/service_locator.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/cart/add_cart_usecase.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/home_page/product_use_case.dart';
-import 'package:zibzo_app/features/zibzo/presentation/home_screen/bloc/product_bloc.dart';
-import 'package:zibzo_app/features/zibzo/presentation/home_screen/cubit/add_cart/add_cart_cubit.dart';
-import 'package:zibzo_app/features/zibzo/presentation/home_screen/screen/home_view.dart';
-import 'package:zibzo_app/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_cubit.dart';
-import 'package:zibzo_app/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_state.dart';
+import 'package:zibzo/common/provider/cart_count_provider.dart';
+import 'package:zibzo/core/secure_storage/app_secure_storage.dart';
+import 'package:zibzo/core/service/service_locator.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/cart/add_cart_usecase.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/home_page/product_use_case.dart';
+import 'package:zibzo/features/zibzo/presentation/home_screen/bloc/product_bloc.dart';
+import 'package:zibzo/features/zibzo/presentation/home_screen/cubit/add_cart/add_cart_cubit.dart';
+import 'package:zibzo/features/zibzo/presentation/home_screen/screen/home_view.dart';
+import 'package:zibzo/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_cubit.dart';
+import 'package:zibzo/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_state.dart';
 
 import '../../../../constants/product_params.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:zibzo_app/core/network_info/network_info.dart';
+import 'package:zibzo/core/network_info/network_info.dart';
 
 class MockInternetConnectionChecker extends Mock
     implements InternetConnectionChecker {}

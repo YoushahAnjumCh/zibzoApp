@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:zibzo_app/common/bottom_nav_bar_notifier.dart';
-import 'package:zibzo_app/core/service/service_locator.dart';
-import 'package:zibzo_app/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
-import 'package:zibzo_app/features/zibzo/presentation/cart/view/cart_screen.dart';
-import 'package:zibzo_app/features/zibzo/presentation/home_screen/screen/home_view.dart';
-import 'package:zibzo_app/features/zibzo/presentation/home_screen/widgets/bottom_navigation_bar.dart';
+import 'package:zibzo/common/bottom_nav_bar_notifier.dart';
+import 'package:zibzo/core/service/service_locator.dart';
+import 'package:zibzo/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
+import 'package:zibzo/features/zibzo/presentation/cart/view/cart_screen.dart';
+import 'package:zibzo/features/zibzo/presentation/home_screen/screen/home_view.dart';
+import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/bottom_navigation_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:zibzo_app/core/service/service_locator.dart';
-import 'package:zibzo_app/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
-import 'package:zibzo_app/features/zibzo/presentation/cart/view/cart_screen.dart';
-import 'package:zibzo_app/features/zibzo/presentation/category_products/bloc/bloc/category_product_bloc.dart';
-import 'package:zibzo_app/features/zibzo/presentation/category_products/screen/category_products_view.dart';
+import 'package:zibzo/core/service/service_locator.dart';
+import 'package:zibzo/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
+import 'package:zibzo/features/zibzo/presentation/cart/view/cart_screen.dart';
+import 'package:zibzo/features/zibzo/presentation/category_products/bloc/bloc/category_product_bloc.dart';
+import 'package:zibzo/features/zibzo/presentation/category_products/screen/category_products_view.dart';
 
-import 'package:zibzo_app/features/zibzo/presentation/home_screen/screen/home_screen.dart';
-import 'package:zibzo_app/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_cubit.dart';
-import 'package:zibzo_app/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_state.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signin/screen/sign_in_screen.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/screen/sign_up_screen.dart';
+import 'package:zibzo/features/zibzo/presentation/home_screen/screen/home_screen.dart';
+import 'package:zibzo/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_cubit.dart';
+import 'package:zibzo/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_state.dart';
+import 'package:zibzo/features/zibzo/presentation/signin/screen/sign_in_screen.dart';
+import 'package:zibzo/features/zibzo/presentation/signup/screen/sign_up_screen.dart';
 
 class AppRouter {
   AppRouter();

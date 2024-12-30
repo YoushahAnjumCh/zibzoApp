@@ -1,4 +1,4 @@
-package com.example.zibzo_app
+package com.example.zibzo
 
 import io.flutter.embedding.android.FlutterActivity
 

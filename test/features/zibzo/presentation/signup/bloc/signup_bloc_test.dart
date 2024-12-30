@@ -2,10 +2,10 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:either_dart/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:zibzo_app/core/failure/failure.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/signup/signup_usecase.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/bloc/signup_bloc.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/bloc/signup_state.dart';
+import 'package:zibzo/core/failure/failure.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/signup/signup_usecase.dart';
+import 'package:zibzo/features/zibzo/presentation/signup/bloc/signup_bloc.dart';
+import 'package:zibzo/features/zibzo/presentation/signup/bloc/signup_state.dart';
 
 import '../../../../constants/signup_params.dart';
 

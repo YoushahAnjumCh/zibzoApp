@@ -1,9 +1,9 @@
 import 'package:either_dart/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/cart/cart_response_entity.dart';
-import 'package:zibzo_app/features/zibzo/domain/repositories/cart/cart_repository.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/cart/get_cart_usecase.dart';
+import 'package:zibzo/features/zibzo/domain/entities/cart/cart_response_entity.dart';
+import 'package:zibzo/features/zibzo/domain/repositories/cart/cart_repository.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/cart/get_cart_usecase.dart';
 
 class MockCartRepository extends Mock implements CartRepository {}
 

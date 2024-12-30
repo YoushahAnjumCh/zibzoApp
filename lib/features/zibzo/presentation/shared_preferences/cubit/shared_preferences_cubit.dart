@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/shared_preferences/shared_preferences_usecase.dart';
-import 'package:zibzo_app/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_state.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/shared_preferences/shared_preferences_usecase.dart';
+import 'package:zibzo/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_state.dart';
 
 class SharedPreferencesCubit extends Cubit<AuthState> {
   final SharedPreferencesLoginUseCase sharedPreferencesLoginUseCase;

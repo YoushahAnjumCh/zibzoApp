@@ -1,4 +1,4 @@
-import 'package:zibzo_app/core/secure_storage/app_secure_storage.dart';
+import 'package:zibzo/core/secure_storage/app_secure_storage.dart';
 
 class SharedPreferencesLoginUseCase {
   final AppLocalStorage authRepository;

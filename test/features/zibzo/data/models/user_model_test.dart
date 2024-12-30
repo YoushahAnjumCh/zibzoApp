@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zibzo_app/features/zibzo/data/models/auth/user_model.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/signup/user.dart';
+import 'package:zibzo/features/zibzo/data/models/auth/user_model.dart';
+import 'package:zibzo/features/zibzo/domain/entities/signup/user.dart';
 import '../../../../fixture_reader/fixture_reader.dart';
 import '../../../constants/signup_params.dart';
 

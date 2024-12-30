@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:zibzo_app/features/zibzo/data/models/products/category_model.dart';
-import 'package:zibzo_app/features/zibzo/data/models/products/home_banner_model.dart';
-import 'package:zibzo_app/features/zibzo/data/models/products/offer_banner_model.dart';
-import 'package:zibzo_app/features/zibzo/data/models/products/product_model.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/home_response_entity.dart';
+import 'package:zibzo/features/zibzo/data/models/products/category_model.dart';
+import 'package:zibzo/features/zibzo/data/models/products/home_banner_model.dart';
+import 'package:zibzo/features/zibzo/data/models/products/offer_banner_model.dart';
+import 'package:zibzo/features/zibzo/data/models/products/product_model.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/home_response_entity.dart';
 
 ProductResponseModel homeResponseModelFromJson(String str) =>
     ProductResponseModel.fromJson(json.decode(str));

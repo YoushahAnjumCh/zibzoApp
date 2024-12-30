@@ -1,9 +1,9 @@
 import 'package:either_dart/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:zibzo_app/core/failure/failure.dart';
-import 'package:zibzo_app/features/zibzo/domain/repositories/signup/signup_repository.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/signup/signup_usecase.dart';
+import 'package:zibzo/core/failure/failure.dart';
+import 'package:zibzo/features/zibzo/domain/repositories/signup/signup_repository.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/signup/signup_usecase.dart';
 
 import '../../../../constants/signup_params.dart';
 

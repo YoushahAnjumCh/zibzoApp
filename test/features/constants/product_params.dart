@@ -1,11 +1,11 @@
-import 'package:zibzo_app/features/zibzo/data/models/products/product_model.dart';
-import 'package:zibzo_app/features/zibzo/data/models/products/product_response_model.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/category_entity.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/home_banner_entity.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/home_products_entity.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/home_response_entity.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/offer_banner_entity.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/home_page/product_use_case.dart';
+import 'package:zibzo/features/zibzo/data/models/products/product_model.dart';
+import 'package:zibzo/features/zibzo/data/models/products/product_response_model.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/category_entity.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/home_banner_entity.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/home_products_entity.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/home_response_entity.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/offer_banner_entity.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/home_page/product_use_case.dart';
 
 const tProductParams = ProductsParams(limit: 1, offset: 10);
 

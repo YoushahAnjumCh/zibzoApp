@@ -4,10 +4,10 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:http/http.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:zibzo_app/core/constant/string_constant.dart';
-import 'package:zibzo_app/core/failure/failure.dart';
-import 'package:zibzo_app/features/zibzo/data/datasources/auth/remote/user_remote_data_sources.dart';
-import 'package:zibzo_app/features/zibzo/data/models/auth/user_model.dart';
+import 'package:zibzo/core/constant/string_constant.dart';
+import 'package:zibzo/core/failure/failure.dart';
+import 'package:zibzo/features/zibzo/data/datasources/auth/remote/user_remote_data_sources.dart';
+import 'package:zibzo/features/zibzo/data/models/auth/user_model.dart';
 import '../../../../../../fixture_reader/fixture_reader.dart';
 import '../../../../../constants/signin_params.dart';
 import '../../../../../constants/signup_params.dart';

@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:zibzo_app/core/typedef/typedef.dart';
-import 'package:zibzo_app/core/usecase/usecase.dart';
-import 'package:zibzo_app/features/zibzo/domain/repositories/signup/signup_repository.dart';
+import 'package:zibzo/core/typedef/typedef.dart';
+import 'package:zibzo/core/usecase/usecase.dart';
+import 'package:zibzo/features/zibzo/domain/repositories/signup/signup_repository.dart';
 
 class SignUpUseCase implements UseCase<void, SignUpParams> {
   final UserRepository repository;
