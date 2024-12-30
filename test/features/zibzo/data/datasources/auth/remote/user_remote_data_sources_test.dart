@@ -34,41 +34,7 @@ void main() {
 
   tearDown(() => {});
 
-  String generateRandomEmail() {
-    const characters =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    Random random = Random();
-
-    // Generate a random string for the username part
-    String username = List.generate(
-        10, (index) => characters[random.nextInt(characters.length)]).join();
-
-    // Append "@gmail.com" to the username
-    return '$username@gmail.com';
-  }
-
-  final email = generateRandomEmail();
-  final tSignUpParam = SignUpParams(
-      email: email.toString(),
-      userName: "userName",
-      password: "password",
-      selectedImage: File(AssetsPath.appLogo));
-
   group('signUp', () {
-    test('should return UserModel when the request is successful', () async {
-      // Arrange
-      final fakeResponse = fixture('user/user_mocks.json');
-      MockHttpClient mockHttpClient = MockHttpClient();
-
-      when(() => mockHttpClient.post(
-            Uri.parse('${StringConstant.kBaseUrl}auth/signup/'),
-            headers: any(named: 'headers'),
-            body: any(named: 'body'),
-          )).thenAnswer((_) async => Response(fakeResponse, 201));
-      // Act
-      expect(dataSource.signUp(tSignUpParam), isNotNull);
-    });
-
     test('should throw ServerFailure when the request fails', () async {
       // Arrange
 
@@ -82,6 +48,19 @@ void main() {
       // Act & Assert
       expect(() => dataSource.signUp(tSignUpParams),
           throwsA(isA<ServerFailure>()));
+    });
+    test('should return UserModel when the request is successful', () async {
+      // Arrange
+      final fakeResponse = fixture('user/user_mocks.json');
+      MockHttpClient mockHttpClient = MockHttpClient();
+
+      when(() => mockHttpClient.post(
+            Uri.parse('${StringConstant.kBaseUrl}auth/signup/'),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+          )).thenAnswer((_) async => Response(fakeResponse, 201));
+      // Act
+      expect(dataSource.signUp(tSignUpParams), isNotNull);
     });
   });
   group("SignIn", () {
