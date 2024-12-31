@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: "11.x"
+          java-version: "17.x"
 
       - name: Flutter Clean
         run: flutter clean
@@ -58,7 +58,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: "zulu"
-          java-version: "11.x"
+          java-version: "17.x"
           cache: gradle
       - uses: subosito/flutter-action@v2
         with:
