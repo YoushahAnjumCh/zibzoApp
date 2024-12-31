@@ -10,37 +10,48 @@ jobs:
     name: Analyze and Test
     runs-on: macos-latest
     steps:
+      # Checkout the repository
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      # Setup Flutter
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: "3.19.5"
+          channel: stable
+          architecture: x64
+          cache: true
 
+      # Setup Java for Android builds
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: "zulu"
           java-version: "17.x"
-
-      - name: Flutter Clean
+      # Flutter clean
+      - name: Clean Flutter
         run: flutter clean
 
+      # Install dependencies
       - name: Install Dependencies
         run: flutter pub get
 
+      # Analyze the code
       - name: Analyze Code
         run: flutter analyze
 
+      # Run tests
       - name: Run Tests
         run: flutter test
 
   build:
     name: Build APK
     runs-on: macos-latest
-    needs: test
+    needs: test # Ensures that the test job runs before this job
+    if: startsWith(github.ref, 'refs/heads/main_') || startsWith(github.ref, 'refs/heads/test_')
     steps:
+      # Checkout the repository
       - name: Checkout Code
         uses: actions/checkout@v3
       - name: Download Android keystore
@@ -66,17 +77,22 @@ jobs:
           channel: "stable"
           cache: true
 
-      - name: Get Dependencies
+      # Get dependencies
+      - name: Get dependencies
         run: flutter pub get
 
+      # Flutter clean
       - name: Flutter Clean
         run: flutter clean
 
-      - name: Build Release APK
-        run: flutter build appbundle --release
+      # Start release build
+      - name: Start release build
+        run: flutter build apk --release --split-per-abi
 
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v3
+      # Upload Build Artifact (Optional)
+      - name: Push to Release
+        uses: ncipollo/release-action@v1
         with:
-          name: release-apk
-          path: build/app/outputs/flutter-apk/*
+          artifacts: "build/app/outputs/flutter-apk/*"
+          tag: v1.0.${{ github.run_number }}
+          token: ${{ secrets.TOKEN }}
