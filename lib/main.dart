@@ -4,7 +4,6 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:zibzo/common/provider/cart_count_provider.dart';
@@ -21,9 +20,6 @@ import 'core/service/service_locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(
-    fileName: '.env',
-  );
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

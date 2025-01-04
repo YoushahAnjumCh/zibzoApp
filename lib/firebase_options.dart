@@ -3,7 +3,6 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -50,20 +49,20 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static FirebaseOptions android = FirebaseOptions(
-    apiKey: dotenv.env['apiKey_android']!,
-    appId: dotenv.env['appId_android']!,
-    messagingSenderId: dotenv.env['messagingSenderId_android']!,
-    projectId: dotenv.env['projectId_android']!,
-    storageBucket: dotenv.env['storageBucket_android']!,
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyDIQco7pPvY6cC8jRn2kHMOf4vIGUs20wc',
+    appId: '1:819797101244:android:abddd007ae10a87c021eb9',
+    messagingSenderId: '819797101244',
+    projectId: 'zibzo-d338a',
+    storageBucket: 'zibzo-d338a.firebasestorage.app',
   );
 
-  static FirebaseOptions ios = FirebaseOptions(
-    apiKey: dotenv.env['apiKey_ios']!,
-    appId: dotenv.env['appId_ios']!,
-    messagingSenderId: dotenv.env['messagingSenderId_ios']!,
-    projectId: dotenv.env['projectId_ios']!,
-    storageBucket: dotenv.env['storageBucket_ios']!,
-    iosBundleId: dotenv.env['iosBundleId']!,
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyATUYdgysqwc9_H0PUvaJxCyLJ9vojQLUs',
+    appId: '1:819797101244:ios:a2d53418b631261a021eb9',
+    messagingSenderId: '819797101244',
+    projectId: 'zibzo-d338a',
+    storageBucket: 'zibzo-d338a.firebasestorage.app',
+    iosBundleId: 'com.example.zibzoApp',
   );
 }
