@@ -5,6 +5,7 @@ import 'package:zibzo/core/theme/app_text_styles.dart';
 import 'package:zibzo/features/zibzo/domain/entities/home/home_products_entity.dart';
 import 'package:zibzo/features/zibzo/domain/usecases/cart/delete_cart_usecase.dart';
 import 'package:zibzo/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
+import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
 class CartProductDetailWidget extends StatelessWidget {
   final ProductEntity product;
@@ -46,6 +47,7 @@ class CartProductDetailWidget extends StatelessWidget {
   }
 
   void _deleteProductFromCart(BuildContext context, String productId) {
+    AnalyticsService().logRemoveToCart(productId);
     final params = DeleteCartParams(productID: productId);
     context.read<CartBloc>().add(DeleteCartEvent(params: params));
   }

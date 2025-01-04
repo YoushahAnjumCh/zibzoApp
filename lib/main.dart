@@ -1,5 +1,10 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:zibzo/common/provider/cart_count_provider.dart';
@@ -11,12 +16,29 @@ import 'package:zibzo/features/zibzo/presentation/home_screen/cubit/add_cart/add
 import 'package:zibzo/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_cubit.dart';
 import 'package:zibzo/features/zibzo/presentation/signin/bloc/signin_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/bloc/signup_bloc.dart';
+import 'package:zibzo/firebase_options.dart';
 import 'core/service/service_locator.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(
+    fileName: '.env',
+  );
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(true);
   await init();
+  FlutterError.onError = (errorDetails) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack);
+    return true;
+  };
   runApp(MyApp());
+  FirebaseAnalytics.instance.logAppOpen();
 }
 
 class MyApp extends StatelessWidget {

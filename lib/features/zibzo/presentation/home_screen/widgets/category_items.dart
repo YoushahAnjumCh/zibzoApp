@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:zibzo/core/constant/assets_path.dart';
 import 'package:zibzo/core/constant/string_constant.dart';
 import 'package:zibzo/features/zibzo/domain/entities/home/category_entity.dart';
+import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
 class CategoryItems extends StatelessWidget {
   final List<CategoryEntity> category;
@@ -30,7 +30,7 @@ class CategoryItems extends StatelessWidget {
                     width: 62,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Theme.of(context).colorScheme.primaryContainer,
+                      color: Theme.of(context).colorScheme.onPrimary,
                     ),
                     child: Center(
                       child: SizedBox(
@@ -59,10 +59,13 @@ class CategoryItems extends StatelessWidget {
               child: Column(
                 children: [
                   GestureDetector(
-                    onTap: () => context.pushNamed(
-                      'categoryProducts',
-                      pathParameters: {'categoryName': categoryitems.title},
-                    ),
+                    onTap: () {
+                      AnalyticsService().logToCategory(categoryitems.id);
+                      context.pushNamed(
+                        'categoryProducts',
+                        pathParameters: {'categoryName': categoryitems.title},
+                      );
+                    },
                     child: Container(
                       height: 62,
                       width: 62,

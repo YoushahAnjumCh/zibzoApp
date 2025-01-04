@@ -11,7 +11,6 @@ class CategoryModel extends CategoryEntity {
           image: image,
         );
 
-  // Factory method to create an instance of HomeBannerModel from JSON
   factory CategoryModel.fromJson(Map<String, dynamic> json) {
     return CategoryModel(
       id: json['_id'] as String,
@@ -20,7 +19,6 @@ class CategoryModel extends CategoryEntity {
     );
   }
 
-  // Method to convert an instance of HomeBannerModel to JSON
   Map<String, dynamic> toJson() {
     return {
       '_id': id,

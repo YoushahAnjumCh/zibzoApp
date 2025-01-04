@@ -1,4 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core_platform_interface/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,7 +13,6 @@ import 'package:zibzo/features/zibzo/presentation/signup/bloc/signup_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/bloc/signup_state.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/screen/sign_up_screen.dart';
 
-// Mock dependencies
 class MockAppLocalStorage extends Mock implements AppLocalStorage {}
 
 class MockSignUpUseCase extends Mock implements SignUpUseCase {}
@@ -26,7 +27,10 @@ void main() {
   late MockSignUpBloc mockSignUpBloc;
 
   // Setup fallback values and mock dependencies
-  setUpAll(() {
+  setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    setupFirebaseCoreMocks();
+    await Firebase.initializeApp();
     registerFallbackValue(
       SignupUser(SignUpParams(
           userName: "userName",
@@ -63,11 +67,6 @@ void main() {
       ),
     );
 
-    // Verify UI elements
-    // expect(find.byKey(Key(WidgetsKeys.tEmailKey)), findsOneWidget);
-    // expect(find.byKey(Key(WidgetsKeys.tPasswordKey)), findsOneWidget);
-    // expect(find.byKey(Key(WidgetsKeys.tSigninKey)), findsOneWidget);
-    // expect(find.text(StringConstant.dontHaveAccount), findsOneWidget);
     expect(find.text(StringConstant.welcomeSignUp), findsOneWidget);
   });
 }

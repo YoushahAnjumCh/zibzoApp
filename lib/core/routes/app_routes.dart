@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -15,8 +16,12 @@ import 'package:zibzo/features/zibzo/presentation/signup/screen/sign_up_screen.d
 
 class AppRouter {
   AppRouter();
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  static FirebaseAnalyticsObserver observer =
+      FirebaseAnalyticsObserver(analytics: analytics);
 
   late final GoRouter router = GoRouter(
+    observers: [observer],
     routes: [
       GoRoute(
         path: GoRouterPaths.loginRoute,

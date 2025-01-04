@@ -7,7 +7,9 @@ import 'package:zibzo/features/zibzo/domain/entities/home/home_products_entity.d
 import 'package:zibzo/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/cart/widgets/cart_checkout_button.dart';
 import 'package:zibzo/features/zibzo/presentation/cart/widgets/cart_items_widget.dart';
+import 'package:zibzo/features/zibzo/presentation/cart/widgets/price_row_widget.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/section_title.dart';
+import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -25,6 +27,11 @@ class CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AnalyticsService().logScreensView(
+      'cart_screen',
+      'CartScreen',
+    );
+
     return SafeArea(
       child: Scaffold(
         body: BlocBuilder<CartBloc, CartState>(
@@ -94,10 +101,11 @@ class CartScreenState extends State<CartScreen> {
             const SizedBox(height: 24),
             CartItemsWidget(products: products),
             const SizedBox(height: 10),
-            PriceRow(label: "Items (${products.length})", amount: totalPrice),
-            PriceRow(label: "Shipping", amount: 40),
+            PriceRowWidget(
+                label: "Items (${products.length})", amount: totalPrice),
+            PriceRowWidget(label: "Shipping", amount: 40),
             const Divider(thickness: 1, color: Colors.grey),
-            PriceRow(
+            PriceRowWidget(
                 label: "Total Price", amount: totalWithShipping, isBold: true),
             const SizedBox(height: 41),
             const CartCheckoutButton(),
@@ -109,30 +117,5 @@ class CartScreenState extends State<CartScreen> {
 
   double _calculateTotalPrice(List<ProductEntity> products) {
     return products.fold(0.0, (total, product) => total + product.offerPrice);
-  }
-}
-
-class PriceRow extends StatelessWidget {
-  final String label;
-  final double amount;
-  final bool isBold;
-
-  const PriceRow(
-      {Key? key,
-      required this.label,
-      required this.amount,
-      this.isBold = false})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(label, style: isBold ? AppTextStyles.headingMedium : null),
-        Text("₹${amount.toStringAsFixed(2)}",
-            style: isBold ? AppTextStyles.headingMedium : null),
-      ],
-    );
   }
 }

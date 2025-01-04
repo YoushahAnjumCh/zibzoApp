@@ -8,7 +8,7 @@
     <application
         android:label="zibzo"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -36,5 +36,9 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+            <meta-data
+    android:name="firebase_analytics_collection_enabled"
+    android:value="true" />
+
     </application>
 </manifest>

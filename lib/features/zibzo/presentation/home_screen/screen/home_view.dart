@@ -18,15 +18,20 @@ import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/section_ti
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/trending_offer_widget.dart';
 import 'package:zibzo/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_cubit.dart';
 import 'package:zibzo/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_state.dart';
+import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({super.key});
 
-  final ScrollController scrollController = ScrollController();
   final TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    AnalyticsService().logScreensView(
+      'home_screen',
+      'HomeScreen',
+    );
+
     return Scaffold(
       appBar: CustomAppBar(),
       floatingActionButton: _buildLogoutButton(context),
@@ -76,6 +81,7 @@ class HomeView extends StatelessWidget {
       builder: (context, state) {
         return FloatingActionButton(
           onPressed: () {
+            AnalyticsService().logLogout();
             context.read<SharedPreferencesCubit>().logout("token");
             context.go(GoRouterPaths.loginRoute);
           },
@@ -144,9 +150,8 @@ class HomeContent extends StatelessWidget {
                   builder: (context, state) {
                     return ProductCard(
                       products: products,
-                      isLoading: context
-                          .read<AddCartCubit>()
-                          .isLoading(products.id), // Pass loading state
+                      isLoading:
+                          context.read<AddCartCubit>().isLoading(products.id),
                     );
                   },
                 );

@@ -1,5 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:either_dart/either.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core_platform_interface/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -48,7 +50,10 @@ void main() {
   late MockProductsUseCase mockProductsUseCase;
   late MockDeleteCartUseCase mockDeleteCartUseCase;
   late MockGetCartUseCase mockGetCartUseCase;
-  setUpAll(() {
+  setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    setupFirebaseCoreMocks();
+    await Firebase.initializeApp();
     registerFallbackValue(FakeCategoryProductState());
     registerFallbackValue(FakeCategoryProductEvent());
     registerFallbackValue(FakeAuthState());

@@ -1,4 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core_platform_interface/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -43,16 +45,21 @@ void main() {
   late MockSharedPreferencesCubit mockSharedPreferencesCubit;
   late MockCartUseCase mockCartUseCase;
   late MockCartCubit mockCartCubit;
-  setUpAll(() {
+  setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    setupFirebaseCoreMocks();
+    await Firebase.initializeApp();
     registerFallbackValue(FakeProductState());
     registerFallbackValue(FakeProductEvent());
     registerFallbackValue(FakeAuthState());
   });
 
   setUp(() {
+    sl.reset();
     mockAppLocalStorage = MockAppLocalStorage();
     mockSignInUseCase = MockProductsUseCase();
     mockSharedPreferencesCubit = MockSharedPreferencesCubit();
+
     mockCartUseCase = MockCartUseCase();
     mockCartCubit = MockCartCubit();
     sl.registerLazySingleton<AppLocalStorage>(() => mockAppLocalStorage);
@@ -73,15 +80,11 @@ void main() {
   });
 
   testWidgets("success", (WidgetTester tester) async {
-    WidgetsFlutterBinding.ensureInitialized();
-
-    // Mock ProductBloc
     final mockProductBloc = MockProductBloc();
     when(() => mockProductBloc.state).thenReturn(
       ProductLoaded(product: tHomeResponseEntity), // Desired state
     );
 
-    // Widget under test
     final widget = HomeView();
 
     await tester.pumpWidget(
@@ -93,7 +96,6 @@ void main() {
           BlocProvider<SharedPreferencesCubit>(
             create: (context) => mockSharedPreferencesCubit,
           ),
-          // Use ChangeNotifierProvider for CartCountProvider
           ChangeNotifierProvider<CartCountProvider>(
             create: (context) => CartCountProvider(),
           ),
@@ -105,10 +107,8 @@ void main() {
       ),
     );
 
-    // Simulate async rebuild
     await tester.pump(const Duration(seconds: 4));
 
-    // Verify expected output
     expect(find.byType(HomeContent), findsOneWidget);
   });
 }

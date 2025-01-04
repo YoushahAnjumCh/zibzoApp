@@ -8,6 +8,7 @@ import 'package:zibzo/features/zibzo/domain/entities/home/home_products_entity.d
 import 'package:zibzo/features/zibzo/presentation/category_products/bloc/bloc/category_product_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/cubit/add_cart/add_cart_cubit.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/product_card_widget.dart';
+import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
 class CategoryProductsView extends StatelessWidget {
   final String categoryName;
@@ -17,6 +18,11 @@ class CategoryProductsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AnalyticsService().logScreensView(
+      'category_screen',
+      'CategoryScreen',
+    );
+
     return Scaffold(
       appBar: _buildAppBar(context),
       body: BlocBuilder<CategoryProductBloc, CategoryProductState>(

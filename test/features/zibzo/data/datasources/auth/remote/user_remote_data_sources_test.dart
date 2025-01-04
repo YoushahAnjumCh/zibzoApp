@@ -33,18 +33,19 @@ void main() {
   group('signUp', () {
     test('should throw ServerFailure when the request fails', () async {
       // Arrange
-
       when(() => mockHttpClient
               .post(Uri.parse('${StringConstant.kBaseUrl}auth/signup/'), body: {
             'email': tSignUpParams.email,
             'userName': tSignUpParams.userName,
             'password': tSignUpParams.password,
-          })).thenAnswer((_) async => Response(errorMessage, 400));
-
+          })).thenAnswer((_) async {
+        await Future.delayed(Duration(seconds: 1));
+        return Response(errorMessage, 400);
+      });
       // Act & Assert
       expect(() => dataSource.signUp(tSignUpParams),
           throwsA(isA<ServerFailure>()));
-    });
+    }, timeout: Timeout(Duration(minutes: 1)));
     test('should return UserModel when the request is successful', () async {
       // Arrange
       final fakeResponse = fixture('user/user_mocks.json');

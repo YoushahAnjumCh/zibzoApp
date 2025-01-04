@@ -22,7 +22,6 @@ class AppColors {
   static const Color backgroundDark = Color(0xff121212);
   static const Color onBackgroundDark = Color(0xffffffff);
 
-  // Common colors (shared across light and dark themes)
   static const Color error = Color(0xfffb7181);
   static const Color onError = Color(0xffffffff);
 }

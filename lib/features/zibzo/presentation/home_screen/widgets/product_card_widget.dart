@@ -10,6 +10,7 @@ import 'package:zibzo/features/zibzo/domain/entities/home/home_products_entity.d
 import 'package:zibzo/features/zibzo/domain/usecases/cart/add_cart_usecase.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/cubit/add_cart/add_cart_cubit.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/product_images_widget.dart';
+import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductEntity products;
@@ -30,7 +31,7 @@ class ProductCard extends StatelessWidget {
         boxShadow: const [
           BoxShadow(
             color: Color.fromRGBO(255, 255, 255, 0.4),
-            offset: Offset(0, 2), // Shadow position
+            offset: Offset(0, 2),
           ),
         ],
       ),
@@ -96,9 +97,7 @@ class ProductCard extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        _buildOutlinedButton("Wishlist", Icons.favorite_border, () {
-          // Wishlist button action
-        }),
+        _buildOutlinedButton("Wishlist", Icons.favorite_border, () {}),
         const SizedBox(width: 10),
         Expanded(
           child: BlocConsumer<AddCartCubit, AddCartState>(
@@ -119,10 +118,9 @@ class ProductCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
                 onPressed: () async {
-                  // Access the provider before the async operation
                   final cartCountProvider =
                       Provider.of<CartCountProvider>(context, listen: false);
-
+                  AnalyticsService().logAddToCart(products.id);
                   final params = AddCartParams(
                     productId: products.id,
                   );

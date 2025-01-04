@@ -26,7 +26,6 @@ class ProductResponseModel extends HomeResponseEntity {
             category: category,
             cartProductCount: cartProductCount);
 
-  // Factory method to create an instance of ProductModel from JSON
   factory ProductResponseModel.fromJson(Map<String, dynamic> json) {
     return ProductResponseModel(
       products: List<ProductModel>.from(

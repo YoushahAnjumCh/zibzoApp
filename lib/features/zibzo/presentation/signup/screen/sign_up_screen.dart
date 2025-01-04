@@ -24,6 +24,7 @@ import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/text
 import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/text_input_form_field_attributes.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/widgets/input_form_button.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/widgets/text_input_form_field.dart';
+import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({Key? key}) : super(key: key);
@@ -45,6 +46,10 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _imagePickerHandler = ImagePickerWidget(selectedImageNotifier);
+    AnalyticsService().logScreensView(
+      'signup_screen',
+      'SignUpScreen',
+    );
 
     return BlocListener<UserBloc, UserState>(
       listener: (context, state) async {
@@ -54,6 +59,7 @@ class SignUpScreen extends StatelessWidget {
           await Future.delayed(Duration(minutes: 1));
           EasyLoading.dismiss();
         } else if (state is UserLogged) {
+          AnalyticsService().logSignUp();
           EasyLoading.dismiss();
           Navigator.pop(context);
         } else if (state is UserLoggedFail) {
@@ -64,37 +70,37 @@ class SignUpScreen extends StatelessWidget {
           });
         }
       },
-      child: Scaffold(
-        body: Stack(
-          children: [
-            Center(
-              child: SingleChildScrollView(
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _buildAppLogo(),
-                      SizedBox(height: 40),
-                      _buildWelcomeText(context),
-                      SizedBox(height: 20),
-                      _buildErrorMessage(),
-                      _buildSignInFields(context),
-                      SizedBox(height: 20),
-                      _buildProfilePicturePicker(context),
-                      SizedBox(height: 20),
-                      _buildSignInButton(context),
-                      SizedBox(
-                        height: 25,
-                      ),
-                      _buildSignInPrompt(context)
-                    ],
+      child: SafeArea(
+        child: Scaffold(
+          body: Stack(
+            children: [
+              Center(
+                child: SingleChildScrollView(
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(height: 40),
+                        _buildAppLogo(),
+                        SizedBox(height: 40),
+                        _buildWelcomeText(context),
+                        _buildErrorMessage(),
+                        _buildSignInFields(context),
+                        SizedBox(height: 20),
+                        _buildProfilePicturePicker(context),
+                        SizedBox(height: 20),
+                        _buildSignInButton(context),
+                        SizedBox(height: 20),
+                        _buildSignInPrompt(context)
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -301,34 +307,28 @@ class SignUpScreen extends StatelessWidget {
   }
 
   Widget _buildSignInPrompt(BuildContext context) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 60),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              StringConstant.alreadyHaveAccount,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.primaryContainer,
-                  ),
-            ),
-            GestureDetector(
-              onTap: () {
-                context.push(GoRouterPaths.loginRoute);
-              },
-              child: Text(
-                StringConstant.login,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.bold,
-                    ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          StringConstant.alreadyHaveAccount,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Theme.of(context).colorScheme.primaryContainer,
               ),
-            ),
-          ],
         ),
-      ),
+        GestureDetector(
+          onTap: () {
+            context.push(GoRouterPaths.loginRoute);
+          },
+          child: Text(
+            StringConstant.login,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+        ),
+      ],
     );
   }
 }

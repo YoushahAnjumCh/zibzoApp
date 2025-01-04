@@ -22,6 +22,7 @@ import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/text
 import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/text_input_form_field_attributes.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/widgets/input_form_button.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/widgets/text_input_form_field.dart';
+import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
@@ -34,6 +35,10 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppLocalStorage appSecureStorage = sl<AppLocalStorage>();
+    AnalyticsService().logScreensView(
+      'signin_screen',
+      'SignInScreen',
+    );
 
     return BlocListener<SignInBloc, SignInState>(
       listener: (context, state) =>
@@ -65,8 +70,6 @@ class SignInScreen extends StatelessWidget {
       AppLocalStorage appSecureStorage) async {
     if (state is SignInLoading) {
       EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-      await Future.delayed(Duration(seconds: 8));
-      EasyLoading.dismiss();
     } else if (state is SignInFail) {
       EasyLoading.dismiss();
       errorMessageNotifier.value = state.message;
@@ -234,6 +237,7 @@ class SignInScreen extends StatelessWidget {
         attributes: TextFormButtonAttributes(
           onClick: () {
             if (_formKey.currentState!.validate()) {
+              AnalyticsService().logLogin();
               context.read<SignInBloc>().add(
                     SignInButtonEvent(
                       params: SignInParams(
