@@ -37,8 +37,6 @@ android/app/keystore.jks.gpg
 # Symbolication related
 app.*.symbols
 
-#env
-.env
 # Obfuscation related
 app.*.map.json
 
