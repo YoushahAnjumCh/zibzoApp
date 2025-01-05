@@ -1,9 +1,10 @@
 plugins {
     id "com.android.application"
-    id 'com.google.gms.google-services'
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
+    id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
+    
 }
 
 def localProperties = new Properties()
@@ -68,18 +69,24 @@ android {
         }
     }
 
-    buildTypes {
-        release {
-            signingConfig signingConfigs.release
-            minifyEnabled false
-            shrinkResources false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            
+     buildTypes {
+    release {
+        signingConfig signingConfigs.release
+        minifyEnabled true
+        shrinkResources false
+        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+        firebaseCrashlytics {
+            mappingFileUploadEnabled true
         }
     }
-     firebaseCrashlytics {
-        mappingFileUploadEnabled true
+    debug {
+        firebaseCrashlytics {
+            mappingFileUploadEnabled false
+        }
     }
+}
+
 }
 
 flutter {
@@ -88,7 +95,8 @@ flutter {
 
 dependencies {
         implementation platform('com.google.firebase:firebase-bom:32.2.0') 
-    implementation 'com.google.firebase:firebase-analytics'
+        implementation 'com.google.firebase:firebase-analytics'
+    
 }
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
