@@ -1,0 +1,102 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+    
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+android {
+    namespace "com.example.zibzo"
+    compileSdkVersion 34
+    buildToolsVersion "30.0.3"
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        applicationId "com.example.zibzo"
+        minSdkVersion 23
+        targetSdkVersion 34
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+    }
+
+    signingConfigs {
+        release {
+            def keyProperties = new Properties()
+            def keystorePropertiesFile = rootProject.file('app/key.properties')
+
+            if (keystorePropertiesFile.exists()) {
+                keyProperties.load(new FileInputStream(keystorePropertiesFile))
+            } else {
+                throw new FileNotFoundException("key.properties file not found at ${keystorePropertiesFile.absolutePath}")
+            }
+            storePassword keyProperties['storePassword']
+            keyAlias keyProperties['keyAlias']
+            keyPassword keyProperties['keyPassword']
+            storeFile file(keyProperties['storeFile'])
+        }
+    }
+
+     buildTypes {
+    release {
+        signingConfig signingConfigs.release
+        minifyEnabled true
+        shrinkResources false
+        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+        firebaseCrashlytics {
+            mappingFileUploadEnabled true
+        }
+    }
+    debug {
+        firebaseCrashlytics {
+            mappingFileUploadEnabled false
+        }
+    }
+}
+
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+        implementation platform('com.google.firebase:firebase-bom:32.2.0') 
+        implementation 'com.google.firebase:firebase-analytics'
+    
+}
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'

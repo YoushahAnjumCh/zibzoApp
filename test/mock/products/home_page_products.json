@@ -1,0 +1,190 @@
+{
+    "products": [
+      {
+        "_id": "6728cbd124fece9ffe991115",
+        "title": "Crewneck Mixed Texture",
+        "subtitle": "Sweater",
+        "category": "Men",
+        "image": [
+          "ProductImage_1730726865575.avif",
+          "ProductImage_1730726865577.webp",
+          "ProductImage_1730726865581.avif",
+          "ProductImage_1730726865581.avif"
+        ],
+        "offerPrice": 1899,
+        "actualPrice": 2600,
+        "offerPercentage": 10,
+        "__v": 0
+      },
+      {
+        "_id": "6728ccdb24fece9ffe99111f",
+        "title": "Trucker Faux",
+        "subtitle": "Jacket",
+        "category": "Men",
+        "image": [
+          "ProductImage_1730727131353.avif",
+          "ProductImage_1730727131353.avif",
+          "ProductImage_1730727131354.avif"
+        ],
+        "offerPrice": 2099,
+        "actualPrice": 2800,
+        "offerPercentage": 7,
+        "__v": 0
+      },
+      {
+        "_id": "6728cdbc24fece9ffe99113b",
+        "title": "Pile Lined Zip-Up",
+        "subtitle": "Hoodie",
+        "category": "Men",
+        "image": [
+          "ProductImage_1730727356248.avif",
+          "ProductImage_1730727356256.webp"
+        ],
+        "offerPrice": 1300,
+        "actualPrice": 1899,
+        "offerPercentage": 7,
+        "__v": 0
+      },
+      {
+        "_id": "6728ced624fece9ffe991145",
+        "title": "Trick Crochet Pattern",
+        "subtitle": "Jumper",
+        "category": "Women",
+        "image": [
+          "ProductImage_1730727638790.webp"
+        ],
+        "offerPrice": 899,
+        "actualPrice": 1099,
+        "offerPercentage": 10,
+        "__v": 0
+      },
+      {
+        "_id": "6728cf9c24fece9ffe99114f",
+        "title": "Long Sleeves Tunics",
+        "subtitle": "Corduroy Robe",
+        "category": "Women",
+        "image": [
+          "ProductImage_1730727836725.avif",
+          "ProductImage_1730727836727.avif",
+          "ProductImage_1730727836730.avif"
+        ],
+        "offerPrice": 1299,
+        "actualPrice": 1899,
+        "offerPercentage": 10,
+        "__v": 0
+      },
+      {
+        "_id": "6728d05e24fece9ffe991159",
+        "title": "Burgundy Long wool",
+        "subtitle": "Prom",
+        "category": "Women",
+        "image": [
+          "ProductImage_1730728030292.avif",
+          "ProductImage_1730728030294.webp",
+          "ProductImage_1730728030295.avif",
+          "ProductImage_1730728030296.avif"
+        ],
+        "offerPrice": 3299,
+        "actualPrice": 4299,
+        "offerPercentage": 10,
+        "__v": 0
+      },
+      {
+        "_id": "6728d12424fece9ffe991163",
+        "title": "French Terry Pullover",
+        "subtitle": "Sweater",
+        "category": "Kids",
+        "image": [
+          "ProductImage_1730728228330.avif",
+          "ProductImage_1730728228330.avif",
+          "ProductImage_1730728228331.avif",
+          "ProductImage_1730728228331.avif"
+        ],
+        "offerPrice": 999,
+        "actualPrice": 1099,
+        "offerPercentage": 10,
+        "__v": 0
+      },
+      {
+        "_id": "67290e76e8226d9a7f83636b",
+        "title": "Blue Pattern",
+        "subtitle": "Zibzo",
+        "category": "Men",
+        "image": [
+          "ProductImage_1730743926790.avif",
+          "ProductImage_1730743926791.avif",
+          "ProductImage_1730743926791.avif",
+          "ProductImage_1730743926791.avif"
+        ],
+        "offerPrice": 1099,
+        "actualPrice": 1299,
+        "offerPercentage": 10,
+        "__v": 0
+      }
+    ],
+    "homebanner": [
+      {
+        "_id": "67286762abd94980145f803f",
+        "image": "homebanner_1730701146215.png",
+        "title": "ZARA",
+        "__v": 0
+      },
+      {
+        "_id": "672867f8abd94980145f804a",
+        "image": "homebanner_1730701304358.png",
+        "title": "PRADA",
+        "__v": 0
+      },
+      {
+        "_id": "672868b3abd94980145f804c",
+        "image": "homebanner_1730701491043.png",
+        "title": "Jacket",
+        "__v": 0
+      },
+      {
+        "_id": "672868e7abd94980145f8056",
+        "image": "homebanner_1730701543825.png",
+        "title": "Women Collection",
+        "__v": 0
+      }
+    ],
+    "category": [
+      {
+        "_id": "6728d269e8226d9a7f836325",
+        "image": "category_1730728553847.jpg",
+        "title": "Men",
+        "__v": 0
+      },
+      {
+        "_id": "6728d297e8226d9a7f836337",
+        "image": "category_1730728599610.jpg",
+        "title": "Women",
+        "__v": 0
+      },
+      {
+        "_id": "6728d2a0e8226d9a7f836339",
+        "image": "category_1730728608956.jpg",
+        "title": "Kids",
+        "__v": 0
+      }
+    ],
+    "offerdeal": [
+        {
+            "_id": "6762b89f757a30f5aa42e8d4",
+            "image": "https://d3o9xza3ibzeyy.cloudfront.net/81aa49b01e0cecba98a1bea8b5dcf0b2b73d454e85ddfeb746e27422eaf838c9",
+            "title": "Men",
+            "logo": "https://d3o9xza3ibzeyy.cloudfront.net/",
+            "offer": "10% Off under 1099",
+            "__v": 0
+        }
+    ],
+    "offerbanner": [
+      {
+        "_id": "6762b484757a30f5aa42e868",
+        "image": "https://d3o9xza3ibzeyy.cloudfront.net/3adc33ee705bf4cbd06594be9fc35d3a28f3d198fe9cb2f017c6ef3c275eab08",
+        "title": "OfferSale",
+        "__v": 0
+      }
+    ],
+    "cartProductCount": 0
+  }
