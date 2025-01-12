@@ -1,14 +1,14 @@
 import 'dart:io';
 import 'package:either_dart/either.dart';
-import 'package:zibzo_app/core/constant/string_constant.dart';
-import 'package:zibzo_app/core/failure/failure.dart';
-import 'package:zibzo_app/core/network_info/network_info.dart';
-import 'package:zibzo_app/core/typedef/typedef.dart';
-import 'package:zibzo_app/features/zibzo/data/datasources/auth/remote/user_remote_data_sources.dart';
-import 'package:zibzo_app/features/zibzo/data/models/auth/user_model.dart';
-import 'package:zibzo_app/features/zibzo/domain/repositories/signup/signup_repository.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/signin/signin_usecase.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/signup/signup_usecase.dart';
+import 'package:zibzo/core/constant/string_constant.dart';
+import 'package:zibzo/core/failure/failure.dart';
+import 'package:zibzo/core/network_info/network_info.dart';
+import 'package:zibzo/core/typedef/typedef.dart';
+import 'package:zibzo/features/zibzo/data/datasources/auth/remote/user_remote_data_sources.dart';
+import 'package:zibzo/features/zibzo/data/models/auth/user_model.dart';
+import 'package:zibzo/features/zibzo/domain/repositories/signup/signup_repository.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/signin/signin_usecase.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/signup/signup_usecase.dart';
 
 class UserRepositoryImpl extends UserRepository {
   final UserDataSource remoteDataSource;

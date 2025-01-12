@@ -1,4 +1,4 @@
-import 'package:zibzo_app/features/zibzo/domain/entities/home/home_products_entity.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/home_products_entity.dart';
 
 class ProductModel extends ProductEntity {
   const ProductModel({
@@ -19,7 +19,6 @@ class ProductModel extends ProductEntity {
           offerPrice: offerPrice,
         );
 
-  // Factory constructor to create a ProductEntity from a JSON map
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
       id: json['_id'],
@@ -32,7 +31,6 @@ class ProductModel extends ProductEntity {
     );
   }
 
-  // Method to convert a ProductEntity instance to a JSON map
   Map<String, dynamic> toJson() {
     return {
       '_id': id,

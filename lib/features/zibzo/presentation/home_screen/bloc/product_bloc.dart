@@ -1,14 +1,15 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zibzo_app/core/failure/failure.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/home_response_entity.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/home_page/product_use_case.dart';
+import 'package:zibzo/core/failure/failure.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/home_response_entity.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/home_page/product_use_case.dart';
 
 part 'product_event.dart';
 part 'product_state.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final ProductUseCase useCase;
+
   ProductBloc(this.useCase) : super(ProductInitial()) {
     on<ProductFetchEvent>(_getProducts);
   }
@@ -20,7 +21,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       products.fold(
           (left) =>
               emit(ProductFail(errorMessage: left.errorMessage.toString())),
-          (products) => emit(ProductLoaded(product: products)));
+          (products) {
+        emit(ProductLoaded(product: products));
+      });
     } on ServerFailure catch (e) {
       emit(ProductFail(errorMessage: e.errorMessage.toString()));
     }

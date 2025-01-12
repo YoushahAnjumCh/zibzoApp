@@ -1,5 +1,5 @@
 import 'package:either_dart/either.dart';
-import 'package:zibzo_app/core/failure/failure.dart';
+import 'package:zibzo/core/failure/failure.dart';
 
 abstract class UseCase<Type, Params> {
   Future<Either<Failure, Type>> call(Params params);

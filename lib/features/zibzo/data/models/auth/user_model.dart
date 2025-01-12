@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/signup/user.dart';
+import 'package:zibzo/features/zibzo/domain/entities/signup/user.dart';
 
 part 'user_model.g.dart';
 

@@ -1,4 +1,4 @@
-import 'package:zibzo_app/features/zibzo/domain/entities/home/home_banner_entity.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/home_banner_entity.dart';
 
 class HomeBannerModel extends HomeBannerEntity {
   const HomeBannerModel({
@@ -11,7 +11,6 @@ class HomeBannerModel extends HomeBannerEntity {
           image: image,
         );
 
-  // Factory method to create an instance of HomeBannerModel from JSON
   factory HomeBannerModel.fromJson(Map<String, dynamic> json) {
     return HomeBannerModel(
       id: json['_id'] as String,
@@ -20,7 +19,6 @@ class HomeBannerModel extends HomeBannerEntity {
     );
   }
 
-  // Method to convert an instance of HomeBannerModel to JSON
   Map<String, dynamic> toJson() {
     return {
       'id': id,

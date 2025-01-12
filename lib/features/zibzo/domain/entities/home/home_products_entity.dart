@@ -19,19 +19,6 @@ class ProductEntity extends Equatable {
     required this.offerPrice,
   });
 
-  // Factory constructor to parse JSON into a ProductEntity instance
-  factory ProductEntity.fromJson(Map<String, dynamic> json) {
-    return ProductEntity(
-      id: json['_id'] as String,
-      title: json['title'] as String,
-      subtitle: json['subtitle'] as String,
-      image: List<String>.from(json['image'] as List),
-      offerPercentage: (json['offerPercentage'] as num).toDouble(),
-      actualPrice: (json['actualPrice'] as num).toDouble(),
-      offerPrice: (json['offerPrice'] as num).toDouble(),
-    );
-  }
-
   @override
   List<Object> get props => [id];
 }

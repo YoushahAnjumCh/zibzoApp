@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:zibzo_app/core/constant/assets_path.dart';
-import 'package:zibzo_app/core/secure_storage/app_secure_storage.dart';
-import 'package:zibzo_app/core/service/service_locator.dart';
+import 'package:zibzo/core/constant/assets_path.dart';
+import 'package:zibzo/core/secure_storage/app_secure_storage.dart';
+import 'package:zibzo/core/service/service_locator.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   CustomAppBar({Key? key}) : super(key: key);
@@ -12,8 +12,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, String?>>(
       future: Future.wait([
-        appSecureStorage.getToken("image"),
-        appSecureStorage.getToken("userName"),
+        appSecureStorage.getCredential("image"),
+        appSecureStorage.getCredential("userName"),
       ]).then((values) => {
             'image': values[0],
             'userName': values[1],
@@ -59,10 +59,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.search, color: Colors.black),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.shopping_cart, color: Colors.black),
               ),
             ],
           );

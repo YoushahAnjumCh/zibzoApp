@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zibzo_app/common/password_notifier.dart';
+import 'package:zibzo/common/password_notifier.dart';
 
 class InputTextFormFieldAttributes {
   final TextEditingController controller;

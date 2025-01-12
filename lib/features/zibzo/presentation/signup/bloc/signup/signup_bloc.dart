@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zibzo_app/core/failure/failure.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/signup/signup_usecase.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/bloc/signup/signup_state.dart';
+import 'package:zibzo/core/failure/failure.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/signup/signup_usecase.dart';
+import 'package:zibzo/features/zibzo/presentation/signup/bloc/signup/signup_state.dart';
 
 part 'signup_event.dart';
 

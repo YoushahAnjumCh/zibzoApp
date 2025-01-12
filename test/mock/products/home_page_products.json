@@ -168,5 +168,23 @@
         "__v": 0
       }
     ],
-    "offerbanner": []
+    "offerdeal": [
+        {
+            "_id": "6762b89f757a30f5aa42e8d4",
+            "image": "https://d3o9xza3ibzeyy.cloudfront.net/81aa49b01e0cecba98a1bea8b5dcf0b2b73d454e85ddfeb746e27422eaf838c9",
+            "title": "Men",
+            "logo": "https://d3o9xza3ibzeyy.cloudfront.net/",
+            "offer": "10% Off under 1099",
+            "__v": 0
+        }
+    ],
+    "offerbanner": [
+      {
+        "_id": "6762b484757a30f5aa42e868",
+        "image": "https://d3o9xza3ibzeyy.cloudfront.net/3adc33ee705bf4cbd06594be9fc35d3a28f3d198fe9cb2f017c6ef3c275eab08",
+        "title": "OfferSale",
+        "__v": 0
+      }
+    ],
+    "cartProductCount": 0
   }
