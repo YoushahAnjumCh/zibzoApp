@@ -7,6 +7,7 @@ import 'package:zibzo/features/zibzo/domain/entities/home/home_products_entity.d
 import 'package:zibzo/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/cart/widgets/cart_checkout_button.dart';
 import 'package:zibzo/features/zibzo/presentation/cart/widgets/cart_items_widget.dart';
+import 'package:zibzo/features/zibzo/presentation/cart/widgets/cart_loading_widget.dart';
 import 'package:zibzo/features/zibzo/presentation/cart/widgets/price_row_widget.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/section_title.dart';
 import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
@@ -37,7 +38,7 @@ class CartScreenState extends State<CartScreen> {
         body: BlocBuilder<CartBloc, CartState>(
           builder: (context, state) {
             if (state is CartLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const CartLoadingWidget();
             } else if (state is CartSuccess) {
               _updateCartCount(state.cartResponseEntity.cartProductCount);
               return _buildCartContent(state.cartResponseEntity.products);
@@ -90,7 +91,7 @@ class CartScreenState extends State<CartScreen> {
 
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 40),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

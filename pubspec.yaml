@@ -61,6 +61,7 @@ dependencies:
   firebase_analytics:
   firebase_crashlytics: ^4.1.0
   fake_cloud_firestore: ^3.1.0
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

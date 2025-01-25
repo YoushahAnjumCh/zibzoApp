@@ -42,8 +42,6 @@ class CarouselImageSlider extends StatelessWidget {
                         ),
                       ),
                     ),
-                    placeholder: (context, url) =>
-                        Center(child: const CircularProgressIndicator()),
                     errorWidget: (context, url, error) =>
                         const Icon(Icons.error),
                   ),

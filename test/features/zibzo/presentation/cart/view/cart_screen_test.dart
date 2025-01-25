@@ -13,6 +13,7 @@ import 'package:zibzo/core/service/service_locator.dart';
 import 'package:zibzo/features/zibzo/domain/entities/cart/cart_response_entity.dart';
 import 'package:zibzo/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/cart/view/cart_screen.dart';
+import 'package:zibzo/features/zibzo/presentation/cart/widgets/cart_loading_widget.dart';
 import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
 import '../../../../constants/product_params.dart';
@@ -43,6 +44,35 @@ void main() {
     sl.registerLazySingleton<AppLocalStorage>(() => MockAppLocalStorage());
     mockAnalyticsService = MockAnalyticsService();
     sl.registerLazySingleton<AnalyticsService>(() => mockAnalyticsService);
+  });
+
+  testWidgets("Cart screen loading state", (WidgetTester tester) async {
+    await mockNetworkImagesFor(() async {
+      final mockCartBloc = MockCartBloc();
+
+      // Simulate CartLoading state
+      when(() => mockCartBloc.state).thenReturn(CartLoading());
+
+      final widget = CartScreen();
+
+      await tester.pumpWidget(
+        MultiBlocProvider(
+          providers: [
+            BlocProvider<CartBloc>(
+              create: (context) => mockCartBloc,
+            ),
+            ChangeNotifierProvider<CartCountProvider>(
+              create: (context) => CartCountProvider(),
+            ),
+          ],
+          child: MaterialApp(title: 'Widget Test', home: widget),
+        ),
+      );
+
+      await tester.pump(const Duration(seconds: 4));
+
+      expect(find.byType(CartLoadingWidget), findsOneWidget);
+    });
   });
 
   testWidgets("Cart screen success", (WidgetTester tester) async {

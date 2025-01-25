@@ -14,6 +14,7 @@ import 'package:zibzo/features/zibzo/domain/usecases/home_page/product_use_case.
 import 'package:zibzo/features/zibzo/presentation/home_screen/bloc/product_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/cubit/add_cart/add_cart_cubit.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/screen/home_view.dart';
+import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/home_loading_widget.dart';
 import 'package:zibzo/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_cubit.dart';
 import 'package:zibzo/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_state.dart';
 
@@ -72,11 +73,46 @@ void main() {
 
     when(() => mockAppLocalStorage.getCredential("userName"))
         .thenAnswer((_) async => 'John Doe');
-    // Mock SharedPreferencesCubit behavior
+
     when(() => mockSharedPreferencesCubit.state).thenReturn(Authenticated());
     when(() => mockCartCubit.state).thenReturn(AddCartInitial());
     when(() => mockSharedPreferencesCubit.sharedPreferencesLoginStatusUseCase
         .isLoggedIn()).thenAnswer((_) async => true);
+  });
+  testWidgets("renders HomeLoadingWidget when ProductState is ProductLoading",
+      (WidgetTester tester) async {
+    final mockProductBloc = MockProductBloc();
+
+    when(() => mockProductBloc.state).thenReturn(ProductLoading());
+
+    final widget = HomeView();
+
+    await tester.pumpWidget(
+      MultiBlocProvider(
+        providers: [
+          BlocProvider<ProductBloc>(
+            create: (context) => mockProductBloc,
+          ),
+          BlocProvider<SharedPreferencesCubit>(
+            create: (context) => mockSharedPreferencesCubit,
+          ),
+          ChangeNotifierProvider<CartCountProvider>(
+            create: (context) => CartCountProvider(),
+          ),
+          BlocProvider<AddCartCubit>(
+            create: (context) => AddCartCubit(mockCartUseCase),
+          ),
+        ],
+        child: MaterialApp(
+          title: 'Widget Test',
+          home: widget,
+        ),
+      ),
+    );
+
+    await tester.pump();
+
+    expect(find.byType(HomeLoadingWidget), findsOneWidget);
   });
 
   testWidgets("success", (WidgetTester tester) async {
