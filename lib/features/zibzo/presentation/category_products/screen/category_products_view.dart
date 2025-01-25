@@ -6,6 +6,7 @@ import 'package:zibzo/common/provider/cart_count_provider.dart';
 import 'package:zibzo/core/routes/app_routes.dart';
 import 'package:zibzo/features/zibzo/domain/entities/home/home_products_entity.dart';
 import 'package:zibzo/features/zibzo/presentation/category_products/bloc/bloc/category_product_bloc.dart';
+import 'package:zibzo/features/zibzo/presentation/category_products/widgets/category_loading_widget.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/cubit/add_cart/add_cart_cubit.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/product_card_widget.dart';
 import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
@@ -28,7 +29,7 @@ class CategoryProductsView extends StatelessWidget {
       body: BlocBuilder<CategoryProductBloc, CategoryProductState>(
         builder: (context, state) {
           if (state is CategoryProductLoading) {
-            return const LoadingIndicator();
+            return CategoryLoadingWidget();
           } else if (state is CategoryProductSuccess) {
             return ProductList(products: state.product);
           } else if (state is CategoryProductFailure) {
@@ -80,15 +81,6 @@ class CategoryProductsView extends StatelessWidget {
         }),
       ],
     );
-  }
-}
-
-class LoadingIndicator extends StatelessWidget {
-  const LoadingIndicator({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: CircularProgressIndicator());
   }
 }
 

@@ -83,8 +83,6 @@ class CategoryItems extends StatelessWidget {
                             ),
                           ),
                         ),
-                        placeholder: (context, url) =>
-                            const CircularProgressIndicator(),
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error),
                       ),

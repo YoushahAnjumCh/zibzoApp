@@ -10,6 +10,7 @@ import 'package:zibzo/features/zibzo/presentation/home_screen/cubit/add_cart/add
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/carousel_slider.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/category_items.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/custom_appbar_widget.dart';
+import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/home_loading_widget.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/trending_offer_widget.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/product_card_widget.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/section_title.dart';
@@ -39,7 +40,7 @@ class HomeView extends StatelessWidget {
         child: BlocBuilder<ProductBloc, ProductState>(
           builder: (context, state) {
             if (state is ProductLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const HomeLoadingWidget();
             } else if (state is ProductLoaded) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 _fetchCartCountAndStore(
