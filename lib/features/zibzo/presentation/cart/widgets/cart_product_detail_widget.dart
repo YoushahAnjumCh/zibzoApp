@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:zibzo/common/provider/cart_count_provider.dart';
 import 'package:zibzo/core/theme/app_colors.dart';
 import 'package:zibzo/core/theme/app_text_styles.dart';
 import 'package:zibzo/features/zibzo/domain/entities/home/home_products_entity.dart';
@@ -49,6 +50,7 @@ class CartProductDetailWidget extends StatelessWidget {
   void _deleteProductFromCart(BuildContext context, String productId) {
     AnalyticsService().logRemoveToCart(productId);
     final params = DeleteCartParams(productID: productId);
+    CartCountProvider().deleteCart();
     context.read<CartBloc>().add(DeleteCartEvent(params: params));
   }
 }

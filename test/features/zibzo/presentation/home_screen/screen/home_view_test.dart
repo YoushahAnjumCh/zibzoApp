@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_core_platform_interface/test.dart';
@@ -15,8 +17,6 @@ import 'package:zibzo/features/zibzo/presentation/home_screen/bloc/product_bloc.
 import 'package:zibzo/features/zibzo/presentation/home_screen/cubit/add_cart/add_cart_cubit.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/screen/home_view.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/home_loading_widget.dart';
-import 'package:zibzo/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_cubit.dart';
-import 'package:zibzo/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_state.dart';
 
 import '../../../../constants/product_params.dart';
 
@@ -29,12 +29,7 @@ class MockCartUseCase extends Mock implements AddCartUseCase {}
 class MockProductBloc extends MockBloc<ProductEvent, ProductState>
     implements ProductBloc {}
 
-class MockSharedPreferencesCubit extends MockCubit<AuthState>
-    implements SharedPreferencesCubit {}
-
 class MockCartCubit extends MockCubit<AddCartState> implements AddCartCubit {}
-
-class FakeAuthState extends Fake implements AuthState {}
 
 class FakeProductState extends Fake implements ProductState {}
 
@@ -43,41 +38,36 @@ class FakeProductEvent extends Fake implements ProductEvent {}
 void main() {
   late MockAppLocalStorage mockAppLocalStorage;
   late MockProductsUseCase mockSignInUseCase;
-  late MockSharedPreferencesCubit mockSharedPreferencesCubit;
   late MockCartUseCase mockCartUseCase;
   late MockCartCubit mockCartCubit;
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
+    HttpOverrides.global = null; // Prevents real network requests
+
     setupFirebaseCoreMocks();
     await Firebase.initializeApp();
     registerFallbackValue(FakeProductState());
     registerFallbackValue(FakeProductEvent());
-    registerFallbackValue(FakeAuthState());
   });
 
   setUp(() {
     sl.reset();
     mockAppLocalStorage = MockAppLocalStorage();
     mockSignInUseCase = MockProductsUseCase();
-    mockSharedPreferencesCubit = MockSharedPreferencesCubit();
 
     mockCartUseCase = MockCartUseCase();
     mockCartCubit = MockCartCubit();
+    HttpOverrides.global = null; // Prevents real network requests
     sl.registerLazySingleton<AppLocalStorage>(() => mockAppLocalStorage);
     sl.registerLazySingleton<ProductUseCase>(() => mockSignInUseCase);
-    sl.registerLazySingleton<SharedPreferencesCubit>(
-        () => mockSharedPreferencesCubit);
     sl.registerLazySingleton<AddCartCubit>(() => mockCartCubit);
     when(() => mockAppLocalStorage.getCredential("image"))
-        .thenAnswer((_) async => 'https://via.placeholder.com/150');
+        .thenAnswer((_) async => '');
 
     when(() => mockAppLocalStorage.getCredential("userName"))
         .thenAnswer((_) async => 'John Doe');
 
-    when(() => mockSharedPreferencesCubit.state).thenReturn(Authenticated());
     when(() => mockCartCubit.state).thenReturn(AddCartInitial());
-    when(() => mockSharedPreferencesCubit.sharedPreferencesLoginStatusUseCase
-        .isLoggedIn()).thenAnswer((_) async => true);
   });
   testWidgets("renders HomeLoadingWidget when ProductState is ProductLoading",
       (WidgetTester tester) async {
@@ -93,9 +83,6 @@ void main() {
           BlocProvider<ProductBloc>(
             create: (context) => mockProductBloc,
           ),
-          BlocProvider<SharedPreferencesCubit>(
-            create: (context) => mockSharedPreferencesCubit,
-          ),
           ChangeNotifierProvider<CartCountProvider>(
             create: (context) => CartCountProvider(),
           ),
@@ -110,7 +97,7 @@ void main() {
       ),
     );
 
-    await tester.pump();
+    await tester.pump(const Duration(seconds: 2));
 
     expect(find.byType(HomeLoadingWidget), findsOneWidget);
   });
@@ -129,9 +116,6 @@ void main() {
           BlocProvider<ProductBloc>(
             create: (context) => mockProductBloc,
           ),
-          BlocProvider<SharedPreferencesCubit>(
-            create: (context) => mockSharedPreferencesCubit,
-          ),
           ChangeNotifierProvider<CartCountProvider>(
             create: (context) => CartCountProvider(),
           ),
@@ -144,7 +128,6 @@ void main() {
     );
 
     await tester.pump(const Duration(seconds: 4));
-
     expect(find.byType(HomeContent), findsOneWidget);
   });
 }

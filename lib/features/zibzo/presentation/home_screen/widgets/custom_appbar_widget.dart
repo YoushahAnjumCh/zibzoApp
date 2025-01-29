@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:zibzo/core/constant/assets_path.dart';
 import 'package:zibzo/core/secure_storage/app_secure_storage.dart';
 import 'package:zibzo/core/service/service_locator.dart';
 
@@ -34,14 +33,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           return AppBar(
             title: Row(
               children: [
-                CircleAvatar(
-                  backgroundImage: image?.startsWith('http') == true
-                      ? NetworkImage(image!)
-                      : const AssetImage(AssetsPath.appLogo) as ImageProvider,
-                  onBackgroundImageError: (exception, stackTrace) {
-                    debugPrint('Failed to load network image: $exception');
-                  },
-                ),
+                image != null && image.isNotEmpty
+                    ? CircleAvatar(
+                        backgroundImage: image.startsWith('http')
+                            ? NetworkImage(image)
+                            : null,
+                      )
+                    : SizedBox.shrink(),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(

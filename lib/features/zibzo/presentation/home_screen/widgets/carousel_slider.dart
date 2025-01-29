@@ -36,6 +36,7 @@ class CarouselImageSlider extends StatelessWidget {
                     imageUrl: url.image,
                     imageBuilder: (context, imageProvider) => Container(
                       decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(22),
                         image: DecorationImage(
                           image: imageProvider,
                           fit: BoxFit.fill,

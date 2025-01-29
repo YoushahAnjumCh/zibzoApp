@@ -19,14 +19,12 @@ import 'package:zibzo/features/zibzo/domain/usecases/cart/delete_cart_usecase.da
 import 'package:zibzo/features/zibzo/domain/usecases/cart/get_cart_usecase.dart';
 import 'package:zibzo/features/zibzo/domain/usecases/category_products/category_products_use_case.dart';
 import 'package:zibzo/features/zibzo/domain/usecases/home_page/product_use_case.dart';
-import 'package:zibzo/features/zibzo/domain/usecases/shared_preferences/shared_preferences_usecase.dart';
 import 'package:zibzo/features/zibzo/domain/usecases/signin/signin_usecase.dart';
 import 'package:zibzo/features/zibzo/domain/usecases/signup/signup_usecase.dart';
 import 'package:zibzo/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/category_products/bloc/bloc/category_product_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/bloc/product_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/cubit/add_cart/add_cart_cubit.dart';
-import 'package:zibzo/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_cubit.dart';
 import 'package:zibzo/features/zibzo/presentation/signin/bloc/signin_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/bloc/signup_bloc.dart';
 import 'package:http/http.dart' as http;
@@ -49,9 +47,6 @@ Future<void> init() async {
     () => ProductBloc(sl()),
   );
   sl.registerFactory(
-    () => SharedPreferencesCubit(sl(), sl(), sl()),
-  );
-  sl.registerFactory(
     () => AddCartCubit(sl()),
   );
   sl.registerFactory(
@@ -61,9 +56,6 @@ Future<void> init() async {
   sl.registerLazySingleton(() => SignUpUseCase(sl()));
   sl.registerLazySingleton(() => SignInUseCase(sl()));
   sl.registerLazySingleton(() => ProductUseCase(sl()));
-  sl.registerLazySingleton(() => SharedPreferencesLoginUseCase(sl()));
-  sl.registerLazySingleton(() => SharedPreferencesLoginStatusUseCase(sl()));
-  sl.registerLazySingleton(() => SharedPreferencesLogoutUseCase(sl()));
   sl.registerLazySingleton(() => CategoryProductsUseCase(sl()));
   sl.registerLazySingleton(() => AddCartUseCase(cartRepository: sl()));
   sl.registerLazySingleton(() => DeleteCartUseCase(cartRepository: sl()));

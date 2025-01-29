@@ -26,7 +26,6 @@ class HomeScreen extends StatelessWidget {
                 index: bottomNavBarNotifier.currentIndex,
                 children: [
                   HomeView(),
-                  SearchView(),
                   WishListView(),
                   CartScreen(),
                   ProfileView(),

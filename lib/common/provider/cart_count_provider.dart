@@ -22,4 +22,21 @@ class CartCountProvider with ChangeNotifier {
     await prefs.setInt('cartCount', _cartCount);
     notifyListeners();
   }
+
+  Future<void> deleteCart() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _cartCount = prefs.getInt('cartCount') ?? 0;
+    if (_cartCount > 0) {
+      _cartCount--;
+    }
+    notifyListeners();
+  }
+
+  Future<void> clearCart() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('cartCount');
+    _cartCount = 0;
+    notifyListeners();
+    await loadCartCount();
+  }
 }
