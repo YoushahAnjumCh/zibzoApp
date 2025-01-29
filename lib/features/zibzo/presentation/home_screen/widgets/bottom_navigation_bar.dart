@@ -20,7 +20,7 @@ class CustomBottomNavBar extends StatelessWidget {
           showUnselectedLabels: false,
           currentIndex: bottomNavBarNotifier.currentIndex,
           onTap: (index) {
-            if (index == 3) {
+            if (index == 2) {
               BlocProvider.of<CartBloc>(context).add(GetCartEvent());
             }
             bottomNavBarNotifier.updateIndex(index);
@@ -28,10 +28,6 @@ class CustomBottomNavBar extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search),
               label: '',
             ),
             BottomNavigationBarItem(

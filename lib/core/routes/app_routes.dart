@@ -9,10 +9,10 @@ import 'package:zibzo/features/zibzo/presentation/category_products/bloc/bloc/ca
 import 'package:zibzo/features/zibzo/presentation/category_products/screen/category_products_view.dart';
 
 import 'package:zibzo/features/zibzo/presentation/home_screen/screen/home_screen.dart';
-import 'package:zibzo/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_cubit.dart';
-import 'package:zibzo/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_state.dart';
+import 'package:zibzo/features/zibzo/presentation/onboarding_screen/view/onboarding_screen.dart';
 import 'package:zibzo/features/zibzo/presentation/signin/screen/sign_in_screen.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/screen/sign_up_screen.dart';
+import 'package:zibzo/features/zibzo/presentation/splash_screen/view/splash_screen.dart';
 
 class AppRouter {
   AppRouter();
@@ -21,24 +21,12 @@ class AppRouter {
       FirebaseAnalyticsObserver(analytics: analytics);
 
   late final GoRouter router = GoRouter(
+    initialLocation: GoRouterPaths.splashRoute,
     observers: [observer],
     routes: [
       GoRoute(
         path: GoRouterPaths.loginRoute,
-        builder: (context, state) {
-          return BlocBuilder<SharedPreferencesCubit, AuthState>(
-            builder: (context, state) {
-              if (state is Authenticated) {
-                return HomeScreen();
-              } else if (state is Unauthenticated) {
-                return SignInScreen();
-              } else {
-                return const Scaffold(
-                    body: Center(child: CircularProgressIndicator()));
-              }
-            },
-          );
-        },
+        builder: (context, state) => SignInScreen(),
       ),
       GoRoute(
         path: GoRouterPaths.homeScreenRoute,
@@ -51,6 +39,14 @@ class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return SignUpScreen();
         },
+      ),
+      GoRoute(
+        path: GoRouterPaths.onboardingRoute,
+        builder: (context, state) => OnboardingScreen(),
+      ),
+      GoRoute(
+        path: GoRouterPaths.splashRoute,
+        builder: (context, state) => SplashScreen(),
       ),
       GoRoute(
         path: GoRouterPaths.loginRoute,
@@ -84,8 +80,10 @@ class AppRouter {
 }
 
 class GoRouterPaths {
+  static const onboardingRoute = "/onboarding";
+  static const splashRoute = "/";
   static const signupRoute = "/signup";
-  static const loginRoute = "/";
+  static const loginRoute = "/login";
   static const homeScreenRoute = "/homescreen";
   static const cartScreenRoute = "/cartscreen";
   static const categoryProducts = "/categoryproducts/:categoryName";

@@ -1,12 +1,9 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_core_platform_interface/test.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:provider/provider.dart';
 import 'package:zibzo/core/constant/assets_path.dart';
 import 'package:zibzo/core/secure_storage/app_secure_storage.dart';
 import 'package:zibzo/core/service/service_locator.dart';
@@ -14,64 +11,48 @@ import 'package:zibzo/features/zibzo/presentation/profile/screen/profile_view.da
 import 'package:zibzo/features/zibzo/presentation/profile/widgets/profile_details_widget.dart';
 import 'package:zibzo/features/zibzo/presentation/profile/widgets/profile_items_widget.dart';
 import 'package:zibzo/features/zibzo/presentation/profile/widgets/profile_logout_widget.dart';
-import 'package:zibzo/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_cubit.dart';
-import 'package:zibzo/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_state.dart';
 
 class MockAppLocalStorage extends Mock implements AppLocalStorage {}
 
 class MockGoRouter extends Mock implements GoRouter {}
 
-class MockSharedPreferencesCubit extends MockCubit<AuthState>
-    implements SharedPreferencesCubit {}
-
-class FakeAuthState extends Fake implements AuthState {}
-
 void main() {
   late MockAppLocalStorage mockAppLocalStorage;
-  late MockSharedPreferencesCubit mockSharedPreferencesCubit;
   late MockGoRouter mockGoRouter;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     setupFirebaseCoreMocks();
     await Firebase.initializeApp();
-    registerFallbackValue(FakeAuthState());
   });
 
-  setUp(() {
+  setUp(() async {
     sl.reset();
-    mockGoRouter = MockGoRouter();
+    init();
 
-    mockSharedPreferencesCubit = MockSharedPreferencesCubit();
+    mockGoRouter = MockGoRouter();
     mockAppLocalStorage = MockAppLocalStorage();
 
+    if (sl.isRegistered<AppLocalStorage>()) {
+      sl.unregister<AppLocalStorage>();
+    }
+
     sl.registerLazySingleton<AppLocalStorage>(() => mockAppLocalStorage);
-    sl.registerLazySingleton<SharedPreferencesCubit>(
-        () => mockSharedPreferencesCubit);
+    await sl.allReady(); // ✅ Ensure services are available
 
     when(() => mockAppLocalStorage.getCredential("image"))
         .thenAnswer((_) async => '');
-
     when(() => mockAppLocalStorage.getCredential("userName"))
         .thenAnswer((_) async => 'John Doe');
     when(() => mockAppLocalStorage.getCredential("email"))
         .thenAnswer((_) async => 'john@gmail.com');
-    when(() => mockSharedPreferencesCubit.state).thenReturn(Authenticated());
     when(() => mockGoRouter.go(any())).thenReturn(null);
   });
-
   testWidgets('renders ProfileView with all items',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      MultiProvider(
-        providers: [
-          BlocProvider<SharedPreferencesCubit>(
-            create: (context) => mockSharedPreferencesCubit,
-          ),
-        ],
-        child: MaterialApp(
-          home: ProfileView(),
-        ),
+      MaterialApp(
+        home: ProfileView(),
       ),
     );
 
@@ -83,18 +64,11 @@ void main() {
 
     expect(find.text("Privacy Policy | Terms and Conditions"), findsOneWidget);
   });
-  testWidgets('renders ProfileDetailsWidget with user details',
+  testWidgets('render ProfileDetailsWidget with user details',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      MultiProvider(
-        providers: [
-          BlocProvider<SharedPreferencesCubit>(
-            create: (context) => mockSharedPreferencesCubit,
-          ),
-        ],
-        child: MaterialApp(
-          home: Scaffold(body: ProfileDetailsWidget()),
-        ),
+      MaterialApp(
+        home: Scaffold(body: ProfileDetailsWidget()),
       ),
     );
 
@@ -114,14 +88,9 @@ void main() {
 
   testWidgets('should navigate to login route on logout tap',
       (WidgetTester tester) async {
-    when(() => mockSharedPreferencesCubit.state).thenReturn(Authenticated());
-
     await tester.pumpWidget(
       MaterialApp(
-        home: BlocProvider<SharedPreferencesCubit>(
-          create: (context) => mockSharedPreferencesCubit,
-          child: ProfileView(),
-        ),
+        home: ProfileView(),
       ),
     );
 

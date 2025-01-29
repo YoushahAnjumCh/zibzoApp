@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zibzo/common/password_notifier.dart';
 import 'package:zibzo/core/constant/assets_path.dart';
 import 'package:zibzo/core/constant/string_constant.dart';
@@ -12,7 +13,6 @@ import 'package:zibzo/core/secure_storage/app_secure_storage.dart';
 import 'package:zibzo/core/service/service_locator.dart';
 import 'package:zibzo/core/validation/validation.dart';
 import 'package:zibzo/features/zibzo/domain/usecases/signin/signin_usecase.dart';
-import 'package:zibzo/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_cubit.dart';
 import 'package:zibzo/features/zibzo/presentation/signin/bloc/signin_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/signin/bloc/signin_event.dart';
 import 'package:zibzo/features/zibzo/presentation/signin/bloc/signin_state.dart';
@@ -89,9 +89,11 @@ class SignInScreen extends StatelessWidget {
           "email", state.user.email.toString());
 
       if (context.mounted) {
-        context
-            .read<SharedPreferencesCubit>()
-            .login("token", state.user.token.toString());
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('isAuthenticated', true);
+        if (!context.mounted) {
+          return;
+        }
         context.go(GoRouterPaths.homeScreenRoute);
       }
       EasyLoading.dismiss();
@@ -120,7 +122,6 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  // App logo widget
   Widget _buildAppLogo() {
     return AppLogoWidget(
       attributes: AppLogoWidgetAttributes(
@@ -131,7 +132,6 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  // Welcome text
   Widget _buildWelcomeText(BuildContext context) {
     return Column(
       children: [
@@ -161,7 +161,7 @@ class SignInScreen extends StatelessWidget {
             ? Text(
                 errorMessage,
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onError,
+                  color: Theme.of(context).colorScheme.error,
                   fontWeight: FontWeight.bold,
                 ),
               )
@@ -170,7 +170,6 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  // Sign-in fields (email and password)
   Widget _buildSignInFields(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -187,7 +186,6 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  // Email input field
   Widget _buildEmailField(BuildContext context) {
     return InputTextFormField(
       key: const Key(WidgetsKeys.tEmailKey),
@@ -204,7 +202,6 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  // Password input field with visibility toggle
   Widget _buildPasswordField() {
     return ChangeNotifierProvider(
       create: (_) => PasswordVisibilityNotifier(),
@@ -230,7 +227,6 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  // Sign-in button
   Widget _buildSignInButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),

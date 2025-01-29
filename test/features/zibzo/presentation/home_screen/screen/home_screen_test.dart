@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:either_dart/either.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,8 +20,6 @@ import 'package:zibzo/features/zibzo/domain/usecases/home_page/product_use_case.
 import 'package:zibzo/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/bloc/product_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/screen/home_screen.dart';
-import 'package:zibzo/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_cubit.dart';
-import 'package:zibzo/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_state.dart';
 
 import '../../../../constants/product_params.dart';
 
@@ -34,33 +34,27 @@ class MockGetCartUseCase extends Mock implements GetCartUseCase {}
 
 class MockDeleteCartUseCase extends Mock implements DeleteCartUseCase {}
 
-class MockSharedPreferencesCubit extends MockCubit<AuthState>
-    implements SharedPreferencesCubit {}
-
-class FakeAuthState extends Fake implements AuthState {}
-
 class FakeCategoryProductState extends Fake implements ProductState {}
 
 class FakeCategoryProductEvent extends Fake implements ProductFetchEvent {}
 
 void main() {
   late MockAppLocalStorage mockAppLocalStorage;
-  late MockSharedPreferencesCubit mockSharedPreferencesCubit;
   late BottomNavBarNotifier bottomNavBarNotifier;
   late MockProductsUseCase mockProductsUseCase;
   late MockDeleteCartUseCase mockDeleteCartUseCase;
   late MockGetCartUseCase mockGetCartUseCase;
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
+    HttpOverrides.global = null; // Prevents real network requests
+
     setupFirebaseCoreMocks();
     await Firebase.initializeApp();
     registerFallbackValue(FakeCategoryProductState());
     registerFallbackValue(FakeCategoryProductEvent());
-    registerFallbackValue(FakeAuthState());
   });
   setUp(() {
     sl.reset();
-    mockSharedPreferencesCubit = MockSharedPreferencesCubit();
     mockGetCartUseCase = MockGetCartUseCase();
     mockDeleteCartUseCase = MockDeleteCartUseCase();
     bottomNavBarNotifier = BottomNavBarNotifier();
@@ -70,8 +64,6 @@ void main() {
     sl.registerFactory<CartBloc>(
         () => CartBloc(mockDeleteCartUseCase, mockGetCartUseCase));
 
-    sl.registerLazySingleton<SharedPreferencesCubit>(
-        () => mockSharedPreferencesCubit);
     when(() => mockAppLocalStorage.getCredential("image"))
         .thenAnswer((_) async => 'https://via.placeholder.com/150');
 
@@ -79,11 +71,7 @@ void main() {
         .thenAnswer((_) async => 'John Doe');
     when(() => mockAppLocalStorage.getCredential("email"))
         .thenAnswer((_) async => 'john@gmail.com');
-    when(() => mockSharedPreferencesCubit.state).thenReturn(Authenticated());
-    when(() => mockSharedPreferencesCubit.sharedPreferencesLoginStatusUseCase
-        .isLoggedIn()).thenAnswer((_) async => true);
   });
-
   Widget createWidgetUnderTest() {
     return MultiProvider(
       providers: [
@@ -98,9 +86,6 @@ void main() {
         ),
         ChangeNotifierProvider<CartCountProvider>(
           create: (context) => CartCountProvider(),
-        ),
-        BlocProvider<SharedPreferencesCubit>(
-          create: (context) => mockSharedPreferencesCubit,
         ),
       ],
       child: MaterialApp(

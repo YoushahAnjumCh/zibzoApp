@@ -39,4 +39,9 @@ class StringConstant {
 
   //Cart
   static const checkout = "Checkout";
+  //Onboard
+  static const onBoardTitle = "STEP INTO STYLE LIKE NEVER BEFORE";
+  static const onBoardSubtitle =
+      "Your one-stop destination for trendy and personalized styles.";
+  static const onBoardButtonText = "Get Started";
 }
