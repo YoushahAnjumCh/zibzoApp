@@ -67,6 +67,6 @@ void main() {
       ),
     );
 
-    expect(find.text(StringConstant.welcomeSignUp), findsOneWidget);
+    expect(find.text(StringConstant.letsMakeAccount), findsOneWidget);
   });
 }

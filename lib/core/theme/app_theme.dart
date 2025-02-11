@@ -17,17 +17,22 @@ class AppTheme {
       unselectedItemColor: AppColors.onPrimaryContainerLight,
     ),
     inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: AppColors.textFieldFillColor,
       border: OutlineInputBorder(
-        borderSide: BorderSide(color: AppColors.outline),
+        borderSide: BorderSide.none,
         borderRadius: BorderRadius.circular(8),
       ),
       focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide.none,
         borderRadius: BorderRadius.circular(8),
       ),
       errorBorder: OutlineInputBorder(
+        borderSide: BorderSide.none,
         borderRadius: BorderRadius.circular(8),
       ),
       focusedErrorBorder: OutlineInputBorder(
+        borderSide: BorderSide.none,
         borderRadius: BorderRadius.circular(8),
       ),
     ),

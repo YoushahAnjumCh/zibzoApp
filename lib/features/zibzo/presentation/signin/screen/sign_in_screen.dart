@@ -100,7 +100,6 @@ class SignInScreen extends StatelessWidget {
     }
   }
 
-  // Build the sign-in form UI
   Widget _buildSignInForm(BuildContext context) {
     return SingleChildScrollView(
       child: Form(
@@ -126,8 +125,8 @@ class SignInScreen extends StatelessWidget {
     return AppLogoWidget(
       attributes: AppLogoWidgetAttributes(
         icon: AssetsPath.appLogo,
-        height: 72,
-        width: 72,
+        height: 96,
+        width: 96,
       ),
     );
   }
@@ -136,23 +135,17 @@ class SignInScreen extends StatelessWidget {
     return Column(
       children: [
         Text(
-          StringConstant.welcomeSignIn,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Theme.of(context).colorScheme.primaryContainer,
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-        Text(
           StringConstant.signIn,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Theme.of(context).colorScheme.primaryContainer,
+                color: Theme.of(context).colorScheme.primary,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
         ),
       ],
     );
   }
 
-  // Error message display
   Widget _buildErrorMessage() {
     return ValueListenableBuilder<String>(
       valueListenable: errorMessageNotifier,
@@ -192,7 +185,7 @@ class SignInScreen extends StatelessWidget {
       attributes: InputTextFormFieldAttributes(
         prefixIcon: Icon(Icons.email_rounded,
             color: Theme.of(context).colorScheme.onPrimaryContainer),
-        contentPadding: EdgeInsets.all(8),
+        contentPadding: EdgeInsets.all(18),
         controller: email,
         hint: StringConstant.email,
         hintColor: Theme.of(context).colorScheme.onPrimaryContainer,
@@ -213,7 +206,7 @@ class SignInScreen extends StatelessWidget {
               prefixIcon: Icon(Icons.lock,
                   color: Theme.of(context).colorScheme.onPrimaryContainer),
               passwordVisibilityNotifier: value,
-              contentPadding: EdgeInsets.all(8),
+              contentPadding: EdgeInsets.all(18),
               controller: password,
               hintColor: Theme.of(context).colorScheme.onPrimaryContainer,
               hint: StringConstant.password,
@@ -250,7 +243,7 @@ class SignInScreen extends StatelessWidget {
           titleColor: Colors.white,
           buttonWidthHeight: Size(double.maxFinite, 50),
           titleText: StringConstant.login,
-          cornerRadius: 8,
+          cornerRadius: 30,
         ),
       ),
     );
@@ -266,7 +259,7 @@ class SignInScreen extends StatelessWidget {
           children: [
             Text(
               StringConstant.dontHaveAccount,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Theme.of(context).colorScheme.primaryContainer,
                   ),
             ),
@@ -276,7 +269,7 @@ class SignInScreen extends StatelessWidget {
               },
               child: Text(
                 StringConstant.register,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,
                     ),

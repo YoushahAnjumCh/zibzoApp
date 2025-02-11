@@ -18,8 +18,6 @@ import 'package:zibzo/core/validation/validation.dart';
 import 'package:zibzo/features/zibzo/domain/usecases/signup/signup_usecase.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/bloc/signup_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/bloc/signup_state.dart';
-import 'package:zibzo/features/zibzo/presentation/signup/widgets/app_logo_widget.dart';
-import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/app_logo_widget_attributes.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/text_form_button_attributes.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/text_input_form_field_attributes.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/widgets/input_form_button.dart';
@@ -82,14 +80,12 @@ class SignUpScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(height: 40),
-                        _buildAppLogo(),
-                        SizedBox(height: 40),
                         _buildWelcomeText(context),
                         _buildErrorMessage(),
-                        _buildSignInFields(context),
-                        SizedBox(height: 20),
+                        SizedBox(height: 40),
                         _buildProfilePicturePicker(context),
+                        SizedBox(height: 20),
+                        _buildSignInFields(context),
                         SizedBox(height: 20),
                         _buildSignInButton(context),
                         SizedBox(height: 20),
@@ -110,48 +106,45 @@ class SignUpScreen extends StatelessWidget {
     return ValueListenableBuilder<File?>(
       valueListenable: selectedImageNotifier,
       builder: (context, selectedImage, child) {
-        return GestureDetector(
-          onTap: () async {
-            await _imagePickerHandler.pickImageFromGallery();
-          },
-          child: CircleAvatar(
-            radius: 50,
-            backgroundImage:
-                selectedImage != null ? FileImage(selectedImage) : null,
-            child: selectedImage == null
-                ? Icon(Icons.camera_alt, size: 30, color: Colors.white)
-                : null,
-          ),
+        return Stack(
+          children: [
+            GestureDetector(
+              onTap: () async {
+                await _imagePickerHandler.pickImageFromGallery();
+              },
+              child: CircleAvatar(
+                radius: 60,
+                backgroundImage:
+                    selectedImage != null ? FileImage(selectedImage) : null,
+                child: selectedImage == null
+                    ? Image.asset(AssetsPath.profileAvatar)
+                    : null,
+              ),
+            ),
+            Positioned(
+                bottom: 10,
+                right: 10,
+                child: Icon(Icons.camera_alt,
+                    color: Theme.of(context).colorScheme.primary))
+          ],
         );
       },
-    );
-  }
-
-  Widget _buildAppLogo() {
-    return AppLogoWidget(
-      attributes: AppLogoWidgetAttributes(
-        icon: AssetsPath.appLogo,
-        height: 72,
-        width: 72,
-      ),
     );
   }
 
   Widget _buildWelcomeText(BuildContext context) {
     return Column(
       children: [
-        Text(
-          StringConstant.welcomeSignUp,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Theme.of(context).colorScheme.primary,
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-        Text(
-          StringConstant.letsMakeAccount,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Theme.of(context).colorScheme.primaryContainer,
-              ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            StringConstant.letsMakeAccount,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
         ),
       ],
     );
@@ -183,7 +176,7 @@ class SignUpScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 62),
+          SizedBox(height: 20),
           _buildUserNameField(context),
           SizedBox(height: 20),
           _buildEmailField(context),
@@ -201,11 +194,11 @@ class SignUpScreen extends StatelessWidget {
       key: const Key(WidgetsKeys.tUserNameKey),
       attributes: InputTextFormFieldAttributes(
         prefixIcon: Icon(Icons.person_2,
-            color: Theme.of(context).colorScheme.primaryContainer),
-        contentPadding: EdgeInsets.all(8),
+            color: Theme.of(context).colorScheme.onPrimaryContainer),
+        contentPadding: EdgeInsets.all(18),
         controller: userNameController,
         hint: StringConstant.userName,
-        hintColor: Theme.of(context).colorScheme.primaryContainer,
+        hintColor: Theme.of(context).colorScheme.onPrimaryContainer,
         validation: FormValidator.validateNotEmpty,
         textInputAction: TextInputAction.next,
       ),
@@ -216,11 +209,11 @@ class SignUpScreen extends StatelessWidget {
     return InputTextFormField(
       attributes: InputTextFormFieldAttributes(
         prefixIcon: Icon(Icons.email,
-            color: Theme.of(context).colorScheme.primaryContainer),
-        contentPadding: EdgeInsets.all(8),
+            color: Theme.of(context).colorScheme.onPrimaryContainer),
+        contentPadding: EdgeInsets.all(18),
         controller: emailController,
         hint: StringConstant.email,
-        hintColor: Theme.of(context).colorScheme.primaryContainer,
+        hintColor: Theme.of(context).colorScheme.onPrimaryContainer,
         validation: FormValidator.validateEmail,
         textInputAction: TextInputAction.next,
       ),
@@ -236,11 +229,11 @@ class SignUpScreen extends StatelessWidget {
             key: const Key(WidgetsKeys.tPasswordKey),
             attributes: InputTextFormFieldAttributes(
               prefixIcon: Icon(Icons.lock,
-                  color: Theme.of(context).colorScheme.primaryContainer),
+                  color: Theme.of(context).colorScheme.onPrimaryContainer),
               passwordVisibilityNotifier: value,
-              contentPadding: EdgeInsets.all(8),
+              contentPadding: EdgeInsets.all(18),
               controller: passwordController,
-              hintColor: Theme.of(context).colorScheme.primaryContainer,
+              hintColor: Theme.of(context).colorScheme.onPrimaryContainer,
               hint: StringConstant.password,
               isSecureField: true,
               validation: FormValidator.validatePassword,
@@ -258,14 +251,13 @@ class SignUpScreen extends StatelessWidget {
       child: Consumer<PasswordVisibilityNotifier>(
         builder: (context, value, child) {
           return InputTextFormField(
-            // key: const Key(WidgetsKeys.tPasswordKey),
             attributes: InputTextFormFieldAttributes(
               prefixIcon: Icon(Icons.lock,
-                  color: Theme.of(context).colorScheme.primaryContainer),
+                  color: Theme.of(context).colorScheme.onPrimaryContainer),
               passwordVisibilityNotifier: value,
-              contentPadding: EdgeInsets.all(8),
+              contentPadding: EdgeInsets.all(18),
               controller: confirmPasswordController,
-              hintColor: Theme.of(context).colorScheme.primaryContainer,
+              hintColor: Theme.of(context).colorScheme.onPrimaryContainer,
               hint: StringConstant.confirmPassword,
               isSecureField: true,
               validation: FormValidator.validateConfirmPassword,
@@ -282,6 +274,7 @@ class SignUpScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: InputFormButton(
         attributes: TextFormButtonAttributes(
+            cornerRadius: 30,
             buttonWidthHeight: const Size(double.maxFinite, 50),
             titleColor: Colors.white,
             titleText: StringConstant.signUp,
@@ -307,28 +300,31 @@ class SignUpScreen extends StatelessWidget {
   }
 
   Widget _buildSignInPrompt(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          StringConstant.alreadyHaveAccount,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Theme.of(context).colorScheme.primaryContainer,
-              ),
-        ),
-        GestureDetector(
-          onTap: () {
-            context.push(GoRouterPaths.loginRoute);
-          },
-          child: Text(
-            StringConstant.login,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.bold,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            StringConstant.alreadyHaveAccount,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.primaryContainer,
                 ),
           ),
-        ),
-      ],
+          GestureDetector(
+            onTap: () {
+              context.push(GoRouterPaths.loginRoute);
+            },
+            child: Text(
+              StringConstant.login,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

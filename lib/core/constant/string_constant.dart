@@ -18,12 +18,12 @@ class StringConstant {
   static const passwordConfirmError =
       "Enter password and confirm password are same";
   static const back = "Back";
-  static const letsMakeAccount = "Let’s make your account.";
+  static const letsMakeAccount = "Let's set up your account.";
   static const welcomeSignUp = "Welcome to Zibzo!";
   static const passwordConfirmPasswordError =
       "Password and Confirm Password must be same";
   //SignIn
-  static const signIn = "Sign in to continue";
+  static const signIn = "Log in to your account";
   static const register = " Register";
   static const login = " Login";
   static const welcomeSignIn = "Welcome Back to Zibzo!";
@@ -36,6 +36,9 @@ class StringConstant {
   static const somethingWrong = 'Something went wrong';
   static const categories = "Categories";
   static const endInDays = "Ends in 2 days";
+  static const search = "Search";
+  static const specialOffers = "Special Offers";
+  static const seeAll = "See All";
 
   //Cart
   static const checkout = "Checkout";

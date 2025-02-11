@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:zibzo/core/service/service_locator.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/home_response_entity.dart';
 import 'package:zibzo/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/cart/view/cart_screen.dart';
 import 'package:zibzo/features/zibzo/presentation/category_products/bloc/bloc/category_product_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/category_products/screen/category_products_view.dart';
 
 import 'package:zibzo/features/zibzo/presentation/home_screen/screen/home_screen.dart';
+import 'package:zibzo/features/zibzo/presentation/offers_list_view/view/offers_list_view.dart';
 import 'package:zibzo/features/zibzo/presentation/onboarding_screen/view/onboarding_screen.dart';
 import 'package:zibzo/features/zibzo/presentation/signin/screen/sign_in_screen.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/screen/sign_up_screen.dart';
@@ -28,6 +30,12 @@ class AppRouter {
         path: GoRouterPaths.loginRoute,
         builder: (context, state) => SignInScreen(),
       ),
+      GoRoute(
+          path: GoRouterPaths.offerListViewRoute,
+          builder: (context, state) {
+            final product = state.extra as HomeResponseEntity;
+            return OffersListView(product: product);
+          }),
       GoRoute(
         path: GoRouterPaths.homeScreenRoute,
         builder: (BuildContext context, GoRouterState state) {
@@ -84,6 +92,7 @@ class GoRouterPaths {
   static const splashRoute = "/";
   static const signupRoute = "/signup";
   static const loginRoute = "/login";
+  static const offerListViewRoute = "/offerslistview";
   static const homeScreenRoute = "/homescreen";
   static const cartScreenRoute = "/cartscreen";
   static const categoryProducts = "/categoryproducts/:categoryName";

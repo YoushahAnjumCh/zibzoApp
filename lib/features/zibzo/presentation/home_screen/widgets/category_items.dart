@@ -30,7 +30,7 @@ class CategoryItems extends StatelessWidget {
                     width: 62,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Theme.of(context).colorScheme.surface,
+                      color: Theme.of(context).colorScheme.onPrimary,
                     ),
                     child: Center(
                       child: SizedBox(

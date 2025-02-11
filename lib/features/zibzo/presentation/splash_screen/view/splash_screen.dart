@@ -17,7 +17,7 @@ class SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Timer(const Duration(seconds: 3), () async {
+    Timer(const Duration(seconds: 5), () async {
       final prefs = await SharedPreferences.getInstance();
       final isOnboardingShown = prefs.getBool('isOnboardingShown') ?? false;
       final isAuthenticated = prefs.getBool('isAuthenticated') ?? false;
