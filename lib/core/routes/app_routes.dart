@@ -8,6 +8,7 @@ import 'package:zibzo/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart'
 import 'package:zibzo/features/zibzo/presentation/cart/view/cart_screen.dart';
 import 'package:zibzo/features/zibzo/presentation/category_products/bloc/bloc/category_product_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/category_products/screen/category_products_view.dart';
+import 'package:zibzo/features/zibzo/presentation/home_screen/bloc/product_bloc.dart';
 
 import 'package:zibzo/features/zibzo/presentation/home_screen/screen/home_screen.dart';
 import 'package:zibzo/features/zibzo/presentation/offers_list_view/view/offers_list_view.dart';
@@ -31,11 +32,29 @@ class AppRouter {
         builder: (context, state) => SignInScreen(),
       ),
       GoRoute(
-          path: GoRouterPaths.offerListViewRoute,
-          builder: (context, state) {
-            final product = state.extra as HomeResponseEntity;
-            return OffersListView(product: product);
-          }),
+        path: GoRouterPaths.offerListViewRoute,
+        pageBuilder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>;
+
+          final product = extra['product'] as HomeResponseEntity;
+          final productState = extra['state'] as ProductState;
+
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: OffersListView(
+              product: product,
+              productState: productState,
+            ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        },
+      ),
       GoRoute(
         path: GoRouterPaths.homeScreenRoute,
         builder: (BuildContext context, GoRouterState state) {
@@ -44,8 +63,30 @@ class AppRouter {
       ),
       GoRoute(
         path: GoRouterPaths.signupRoute,
-        builder: (BuildContext context, GoRouterState state) {
-          return SignUpScreen();
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: SignUpScreen(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: ScaleTransition(
+                  scale: Tween<double>(
+                    begin: 1.2,
+                    end: 1.0,
+                  ).animate(animation),
+                  child: ScaleTransition(
+                    scale: Tween<double>(
+                      begin: 1.0,
+                      end: 0.8,
+                    ).animate(secondaryAnimation),
+                    child: child,
+                  ),
+                ),
+              );
+            },
+          );
         },
       ),
       GoRoute(
@@ -74,12 +115,22 @@ class AppRouter {
       GoRoute(
         path: GoRouterPaths.categoryProducts,
         name: 'categoryProducts',
-        builder: (context, state) {
+        pageBuilder: (context, state) {
           final categoryName = state.pathParameters['categoryName']!;
-          return BlocProvider(
-            create: (_) => sl<CategoryProductBloc>()
-              ..add(CategoryProductEvent(categoryName: categoryName)),
-            child: CategoryProductsView(categoryName: categoryName),
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: BlocProvider(
+              create: (_) => sl<CategoryProductBloc>()
+                ..add(CategoryProductEvent(categoryName: categoryName)),
+              child: CategoryProductsView(categoryName: categoryName),
+            ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
           );
         },
       ),

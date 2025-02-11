@@ -70,6 +70,10 @@ class SignUpScreen extends StatelessWidget {
       },
       child: SafeArea(
         child: Scaffold(
+          appBar: AppBar(
+            leading:
+                BackButton(color: Colors.black, onPressed: () => context.pop()),
+          ),
           body: Stack(
             children: [
               Center(

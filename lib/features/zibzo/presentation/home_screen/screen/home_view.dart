@@ -46,7 +46,10 @@ class HomeView extends StatelessWidget {
                 _fetchCartCountAndStore(
                     context, state.product.cartProductCount);
               });
-              return HomeContent(product: state.product);
+              return HomeContent(
+                product: state.product,
+                state: state,
+              );
             } else {
               return const Center(child: Text(StringConstant.somethingWrong));
             }
@@ -75,8 +78,9 @@ class HomeView extends StatelessWidget {
 
 class HomeContent extends StatelessWidget {
   final HomeResponseEntity product;
-
-  HomeContent({Key? key, required this.product}) : super(key: key);
+  final ProductState state;
+  HomeContent({Key? key, required this.product, required this.state})
+      : super(key: key);
   final TextEditingController searchController = TextEditingController();
 
   @override
@@ -93,7 +97,7 @@ class HomeContent extends StatelessWidget {
             const SizedBox(height: 20),
             _buildSearchField(context),
             const SizedBox(height: 20),
-            _buildOfferListText(context),
+            _buildOfferListText(context, state),
             const SizedBox(height: 20),
             //Carousel Slider
             Visibility(
@@ -134,7 +138,7 @@ class HomeContent extends StatelessWidget {
     );
   }
 
-  Widget _buildOfferListText(BuildContext context) {
+  Widget _buildOfferListText(BuildContext context, ProductState state) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 14),
       child: Row(
@@ -150,7 +154,7 @@ class HomeContent extends StatelessWidget {
             onTap: () {
               context.go(
                 GoRouterPaths.offerListViewRoute,
-                extra: product,
+                extra: {'product': product, 'state': state},
               );
             },
             child: Text(
