@@ -38,7 +38,7 @@ void main() {
     }
 
     sl.registerLazySingleton<AppLocalStorage>(() => mockAppLocalStorage);
-    await sl.allReady(); // ✅ Ensure services are available
+    await sl.allReady();
 
     when(() => mockAppLocalStorage.getCredential("image"))
         .thenAnswer((_) async => '');
@@ -96,6 +96,11 @@ void main() {
 
     final logoutButton = find.byKey(Key("LogoutKey"));
     expect(logoutButton, findsOneWidget);
+
+    await tester.scrollUntilVisible(
+      logoutButton,
+      100.0,
+    );
 
     await tester.tap(logoutButton);
     await tester.pumpAndSettle();

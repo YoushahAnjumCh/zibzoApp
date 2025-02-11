@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:zibzo/common/provider/cart_count_provider.dart';
 import 'package:zibzo/core/constant/string_constant.dart';
+import 'package:zibzo/core/routes/app_routes.dart';
 import 'package:zibzo/features/zibzo/domain/entities/home/home_response_entity.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/bloc/product_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/cubit/add_cart/add_cart_cubit.dart';
@@ -11,16 +13,14 @@ import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/carousel_s
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/category_items.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/custom_appbar_widget.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/home_loading_widget.dart';
-import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/trending_offer_widget.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/product_card_widget.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/section_title.dart';
-import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/deal_of_the_day_widget.dart';
+import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/text_input_form_field_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/signup/widgets/text_input_form_field.dart';
 import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
 class HomeView extends StatelessWidget {
-  HomeView({super.key});
-
-  final TextEditingController searchController = TextEditingController();
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,8 @@ class HomeView extends StatelessWidget {
 class HomeContent extends StatelessWidget {
   final HomeResponseEntity product;
 
-  const HomeContent({Key? key, required this.product}) : super(key: key);
+  HomeContent({Key? key, required this.product}) : super(key: key);
+  final TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -89,35 +90,21 @@ class HomeContent extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CategoryItems(category: product.category),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
+            _buildSearchField(context),
+            const SizedBox(height: 20),
+            _buildOfferListText(context),
+            const SizedBox(height: 20),
             //Carousel Slider
             Visibility(
               visible: product.homebanner.isNotEmpty,
               child: CarouselImageSlider(homebanner: product.homebanner),
             ),
-            SectionTitle(
-              title: StringConstant.trendingOffer,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.w500,
-                  ),
-            ),
-            //
-            Visibility(
-              visible: product.offerbanner.isNotEmpty,
-              child: TrendingOfferWidget(offerbanner: product.offerbanner),
-            ),
+            const SizedBox(height: 16),
+            CategoryItems(category: product.category),
 
-            SectionTitle(
-              title: StringConstant.dealOfDay,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.w500,
-                  ),
-            ),
-            Visibility(
-              visible: product.offerdeal.isNotEmpty,
-              child: DealOfTheDayWidget(offerDeal: product.offerdeal),
-            ),
+            const SizedBox(height: 10),
+
             SectionTitle(
               title: StringConstant.ourCollection,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -142,6 +129,55 @@ class HomeContent extends StatelessWidget {
               },
             )
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOfferListText(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 14),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            StringConstant.specialOffers,
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+          GestureDetector(
+            onTap: () {
+              context.go(
+                GoRouterPaths.offerListViewRoute,
+                extra: product,
+              );
+            },
+            child: Text(
+              StringConstant.seeAll,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSearchField(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 14),
+      child: InputTextFormField(
+        attributes: InputTextFormFieldAttributes(
+          prefixIcon: Icon(Icons.search,
+              color: Theme.of(context).colorScheme.onPrimaryContainer),
+          contentPadding: EdgeInsets.all(18),
+          controller: searchController,
+          hint: StringConstant.search,
+          hintColor: Theme.of(context).colorScheme.onPrimaryContainer,
+          textInputAction: TextInputAction.next,
         ),
       ),
     );

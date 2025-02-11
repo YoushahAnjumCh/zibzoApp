@@ -23,6 +23,7 @@ class InputTextFormField extends StatelessWidget {
       textInputAction: attributes.textInputAction,
       onFieldSubmitted: attributes.onFieldSubmitted,
       decoration: InputDecoration(
+        border: InputBorder.none,
         prefixIcon: attributes.prefixIcon,
         hintText: attributes.hint,
         hintStyle: TextStyle(

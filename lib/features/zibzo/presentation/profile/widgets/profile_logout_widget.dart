@@ -15,16 +15,14 @@ class ProfileLogoutWidget extends StatelessWidget {
     return GestureDetector(
       key: Key("LogoutKey"),
       onTap: () async {
-        AnalyticsService().logLogout();
         SharedPreferences prefs = await SharedPreferences.getInstance();
         if (!context.mounted) return;
-
         Provider.of<CartCountProvider>(context, listen: false).clearCart();
-
         await prefs.remove('isAuthenticated');
         if (!context.mounted) {
           return;
         }
+        AnalyticsService().logLogout();
         context.go(GoRouterPaths.loginRoute);
       },
       child: Container(

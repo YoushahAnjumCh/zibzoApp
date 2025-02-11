@@ -41,7 +41,8 @@ class UserRemoteDataSourceImpl implements UserDataSource {
     if (response.statusCode == _statusCode201) {
       return UserModel.fromJson(jsonDecode(response.body));
     } else {
-      throw ServerFailure(response.body, response.statusCode);
+      final errorMessage = jsonDecode(response.body);
+      throw ServerFailure(errorMessage['msg'], response.statusCode);
     }
   }
 

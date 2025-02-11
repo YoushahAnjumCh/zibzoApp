@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
             child: Scaffold(
               body: IndexedStack(
                 index: bottomNavBarNotifier.currentIndex,
-                children: [
+                children: const [
                   HomeView(),
                   WishListView(),
                   CartScreen(),
