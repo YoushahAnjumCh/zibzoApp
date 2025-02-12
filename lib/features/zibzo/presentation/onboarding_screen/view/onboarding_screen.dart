@@ -68,7 +68,7 @@ class OnboardingScreen extends StatelessWidget {
                     if (!context.mounted) {
                       return;
                     }
-                    context.go(GoRouterPaths.loginRoute);
+                    context.push(GoRouterPaths.loginRoute);
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min,

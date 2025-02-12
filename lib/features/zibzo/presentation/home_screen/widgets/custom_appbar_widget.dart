@@ -31,6 +31,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           final userName = snapshot.data?['userName'];
 
           return AppBar(
+            automaticallyImplyLeading: false,
             title: Row(
               children: [
                 image != null && image.isNotEmpty

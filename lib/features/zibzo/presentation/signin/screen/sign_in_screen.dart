@@ -24,13 +24,28 @@ import 'package:zibzo/features/zibzo/presentation/signup/widgets/input_form_butt
 import 'package:zibzo/features/zibzo/presentation/signup/widgets/text_input_form_field.dart';
 import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
-class SignInScreen extends StatelessWidget {
-  SignInScreen({super.key});
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController email = TextEditingController();
+
   final TextEditingController password = TextEditingController();
+
   final ValueNotifier<String> errorMessageNotifier = ValueNotifier<String>("");
+
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    email.dispose();
+    password.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,24 +58,27 @@ class SignInScreen extends StatelessWidget {
     return BlocListener<SignInBloc, SignInState>(
       listener: (context, state) =>
           _signInStateListener(context, state, appSecureStorage),
-      child: Scaffold(
-        body: Stack(
-          children: [
-            Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _buildSignInForm(context),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    _buildSignUpPrompt(context),
-                  ],
+      child: PopScope(
+        canPop: false,
+        child: Scaffold(
+          body: Stack(
+            children: [
+              Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _buildSignInForm(context),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      _buildSignUpPrompt(context),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
