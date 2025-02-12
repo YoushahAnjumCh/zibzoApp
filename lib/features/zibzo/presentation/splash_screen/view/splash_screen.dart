@@ -24,11 +24,11 @@ class SplashScreenState extends State<SplashScreen> {
       if (!mounted) return;
 
       if (!isOnboardingShown) {
-        context.go(GoRouterPaths.onboardingRoute);
+        context.push(GoRouterPaths.onboardingRoute);
       } else if (isAuthenticated) {
-        context.go(GoRouterPaths.homeScreenRoute);
+        context.push(GoRouterPaths.homeScreenRoute);
       } else {
-        context.go(GoRouterPaths.loginRoute);
+        context.push(GoRouterPaths.loginRoute);
       }
     });
   }

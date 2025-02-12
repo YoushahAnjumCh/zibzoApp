@@ -24,22 +24,42 @@ import 'package:zibzo/features/zibzo/presentation/signup/widgets/input_form_butt
 import 'package:zibzo/features/zibzo/presentation/signup/widgets/text_input_form_field.dart';
 import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
-class SignUpScreen extends StatelessWidget {
-  SignUpScreen({Key? key}) : super(key: key);
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
 
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController userNameController = TextEditingController();
+
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
+
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
   final ValueNotifier<String> errorMessageNotifier = ValueNotifier<String>("");
+
   final ValueNotifier<File?> selectedImageNotifier = ValueNotifier<File?>(null);
 
   final _formKey = GlobalKey<FormState>();
+
   final AppLocalStorage appSecureStorage = sl<AppLocalStorage>();
 
   late final ImagePickerWidget _imagePickerHandler;
+
+  @override
+  void dispose() {
+    userNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -39,7 +39,9 @@ class StringConstant {
   static const search = "Search";
   static const specialOffers = "Special Offers";
   static const seeAll = "See All";
-
+  static const doYouWantExit = "Do you really want to exit the app?";
+  static const cancel = "Cancel";
+  static const exit = "Exit";
   //Cart
   static const checkout = "Checkout";
   //Onboard

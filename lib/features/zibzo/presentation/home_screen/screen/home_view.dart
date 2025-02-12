@@ -76,12 +76,23 @@ class HomeView extends StatelessWidget {
   }
 }
 
-class HomeContent extends StatelessWidget {
+class HomeContent extends StatefulWidget {
   final HomeResponseEntity product;
   final ProductState state;
-  HomeContent({Key? key, required this.product, required this.state})
+  const HomeContent({Key? key, required this.product, required this.state})
       : super(key: key);
+
+  @override
+  State<HomeContent> createState() => _HomeContentState();
+}
+
+class _HomeContentState extends State<HomeContent> {
   final TextEditingController searchController = TextEditingController();
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,15 +108,15 @@ class HomeContent extends StatelessWidget {
             const SizedBox(height: 20),
             _buildSearchField(context),
             const SizedBox(height: 20),
-            _buildOfferListText(context, state),
+            _buildOfferListText(context, widget.state),
             const SizedBox(height: 20),
             //Carousel Slider
             Visibility(
-              visible: product.homebanner.isNotEmpty,
-              child: CarouselImageSlider(homebanner: product.homebanner),
+              visible: widget.product.homebanner.isNotEmpty,
+              child: CarouselImageSlider(homebanner: widget.product.homebanner),
             ),
             const SizedBox(height: 16),
-            CategoryItems(category: product.category),
+            CategoryItems(category: widget.product.category),
 
             const SizedBox(height: 10),
 
@@ -118,9 +129,9 @@ class HomeContent extends StatelessWidget {
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: product.products.length,
+              itemCount: widget.product.products.length,
               itemBuilder: (context, index) {
-                final products = product.products[index];
+                final products = widget.product.products[index];
                 return BlocBuilder<AddCartCubit, AddCartState>(
                   builder: (context, state) {
                     return ProductCard(
@@ -152,9 +163,9 @@ class HomeContent extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              context.go(
+              context.push(
                 GoRouterPaths.offerListViewRoute,
-                extra: {'product': product, 'state': state},
+                extra: {'product': widget.product, 'state': state},
               );
             },
             child: Text(

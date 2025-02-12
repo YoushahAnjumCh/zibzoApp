@@ -7,12 +7,12 @@ import 'package:zibzo/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart'
 import 'package:zibzo/features/zibzo/presentation/cart/view/cart_screen.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/screen/home_view.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/bottom_navigation_bar.dart';
+import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/custom_bottom_sheet.dart';
 import 'package:zibzo/features/zibzo/presentation/profile/screen/profile_view.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
-  final TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -21,32 +21,32 @@ class HomeScreen extends StatelessWidget {
         builder: (context, bottomNavBarNotifier, child) {
           return BlocProvider<CartBloc>(
             create: (context) => sl<CartBloc>(),
-            child: Scaffold(
-              body: IndexedStack(
-                index: bottomNavBarNotifier.currentIndex,
-                children: const [
-                  HomeView(),
-                  WishListView(),
-                  CartScreen(),
-                  ProfileView(),
-                ],
+            child: PopScope(
+              canPop: false,
+              onPopInvoked: (didPop) {
+                if (didPop) return;
+                CustomBottomSheet.show(
+                  context: context,
+                  onConfirm: () => Navigator.of(context).pop(true),
+                );
+              },
+              child: Scaffold(
+                body: IndexedStack(
+                  index: bottomNavBarNotifier.currentIndex,
+                  children: const [
+                    HomeView(),
+                    WishListView(),
+                    CartScreen(),
+                    ProfileView(),
+                  ],
+                ),
+                bottomNavigationBar: const CustomBottomNavBar(),
               ),
-              bottomNavigationBar: const CustomBottomNavBar(),
             ),
           );
         },
       ),
     );
-  }
-}
-
-//TODO will update once screen is ready
-class SearchView extends StatelessWidget {
-  const SearchView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('Search View'));
   }
 }
 

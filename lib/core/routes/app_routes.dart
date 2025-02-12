@@ -9,7 +9,6 @@ import 'package:zibzo/features/zibzo/presentation/cart/view/cart_screen.dart';
 import 'package:zibzo/features/zibzo/presentation/category_products/bloc/bloc/category_product_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/category_products/screen/category_products_view.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/bloc/product_bloc.dart';
-
 import 'package:zibzo/features/zibzo/presentation/home_screen/screen/home_screen.dart';
 import 'package:zibzo/features/zibzo/presentation/offers_list_view/view/offers_list_view.dart';
 import 'package:zibzo/features/zibzo/presentation/onboarding_screen/view/onboarding_screen.dart';

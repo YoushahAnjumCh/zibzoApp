@@ -13,7 +13,8 @@ class HomeLoadingWidget extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           child: Column(
             children: [
-              SizedBox(height: 100),
+              CustomShimmer(height: 50, width: double.infinity),
+              SizedBox(height: 50),
               CustomShimmer(height: 250, width: double.infinity),
               Padding(
                 padding: const EdgeInsets.only(left: 10),
