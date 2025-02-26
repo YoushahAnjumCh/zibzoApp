@@ -31,7 +31,7 @@ class ProductRemoteDataSourceImpl implements ProductDataSource {
       'Authorization': 'Bearer $token'
     });
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == StringConstant.k200) {
       return homeResponseModelFromJson(response.body);
     } else {
       final errorMessage = json.decode(response.body);

@@ -12,6 +12,7 @@ import 'package:zibzo/features/zibzo/presentation/home_screen/bloc/product_bloc.
 import 'package:zibzo/features/zibzo/presentation/home_screen/screen/home_screen.dart';
 import 'package:zibzo/features/zibzo/presentation/offers_list_view/view/offers_list_view.dart';
 import 'package:zibzo/features/zibzo/presentation/onboarding_screen/view/onboarding_screen.dart';
+import 'package:zibzo/features/zibzo/presentation/search/pages/search_view.dart';
 import 'package:zibzo/features/zibzo/presentation/signin/screen/sign_in_screen.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/screen/sign_up_screen.dart';
 import 'package:zibzo/features/zibzo/presentation/splash_screen/view/splash_screen.dart';
@@ -93,6 +94,10 @@ class AppRouter {
         builder: (context, state) => OnboardingScreen(),
       ),
       GoRoute(
+        path: GoRouterPaths.searchViewRoute,
+        builder: (context, state) => SearchView(),
+      ),
+      GoRoute(
         path: GoRouterPaths.splashRoute,
         builder: (context, state) => SplashScreen(),
       ),
@@ -143,6 +148,7 @@ class GoRouterPaths {
   static const signupRoute = "/signup";
   static const loginRoute = "/login";
   static const offerListViewRoute = "/offerslistview";
+  static const searchViewRoute = "/searchview";
   static const homeScreenRoute = "/homescreen";
   static const cartScreenRoute = "/cartscreen";
   static const categoryProducts = "/categoryproducts/:categoryName";

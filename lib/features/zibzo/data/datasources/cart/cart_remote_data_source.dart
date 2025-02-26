@@ -10,9 +10,6 @@ import 'package:zibzo/features/zibzo/data/models/cart/cart_response_model.dart';
 import 'package:zibzo/features/zibzo/domain/usecases/cart/add_cart_usecase.dart';
 import 'package:zibzo/features/zibzo/domain/usecases/cart/delete_cart_usecase.dart';
 
-const _statusCode201 = 201;
-const _statusCode200 = 200;
-
 abstract class CartDataSource {
   Future<CartCountModel> addCart(AddCartParams params);
   Future<CartResponseModel> getCart();
@@ -37,7 +34,7 @@ class CartRemoteDataSourceImpl implements CartDataSource {
     }, headers: {
       'Authorization': 'Bearer $token'
     });
-    if (response.statusCode == _statusCode201) {
+    if (response.statusCode == StringConstant.k201) {
       return CartCountModel.fromJson(jsonDecode(response.body));
     } else {
       final errorMessage = json.decode(response.body);
@@ -56,7 +53,7 @@ class CartRemoteDataSourceImpl implements CartDataSource {
         Uri.parse('${StringConstant.kBaseUrl}cart?userID=$userID'),
         headers: {'Authorization': 'Bearer $token'});
 
-    if (response.statusCode == _statusCode200) {
+    if (response.statusCode == StringConstant.k200) {
       return CartResponseModel.fromJson(jsonDecode(response.body));
     } else {
       final errorMessage = json.decode(response.body);
@@ -78,7 +75,7 @@ class CartRemoteDataSourceImpl implements CartDataSource {
       'Authorization': 'Bearer $token'
     });
 
-    if (response.statusCode == _statusCode200) {
+    if (response.statusCode == StringConstant.k200) {
       return CartResponseModel.fromJson(jsonDecode(response.body));
     } else {
       final errorMessage = json.decode(response.body);

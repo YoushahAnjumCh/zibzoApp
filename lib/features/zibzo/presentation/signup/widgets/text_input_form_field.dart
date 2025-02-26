@@ -44,8 +44,9 @@ class InputTextFormField extends StatelessWidget {
                   attributes.passwordVisibilityNotifier?.changeVisibility();
                 },
               )
-            : null,
+            : attributes.suffixIcon,
       ),
+      onChanged: attributes.onChanged,
     );
   }
 }

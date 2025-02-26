@@ -184,15 +184,22 @@ class _HomeContentState extends State<HomeContent> {
   Widget _buildSearchField(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 14),
-      child: InputTextFormField(
-        attributes: InputTextFormFieldAttributes(
-          prefixIcon: Icon(Icons.search,
-              color: Theme.of(context).colorScheme.onPrimaryContainer),
-          contentPadding: EdgeInsets.all(18),
-          controller: searchController,
-          hint: StringConstant.search,
-          hintColor: Theme.of(context).colorScheme.onPrimaryContainer,
-          textInputAction: TextInputAction.next,
+      child: InkWell(
+        onTap: () {
+          context.push(GoRouterPaths.searchViewRoute);
+        },
+        child: IgnorePointer(
+          child: InputTextFormField(
+            attributes: InputTextFormFieldAttributes(
+              prefixIcon: Icon(Icons.search,
+                  color: Theme.of(context).colorScheme.onPrimaryContainer),
+              contentPadding: EdgeInsets.all(18),
+              controller: searchController,
+              hint: StringConstant.search,
+              hintColor: Theme.of(context).colorScheme.onPrimaryContainer,
+              textInputAction: TextInputAction.next,
+            ),
+          ),
         ),
       ),
     );

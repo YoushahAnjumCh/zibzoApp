@@ -12,6 +12,7 @@ import 'package:zibzo/core/routes/app_routes.dart';
 import 'package:zibzo/core/theme/app_theme.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/bloc/product_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/cubit/add_cart/add_cart_cubit.dart';
+import 'package:zibzo/features/zibzo/presentation/search/cubit/search_cubit.dart';
 import 'package:zibzo/features/zibzo/presentation/signin/bloc/signin_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/bloc/signup_bloc.dart';
 import 'package:zibzo/firebase_options.dart';
@@ -54,6 +55,9 @@ class MyApp extends StatelessWidget {
           create: (context) => AddCartCubit(
             sl(),
           ),
+        ),
+        BlocProvider(
+          create: (context) => SearchCubit(searchProductUseCase: sl()),
         ),
       ],
       child: MaterialApp.router(
