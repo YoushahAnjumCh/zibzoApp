@@ -4,7 +4,8 @@ class StringConstant {
 
   static const authToken = "token";
   static const userID = "userID";
-
+  static const k200 = 200;
+  static const k201 = 201;
   //Repository
   static const String kInternetFailureText = 'Failed to connect to the network';
   //SignUp
@@ -49,4 +50,11 @@ class StringConstant {
   static const onBoardSubtitle =
       "Your one-stop destination for trendy and personalized styles.";
   static const onBoardButtonText = "Get Started";
+
+  //Search
+  static const searchNotFound = "Not Found";
+  static const searchProducts = "Search for products";
+  static const startTypingSearch = "Start typing to search...";
+  static const searchKeywordNotFound =
+      "Sorry the keyword you entered cannot e found, please try again with another keyword";
 }

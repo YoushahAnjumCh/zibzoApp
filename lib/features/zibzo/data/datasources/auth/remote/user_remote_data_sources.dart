@@ -6,9 +6,6 @@ import 'package:zibzo/features/zibzo/domain/usecases/signin/signin_usecase.dart'
 import 'package:zibzo/features/zibzo/domain/usecases/signup/signup_usecase.dart';
 import '../../../models/auth/user_model.dart';
 
-const _statusCode201 = 201;
-const _statusCode200 = 200;
-
 abstract class UserDataSource {
   Future<UserModel> signUp(SignUpParams params);
   Future<UserModel> signIn(SignInParams params);
@@ -38,7 +35,7 @@ class UserRemoteDataSourceImpl implements UserDataSource {
     final streamedResponse = await request.send();
     final response = await http.Response.fromStream(streamedResponse);
 
-    if (response.statusCode == _statusCode201) {
+    if (response.statusCode == StringConstant.k201) {
       return UserModel.fromJson(jsonDecode(response.body));
     } else {
       final errorMessage = jsonDecode(response.body);
@@ -51,7 +48,7 @@ class UserRemoteDataSourceImpl implements UserDataSource {
     final response = await client.post(
         Uri.parse('${StringConstant.kBaseUrl}auth/login/'),
         body: {"email": params.email, "password": params.password});
-    if (response.statusCode == _statusCode200) {
+    if (response.statusCode == StringConstant.k200) {
       return UserModel.fromJson(jsonDecode(response.body));
     } else {
       final errorMessage = jsonDecode(response.body);
