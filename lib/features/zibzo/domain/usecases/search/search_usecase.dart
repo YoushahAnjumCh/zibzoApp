@@ -7,7 +7,6 @@ import 'package:zibzo/features/zibzo/domain/repositories/search/search_repositor
 
 class SearchProductUseCase {
   final SearchRepository repository;
-
   final BehaviorSubject<String> searchSubject = BehaviorSubject<String>();
 
   final BehaviorSubject<Either<Failure, List<ProductEntity>>> _resultStream =

@@ -10,19 +10,21 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          Positioned.fill(
+          // Full-screen image
+          SizedBox(
+            width: screenWidth,
+            height: screenHeight,
             child: Image.asset(
               AssetsPath.onBoard,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Positioned.fill(
-            child: Container(
-              color: Colors.black.withOpacity(0.5),
+              fit: BoxFit.fill, // Fills the entire screen
+              alignment: Alignment.center,
             ),
           ),
           Padding(
@@ -51,7 +53,7 @@ class OnboardingScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(
-                  key: Key('get-started-button'),
+                  key: const Key('get-started-button'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(

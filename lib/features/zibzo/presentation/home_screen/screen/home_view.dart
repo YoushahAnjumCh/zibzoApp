@@ -108,7 +108,8 @@ class _HomeContentState extends State<HomeContent> {
             const SizedBox(height: 20),
             _buildSearchField(context),
             const SizedBox(height: 20),
-            _buildOfferListText(context, widget.state),
+            //TODO : Uncomment this when the API is ready
+            // _buildOfferListText(context, widget.state),
             const SizedBox(height: 20),
             //Carousel Slider
             Visibility(
@@ -148,38 +149,38 @@ class _HomeContentState extends State<HomeContent> {
       ),
     );
   }
-
-  Widget _buildOfferListText(BuildContext context, ProductState state) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 14),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            StringConstant.specialOffers,
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-          ),
-          GestureDetector(
-            onTap: () {
-              context.push(
-                GoRouterPaths.offerListViewRoute,
-                extra: {'product': widget.product, 'state': state},
-              );
-            },
-            child: Text(
-              StringConstant.seeAll,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+//TODO : Uncomment this when the API is ready
+  // Widget _buildOfferListText(BuildContext context, ProductState state) {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(horizontal: 14),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //       children: [
+  //         Text(
+  //           StringConstant.specialOffers,
+  //           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+  //                 fontWeight: FontWeight.bold,
+  //               ),
+  //         ),
+  //         GestureDetector(
+  //           onTap: () {
+  //             context.push(
+  //               GoRouterPaths.offerListViewRoute,
+  //               extra: {'product': widget.product, 'state': state},
+  //             );
+  //           },
+  //           child: Text(
+  //             StringConstant.seeAll,
+  //             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+  //                   fontWeight: FontWeight.bold,
+  //                   fontSize: 18,
+  //                 ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _buildSearchField(BuildContext context) {
     return Padding(
