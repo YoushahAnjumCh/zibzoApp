@@ -9,16 +9,35 @@
     },
     "products": [
       {
-        "_id": "6762b6ca757a30f5aa42e8ac",
-        "title": "Women Overcoat",
-        "subtitle": "Overcoat",
+        "_id": "67f63203d50ac1e3d03bd527",
+        "productName": "Women Overcoat",
+        "brand": "IBart",
         "category": "Women",
         "image": [
-          "https://d3o9xza3ibzeyy.cloudfront.net/6d8f7b9e44d33984a624614dd33514cc8db6cbe1323e535dcbb804ad0e5a3187"
+          "https://d3o9xza3ibzeyy.cloudfront.net/f48aa8597b14bd88c64897b05f90cb4179ef4257870225e6a27897514877bb1a",
+          "https://d3o9xza3ibzeyy.cloudfront.net/644069e77da5d41289948b26154ff59fa3a7c7de8a73ef850f0a58a7c79d736e"
         ],
-        "offerPrice": 3399,
-        "actualPrice": 3227,
-        "offerPercentage": 5,
+        "offerPrice": 10,
+        "actualPrice": 30,
+        "discount": 3,
+        "description": "<p><strong>Testing</strong></p>",
+        "variants": {
+          "Size: M / Colour: #c6c4c4": {
+            "price": 45,
+            "stock": 4,
+            "_id": "67f63203d50ac1e3d03bd528"
+          },
+          "Size: L / Colour: #c6c4c4": {
+            "price": 67,
+            "stock": 2,
+            "_id": "67f63203d50ac1e3d03bd529"
+          }
+        },
+        "meta": {
+          "_id": "67f63203d50ac1e3d03bd52a"
+        },
+        "createdAt": "2025-04-09T08:38:27.801Z",
+        "updatedAt": "2025-04-09T08:38:27.801Z",
         "__v": 0
       }
     ],

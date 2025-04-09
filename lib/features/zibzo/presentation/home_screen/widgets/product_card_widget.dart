@@ -42,11 +42,11 @@ class ProductCard extends StatelessWidget {
         children: [
           CustomImageRow(imageUrls: products.image),
           const SizedBox(height: 16),
-          _buildText(context, products.title,
-              Theme.of(context).textTheme.headlineSmall, FontWeight.w500),
+          _buildText(context, products.productName,
+              Theme.of(context).textTheme.labelLarge, FontWeight.w500),
           const SizedBox(height: 10),
-          _buildText(context, products.subtitle,
-              Theme.of(context).textTheme.titleLarge, FontWeight.w400),
+          _buildText(context, products.brand,
+              Theme.of(context).textTheme.labelSmall, FontWeight.w400),
           const SizedBox(height: 10),
           _buildPriceRow(context, products.actualPrice, products.offerPrice,
               products.offerPercentage),
@@ -72,7 +72,7 @@ class ProductCard extends StatelessWidget {
       children: [
         Text(
           '₹ ${Stringformatter.removeTrailingZeros(actualPrice)}',
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+          style: Theme.of(context).textTheme.labelMedium?.copyWith(
                 color: Theme.of(context).colorScheme.onPrimaryContainer,
                 decoration: TextDecoration.lineThrough,
               ),
@@ -80,12 +80,12 @@ class ProductCard extends StatelessWidget {
         const SizedBox(width: 13),
         Text(
           '₹ ${Stringformatter.removeTrailingZeros(offerPrice)}',
-          style: Theme.of(context).textTheme.titleMedium,
+          style: Theme.of(context).textTheme.labelLarge,
         ),
         const SizedBox(width: 13),
         Text(
           "(${Stringformatter.removeTrailingZeros(offerPercentage)}% Off)",
-          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+          style: Theme.of(context).textTheme.labelMedium?.copyWith(
                 color: Theme.of(context).colorScheme.scrim,
               ),
         ),

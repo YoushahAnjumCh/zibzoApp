@@ -1,6 +1,6 @@
 class StringConstant {
   static const appName = "Zibzo";
-  static const kBaseUrl = 'https://api.zibzo.youshah.com/';
+  static const kBaseUrl = 'https://zibzo-server.onrender.com/';
 
   static const authToken = "token";
   static const userID = "userID";
@@ -56,5 +56,5 @@ class StringConstant {
   static const searchProducts = "Search for products";
   static const startTypingSearch = "Start typing to search...";
   static const searchKeywordNotFound =
-      "Sorry the keyword you entered cannot e found, please try again with another keyword";
+      "Sorry the keyword you entered cannot found, please try again with another keyword";
 }

@@ -15,23 +15,29 @@ const tProducts = [tProduct, tProduct, tProduct];
 const tProduct = ProductEntity(
   actualPrice: 1200,
   id: "1",
+  productName: "productName",
+  brand: "brand",
+  category: "category",
+  description: "description",
+  variants: {},
   image: [
     "https://via.placeholder.com/150",
   ],
   offerPercentage: 20,
   offerPrice: 20,
-  subtitle: "subtitle",
-  title: "title",
 );
 
 const tProductModel = ProductModel(
   actualPrice: 1200,
   id: "1",
   image: ["image", "image"],
+  brand: "brand",
+  category: "category",
+  description: "description",
+  variants: {},
+  productName: "productName",
   offerPercentage: 20,
   offerPrice: 20,
-  subtitle: "subtitle",
-  title: "title",
 );
 
 final tProductResponse = ProductResponseModel(cartProductCount: 1, products: [

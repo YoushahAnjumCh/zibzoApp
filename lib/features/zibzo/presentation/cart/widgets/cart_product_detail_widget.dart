@@ -24,7 +24,7 @@ class CartProductDetailWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  product.title,
+                  product.productName,
                   style:
                       AppTextStyles.headingLight.copyWith(color: Colors.black),
                 ),

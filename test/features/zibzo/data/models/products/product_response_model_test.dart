@@ -15,8 +15,8 @@ void main() {
       final model = ProductResponseModel.fromJson(json.decode(jsonString));
 
       // Assert
-      expect(model.products.length, 8);
-      expect(model.products.first.title, 'Crewneck Mixed Texture');
+      expect(model.products.length, 2);
+      expect(model.products.first.productName, 'Women Overcoat');
       expect(model.homebanner.length, 4);
       expect(model.category.length, 3);
       expect(model.offerdeal.length, 1);
@@ -32,8 +32,8 @@ void main() {
       final model = homeResponseModelFromJson(jsonString);
 
       // Assert: Check that the data is parsed correctly
-      expect(model.products.length, 8);
-      expect(model.products.first.title, 'Crewneck Mixed Texture');
+      expect(model.products.length, 2);
+      expect(model.products.first.productName, 'Women Overcoat');
       expect(model.homebanner.length, 4);
       expect(model.category.length, 3);
       expect(model.offerdeal.length, 1);
@@ -54,7 +54,7 @@ void main() {
       // Assert: Check that the serialized JSON matches the expected structure
       final decodedJson = json.decode(serializedJson);
 
-      expect(decodedJson['products'].length, 8);
+      expect(decodedJson['products'].length, 2);
       expect(decodedJson['homebanner'].length, 4);
       expect(decodedJson['category'].length, 3);
       expect(decodedJson['offerdeal'].length, 1);
@@ -71,7 +71,7 @@ void main() {
       final serializedJson = model.toJson();
 
       // Assert
-      expect(serializedJson['products'].length, 8);
+      expect(serializedJson['products'].length, 2);
       expect(serializedJson['homebanner'].length, 4);
       expect(serializedJson['category'].length, 3);
       expect(serializedJson['offerdeal'].length, 1);

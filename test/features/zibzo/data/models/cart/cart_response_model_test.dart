@@ -15,7 +15,7 @@ void main() {
       // Assert
       expect(model.products.length, 1);
       expect(model.cartProductCount, 1);
-      expect(model.products.first.title, 'Women Overcoat');
+      expect(model.products.first.productName, 'Women Overcoat');
     });
 
     test('should serialize to JSON correctly', () async {
