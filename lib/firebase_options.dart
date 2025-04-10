@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -49,20 +46,30 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyDAZp3SfWwjORuMKGmCuypU2z94Wf0401A',
+    appId: '1:63227226451:web:456a1df54a9c01985b19a6',
+    messagingSenderId: '63227226451',
+    projectId: 'zibzo-eeea3',
+    authDomain: 'zibzo-eeea3.firebaseapp.com',
+    storageBucket: 'zibzo-eeea3.firebasestorage.app',
+    measurementId: 'G-W4294JHCK4',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDIQco7pPvY6cC8jRn2kHMOf4vIGUs20wc',
-    appId: '1:819797101244:android:abddd007ae10a87c021eb9',
-    messagingSenderId: '819797101244',
-    projectId: 'zibzo-d338a',
-    storageBucket: 'zibzo-d338a.firebasestorage.app',
+    apiKey: 'AIzaSyAUpss-rFkzShYSM2BeSEJkgNgOA2zm7Jg',
+    appId: '1:63227226451:android:bf3ce60bc4f442b15b19a6',
+    messagingSenderId: '63227226451',
+    projectId: 'zibzo-eeea3',
+    storageBucket: 'zibzo-eeea3.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyATUYdgysqwc9_H0PUvaJxCyLJ9vojQLUs',
-    appId: '1:819797101244:ios:a2d53418b631261a021eb9',
-    messagingSenderId: '819797101244',
-    projectId: 'zibzo-d338a',
-    storageBucket: 'zibzo-d338a.firebasestorage.app',
-    iosBundleId: 'com.example.zibzoApp',
+    apiKey: 'AIzaSyDPFVBodWMO49W2Vtq14ISvndxP_O5c5R0',
+    appId: '1:63227226451:ios:1f6a412d9f277f775b19a6',
+    messagingSenderId: '63227226451',
+    projectId: 'zibzo-eeea3',
+    storageBucket: 'zibzo-eeea3.firebasestorage.app',
+    iosBundleId: 'com.youshah.zibzoApp',
   );
 }
