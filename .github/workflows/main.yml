@@ -87,7 +87,7 @@ jobs:
 
       # Start release build
       - name: Start release build
-        run: flutter build apk --release --split-per-abi
+        run: flutter build appbundle --release
 
       # Upload Build Artifact (Optional)
       - name: Push to Release
