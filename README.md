@@ -1,16 +1,23 @@
-# zibzo
+assets/sreenshots/S1.png
 
-A new Flutter project.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/YoushahAnjumCh/zibzoApp/main/assets/sreenshots/S1.png" alt="Sign In Screen" width="200" style="display: inline-block; margin: 0 5px;" />
+  <img src="https://raw.githubusercontent.com/YoushahAnjumCh/zibzoApp/main/assets/sreenshots/S2.png" alt="Sign In Screen" width="200" style="display: inline-block; margin: 0 5px;" />
+  <img src="https://raw.githubusercontent.com/YoushahAnjumCh/zibzoApp/main/assets/sreenshots/S3.png" alt="Sign In Screen" width="200" style="display: inline-block; margin: 0 5px;" />
+  <img src="https://raw.githubusercontent.com/YoushahAnjumCh/zibzoApp/main/assets/sreenshots/S4.png" alt="Sign In Screen" width="200" style="display: inline-block; margin: 0 5px;" />
+  <img src="https://raw.githubusercontent.com/YoushahAnjumCh/zibzoApp/main/assets/sreenshots/S5.png" alt="Sign In Screen" width="200" style="display: inline-block; margin: 0 5px;" />
+  <img src="https://raw.githubusercontent.com/YoushahAnjumCh/zibzoApp/main/assets/sreenshots/S6.png" alt="Sign In Screen" width="200" style="display: inline-block; margin: 0 5px;" />
+  <img src="https://raw.githubusercontent.com/YoushahAnjumCh/zibzoApp/main/assets/sreenshots/S7.png" alt="Sign In Screen" width="200" style="display: inline-block; margin: 0 5px;" />
+  <img src="https://raw.githubusercontent.com/YoushahAnjumCh/zibzoApp/main/assets/sreenshots/S8.png" alt="Sign In Screen" width="200" style="display: inline-block; margin: 0 5px;" />
+  <img src="https://raw.githubusercontent.com/YoushahAnjumCh/zibzoApp/main/assets/sreenshots/S9.png" alt="Sign In Screen" width="200" style="display: inline-block; margin: 0 5px;" />
+  <img src="https://raw.githubusercontent.com/YoushahAnjumCh/zibzoApp/main/assets/sreenshots/S10.png" alt="Sign In Screen" width="200" style="display: inline-block; margin: 0 5px;" />
+  <img src="https://raw.githubusercontent.com/YoushahAnjumCh/zibzoApp/main/assets/sreenshots/S11.png" alt="Sign In Screen" width="200" style="display: inline-block; margin: 0 5px;" />
+  <img src="https://raw.githubusercontent.com/YoushahAnjumCh/zibzoApp/main/assets/sreenshots/S12.png" alt="Sign In Screen" width="200" style="display: inline-block; margin: 0 5px;" />
+  <img src="https://raw.githubusercontent.com/YoushahAnjumCh/zibzoApp/main/assets/sreenshots/S13.png" alt="Sign In Screen" width="200" style="display: inline-block; margin: 0 5px;" />
+  <img src="https://raw.githubusercontent.com/YoushahAnjumCh/zibzoApp/main/assets/sreenshots/S14.png" alt="Sign In Screen" width="200" style="display: inline-block; margin: 0 5px;" />
+  <img src="https://raw.githubusercontent.com/YoushahAnjumCh/zibzoApp/main/assets/sreenshots/S15.png" alt="Sign In Screen" width="200" style="display: inline-block; margin: 0 5px;" />
+  <img src="https://raw.githubusercontent.com/YoushahAnjumCh/zibzoApp/main/assets/sreenshots/S16.png" alt="Sign In Screen" width="200" style="display: inline-block; margin: 0 5px;" />
+  <img src="https://raw.githubusercontent.com/YoushahAnjumCh/zibzoApp/main/assets/sreenshots/S17.png" alt="Sign In Screen" width="200" style="display: inline-block; margin: 0 5px;" />
+  
+</p>
