@@ -129,7 +129,7 @@ class _ImageContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: CachedNetworkImage(
-        imageUrl: "http://localhost:4000/$url",
+        imageUrl: url,
         imageBuilder: (context, imageProvider) => Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/widgets/attributes/text_input_form_field_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/text_input_form_field_attributes.dart';
 
 class InputTextFormField extends StatelessWidget {
   final InputTextFormFieldAttributes attributes;
@@ -23,6 +23,7 @@ class InputTextFormField extends StatelessWidget {
       textInputAction: attributes.textInputAction,
       onFieldSubmitted: attributes.onFieldSubmitted,
       decoration: InputDecoration(
+        border: InputBorder.none,
         prefixIcon: attributes.prefixIcon,
         hintText: attributes.hint,
         hintStyle: TextStyle(
@@ -43,8 +44,9 @@ class InputTextFormField extends StatelessWidget {
                   attributes.passwordVisibilityNotifier?.changeVisibility();
                 },
               )
-            : null,
+            : attributes.suffixIcon,
       ),
+      onChanged: attributes.onChanged,
     );
   }
 }

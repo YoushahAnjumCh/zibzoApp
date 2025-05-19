@@ -1,7 +1,7 @@
-import 'package:zibzo_app/core/typedef/typedef.dart';
-import 'package:zibzo_app/core/usecase/usecase.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/home_response_entity.dart';
-import 'package:zibzo_app/features/zibzo/domain/repositories/home/home_repository.dart';
+import 'package:zibzo/core/typedef/typedef.dart';
+import 'package:zibzo/core/usecase/usecase.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/home_response_entity.dart';
+import 'package:zibzo/features/zibzo/domain/repositories/home/home_repository.dart';
 
 class ProductUseCase extends UseCaseNoParams<HomeResponseEntity> {
   final ProductRepository repository;

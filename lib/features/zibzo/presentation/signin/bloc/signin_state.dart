@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'package:zibzo_app/features/zibzo/domain/entities/signup/user.dart';
+import 'package:zibzo/features/zibzo/domain/entities/signup/user.dart';
 
 abstract class SignInState extends Equatable {}
 

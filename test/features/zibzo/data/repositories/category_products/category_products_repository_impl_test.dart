@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:zibzo_app/core/failure/failure.dart';
-import 'package:zibzo_app/core/network_info/network_info.dart';
-import 'package:zibzo_app/features/zibzo/data/datasources/category_products_data_source/category_prod_remote_data_source.dart';
-import 'package:zibzo_app/features/zibzo/data/repositories/category_products/category_products_repository_impl.dart';
+import 'package:zibzo/core/failure/failure.dart';
+import 'package:zibzo/core/network_info/network_info.dart';
+import 'package:zibzo/features/zibzo/data/datasources/category_products_data_source/category_prod_remote_data_source.dart';
+import 'package:zibzo/features/zibzo/data/repositories/category_products/category_products_repository_impl.dart';
 
 import '../../../../constants/product_params.dart';
 

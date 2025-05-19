@@ -1,36 +1,30 @@
 import 'package:equatable/equatable.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/products_variants.dart';
 
 class ProductEntity extends Equatable {
   final String id;
-  final String title;
-  final String subtitle;
+  final String productName;
+  final String brand;
+  final String category;
+  final String description;
   final List<String> image;
+  final Map<String, ProductVariant> variants; // Dynamic key-value pairs
   final double offerPercentage;
   final double actualPrice;
   final double offerPrice;
 
   const ProductEntity({
     required this.id,
-    required this.title,
-    required this.subtitle,
+    this.variants = const {},
+    required this.productName,
+    required this.category,
+    required this.description,
+    required this.brand,
     required this.image,
     required this.offerPercentage,
     required this.actualPrice,
     required this.offerPrice,
   });
-
-  // Factory constructor to parse JSON into a ProductEntity instance
-  factory ProductEntity.fromJson(Map<String, dynamic> json) {
-    return ProductEntity(
-      id: json['_id'] as String,
-      title: json['title'] as String,
-      subtitle: json['subtitle'] as String,
-      image: List<String>.from(json['image'] as List),
-      offerPercentage: (json['offerPercentage'] as num).toDouble(),
-      actualPrice: (json['actualPrice'] as num).toDouble(),
-      offerPrice: (json['offerPrice'] as num).toDouble(),
-    );
-  }
 
   @override
   List<Object> get props => [id];

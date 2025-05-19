@@ -1,12 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:zibzo_app/core/constant/assets_path.dart';
-import 'package:zibzo_app/core/constant/string_constant.dart';
-import 'package:zibzo_app/core/theme/color_theme.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/category_entity.dart';
+import 'package:zibzo/core/constant/assets_path.dart';
+import 'package:zibzo/core/constant/string_constant.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/category_entity.dart';
+import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
 class CategoryItems extends StatelessWidget {
   final List<CategoryEntity> category;
@@ -31,7 +30,7 @@ class CategoryItems extends StatelessWidget {
                     width: 62,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: ColorTheme.lightBlueColor,
+                      color: Theme.of(context).colorScheme.onPrimary,
                     ),
                     child: Center(
                       child: SizedBox(
@@ -60,10 +59,13 @@ class CategoryItems extends StatelessWidget {
               child: Column(
                 children: [
                   GestureDetector(
-                    onTap: () => context.pushNamed(
-                      'categoryProducts',
-                      pathParameters: {'categoryName': categoryitems.title},
-                    ),
+                    onTap: () {
+                      AnalyticsService().logToCategory(categoryitems.id);
+                      context.pushNamed(
+                        'categoryProducts',
+                        pathParameters: {'categoryName': categoryitems.title},
+                      );
+                    },
                     child: Container(
                       height: 62,
                       width: 62,
@@ -71,8 +73,7 @@ class CategoryItems extends StatelessWidget {
                         shape: BoxShape.circle,
                       ),
                       child: CachedNetworkImage(
-                        imageUrl:
-                            "http://localhost:4000/${categoryitems.image}",
+                        imageUrl: categoryitems.image,
                         imageBuilder: (context, imageProvider) => Container(
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
@@ -82,8 +83,6 @@ class CategoryItems extends StatelessWidget {
                             ),
                           ),
                         ),
-                        placeholder: (context, url) =>
-                            const CircularProgressIndicator(),
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error),
                       ),

@@ -3,67 +3,91 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:zibzo_app/common/password_notifier.dart';
-import 'package:zibzo_app/core/constant/assets_path.dart';
-import 'package:zibzo_app/core/constant/string_constant.dart';
-import 'package:zibzo_app/core/constant/widgets_keys.dart';
-import 'package:zibzo_app/core/routes/app_routes.dart';
-import 'package:zibzo_app/core/secure_storage/app_secure_storage.dart';
-import 'package:zibzo_app/core/service/service_locator.dart';
-import 'package:zibzo_app/core/theme/color_theme.dart';
-import 'package:zibzo_app/core/validation/validation.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/signin/signin_usecase.dart';
-import 'package:zibzo_app/features/zibzo/presentation/shared_preferences/cubit/shared_preferences_cubit.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signin/bloc/signin_bloc.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signin/bloc/signin_event.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signin/bloc/signin_state.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/widgets/app_logo_widget.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/widgets/attributes/app_logo_widget_attributes.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/widgets/attributes/text_form_button_attributes.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/widgets/attributes/text_input_form_field_attributes.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/widgets/input_form_button.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/widgets/text_input_form_field.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zibzo/common/password_notifier.dart';
+import 'package:zibzo/core/constant/assets_path.dart';
+import 'package:zibzo/core/constant/string_constant.dart';
+import 'package:zibzo/core/constant/widgets_keys.dart';
+import 'package:zibzo/core/routes/app_routes.dart';
+import 'package:zibzo/core/secure_storage/app_secure_storage.dart';
+import 'package:zibzo/core/service/service_locator.dart';
+import 'package:zibzo/core/validation/validation.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/signin/signin_usecase.dart';
+import 'package:zibzo/features/zibzo/presentation/signin/bloc/signin_bloc.dart';
+import 'package:zibzo/features/zibzo/presentation/signin/bloc/signin_event.dart';
+import 'package:zibzo/features/zibzo/presentation/signin/bloc/signin_state.dart';
+import 'package:zibzo/features/zibzo/presentation/signup/widgets/app_logo_widget.dart';
+import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/app_logo_widget_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/text_form_button_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/text_input_form_field_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/signup/widgets/input_form_button.dart';
+import 'package:zibzo/features/zibzo/presentation/signup/widgets/text_input_form_field.dart';
+import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
-class SignInScreen extends StatelessWidget {
-  SignInScreen({super.key});
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController email = TextEditingController();
+
   final TextEditingController password = TextEditingController();
+
   final ValueNotifier<String> errorMessageNotifier = ValueNotifier<String>("");
+
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    email.dispose();
+    password.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final AppLocalStorage appSecureStorage = sl<AppLocalStorage>();
+    AnalyticsService().logScreensView(
+      'signin_screen',
+      'SignInScreen',
+    );
 
     return BlocListener<SignInBloc, SignInState>(
       listener: (context, state) =>
           _signInStateListener(context, state, appSecureStorage),
-      child: Scaffold(
-        body: Stack(
-          children: [
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildSignInForm(context),
-                ],
+      child: PopScope(
+        canPop: false,
+        child: Scaffold(
+          body: Stack(
+            children: [
+              Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _buildSignInForm(context),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      _buildSignUpPrompt(context),
+                    ],
+                  ),
+                ),
               ),
-            ),
-            _buildSignUpPrompt(context),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
-  // Listener method to handle SignIn state changes
   void _signInStateListener(BuildContext context, SignInState state,
       AppLocalStorage appSecureStorage) async {
     if (state is SignInLoading) {
       EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-      await Future.delayed(Duration(seconds: 8));
-      EasyLoading.dismiss();
     } else if (state is SignInFail) {
       EasyLoading.dismiss();
       errorMessageNotifier.value = state.message;
@@ -72,22 +96,28 @@ class SignInScreen extends StatelessWidget {
       });
     } else if (state is SignInSuccess &&
         state.user.token.toString().isNotEmpty) {
-      await appSecureStorage.saveToken("token", state.user.token.toString());
-      await appSecureStorage.saveToken("image", state.user.image.toString());
-      await appSecureStorage.saveToken(
+      await appSecureStorage.saveCredential(
+          "token", state.user.token.toString());
+      await appSecureStorage.saveCredential(
+          "image", state.user.image.toString());
+      await appSecureStorage.saveCredential("userID", state.user.id.toString());
+      await appSecureStorage.saveCredential(
           "userName", state.user.userName.toString());
+      await appSecureStorage.saveCredential(
+          "email", state.user.email.toString());
 
       if (context.mounted) {
-        context
-            .read<SharedPreferencesCubit>()
-            .login("token", state.user.token.toString());
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('isAuthenticated', true);
+        if (!context.mounted) {
+          return;
+        }
         context.go(GoRouterPaths.homeScreenRoute);
       }
       EasyLoading.dismiss();
     }
   }
 
-  // Build the sign-in form UI
   Widget _buildSignInForm(BuildContext context) {
     return SingleChildScrollView(
       child: Form(
@@ -100,7 +130,7 @@ class SignInScreen extends StatelessWidget {
             SizedBox(height: 40),
             _buildWelcomeText(context),
             _buildErrorMessage(),
-            _buildSignInFields(),
+            _buildSignInFields(context),
             _buildSignInButton(context),
             SizedBox(height: 40),
           ],
@@ -109,39 +139,31 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  // App logo widget
   Widget _buildAppLogo() {
     return AppLogoWidget(
       attributes: AppLogoWidgetAttributes(
         icon: AssetsPath.appLogo,
-        height: 72,
-        width: 72,
+        height: 96,
+        width: 96,
       ),
     );
   }
 
-  // Welcome text
   Widget _buildWelcomeText(BuildContext context) {
     return Column(
       children: [
         Text(
-          StringConstant.welcomeSignIn,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: ColorTheme.darkBlueColor,
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-        Text(
           StringConstant.signIn,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: ColorTheme.borderColor,
+                color: Theme.of(context).colorScheme.primary,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
         ),
       ],
     );
   }
 
-  // Error message display
   Widget _buildErrorMessage() {
     return ValueListenableBuilder<String>(
       valueListenable: errorMessageNotifier,
@@ -150,7 +172,7 @@ class SignInScreen extends StatelessWidget {
             ? Text(
                 errorMessage,
                 style: TextStyle(
-                  color: ColorTheme.errorColor,
+                  color: Theme.of(context).colorScheme.error,
                   fontWeight: FontWeight.bold,
                 ),
               )
@@ -159,15 +181,14 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  // Sign-in fields (email and password)
-  Widget _buildSignInFields() {
+  Widget _buildSignInFields(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 62),
-          _buildEmailField(),
+          _buildEmailField(context),
           SizedBox(height: 20),
           _buildPasswordField(),
           SizedBox(height: 40),
@@ -176,23 +197,22 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  // Email input field
-  Widget _buildEmailField() {
+  Widget _buildEmailField(BuildContext context) {
     return InputTextFormField(
       key: const Key(WidgetsKeys.tEmailKey),
       attributes: InputTextFormFieldAttributes(
-        prefixIcon: Icon(Icons.email_rounded, color: ColorTheme.borderColor),
-        contentPadding: EdgeInsets.all(8),
+        prefixIcon: Icon(Icons.email_rounded,
+            color: Theme.of(context).colorScheme.onPrimaryContainer),
+        contentPadding: EdgeInsets.all(18),
         controller: email,
         hint: StringConstant.email,
-        hintColor: ColorTheme.borderColor,
+        hintColor: Theme.of(context).colorScheme.onPrimaryContainer,
         validation: FormValidator.validateEmail,
         textInputAction: TextInputAction.next,
       ),
     );
   }
 
-  // Password input field with visibility toggle
   Widget _buildPasswordField() {
     return ChangeNotifierProvider(
       create: (_) => PasswordVisibilityNotifier(),
@@ -201,11 +221,12 @@ class SignInScreen extends StatelessWidget {
           return InputTextFormField(
             key: const Key(WidgetsKeys.tPasswordKey),
             attributes: InputTextFormFieldAttributes(
-              prefixIcon: Icon(Icons.lock, color: ColorTheme.borderColor),
+              prefixIcon: Icon(Icons.lock,
+                  color: Theme.of(context).colorScheme.onPrimaryContainer),
               passwordVisibilityNotifier: value,
-              contentPadding: EdgeInsets.all(8),
+              contentPadding: EdgeInsets.all(18),
               controller: password,
-              hintColor: ColorTheme.borderColor,
+              hintColor: Theme.of(context).colorScheme.onPrimaryContainer,
               hint: StringConstant.password,
               isSecureField: true,
               validation: FormValidator.validatePassword,
@@ -217,7 +238,6 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  // Sign-in button
   Widget _buildSignInButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -226,6 +246,7 @@ class SignInScreen extends StatelessWidget {
         attributes: TextFormButtonAttributes(
           onClick: () {
             if (_formKey.currentState!.validate()) {
+              AnalyticsService().logLogin();
               context.read<SignInBloc>().add(
                     SignInButtonEvent(
                       params: SignInParams(
@@ -236,17 +257,16 @@ class SignInScreen extends StatelessWidget {
                   );
             }
           },
-          color: ColorTheme.secondary,
+          color: Theme.of(context).colorScheme.primary,
           titleColor: Colors.white,
           buttonWidthHeight: Size(double.maxFinite, 50),
           titleText: StringConstant.login,
-          cornerRadius: 8,
+          cornerRadius: 30,
         ),
       ),
     );
   }
 
-  // Build sign-up prompt at the bottom
   Widget _buildSignUpPrompt(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
@@ -257,8 +277,8 @@ class SignInScreen extends StatelessWidget {
           children: [
             Text(
               StringConstant.dontHaveAccount,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: ColorTheme.borderColor,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.primaryContainer,
                   ),
             ),
             GestureDetector(
@@ -267,8 +287,8 @@ class SignInScreen extends StatelessWidget {
               },
               child: Text(
                 StringConstant.register,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ColorTheme.secondary,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,
                     ),
               ),

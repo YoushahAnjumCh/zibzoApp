@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/home_banner_entity.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/home_banner_entity.dart';
 
 class CarouselImageSlider extends StatelessWidget {
   final List<HomeBannerEntity>? homebanner;
@@ -31,19 +31,18 @@ class CarouselImageSlider extends StatelessWidget {
               builder: (BuildContext context) {
                 return Container(
                   width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.symmetric(horizontal: 5.0),
+                  margin: EdgeInsets.symmetric(horizontal: 16.0),
                   child: CachedNetworkImage(
-                    imageUrl: "http://localhost:4000/${url.image}",
+                    imageUrl: url.image,
                     imageBuilder: (context, imageProvider) => Container(
                       decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(22),
                         image: DecorationImage(
                           image: imageProvider,
                           fit: BoxFit.fill,
                         ),
                       ),
                     ),
-                    placeholder: (context, url) =>
-                        Center(child: const CircularProgressIndicator()),
                     errorWidget: (context, url, error) =>
                         const Icon(Icons.error),
                   ),

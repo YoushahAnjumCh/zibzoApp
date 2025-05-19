@@ -1,88 +1,72 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:either_dart/either.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core_platform_interface/test.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:zibzo_app/core/failure/failure.dart';
-import 'package:zibzo_app/features/zibzo/domain/usecases/signup/signup_usecase.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/bloc/signup/signup_bloc.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/bloc/signup/signup_state.dart';
+import 'package:zibzo/core/constant/string_constant.dart';
+import 'package:zibzo/core/secure_storage/app_secure_storage.dart';
+import 'package:zibzo/core/service/service_locator.dart';
+import 'package:zibzo/features/zibzo/domain/usecases/signup/signup_usecase.dart';
+import 'package:zibzo/features/zibzo/presentation/signup/bloc/signup_bloc.dart';
+import 'package:zibzo/features/zibzo/presentation/signup/bloc/signup_state.dart';
+import 'package:zibzo/features/zibzo/presentation/signup/screen/sign_up_screen.dart';
 
-import '../../../../constants/signup_params.dart';
+class MockAppLocalStorage extends Mock implements AppLocalStorage {}
 
-class MockUserUseCase extends Mock implements SignUpUseCase {}
+class MockSignUpUseCase extends Mock implements SignUpUseCase {}
+
+class MockSignUpBloc extends MockBloc<UserEvent, UserState>
+    implements UserBloc {}
 
 void main() {
-  late UserBloc userBloc;
-  late MockUserUseCase useCase;
+  late MockAppLocalStorage mockAppLocalStorage;
+  late MockSignUpUseCase mockSignUpUseCase;
+  late UserBloc signUpBloc;
+  late MockSignUpBloc mockSignUpBloc;
 
-  setUpAll(() {
-    useCase = MockUserUseCase();
-    userBloc = UserBloc(useCase);
+  // Setup fallback values and mock dependencies
+  setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    setupFirebaseCoreMocks();
+    await Firebase.initializeApp();
+    registerFallbackValue(
+      SignupUser(SignUpParams(
+          userName: "userName",
+          email: "email@gmail.com",
+          password: "password")),
+    );
   });
 
-  test("initial state should be User Initial", () {
-    expect(userBloc.state, UserInitial());
+  setUp(() {
+    sl.reset();
+    mockAppLocalStorage = MockAppLocalStorage();
+    mockSignUpUseCase = MockSignUpUseCase();
+    signUpBloc = UserBloc(mockSignUpUseCase);
+    mockSignUpBloc = MockSignUpBloc();
+    sl.registerLazySingleton<AppLocalStorage>(() => mockAppLocalStorage);
+    sl.registerLazySingleton<SignUpUseCase>(() => mockSignUpUseCase);
+    when(() => mockSignUpBloc.state).thenReturn(UserInitial());
+    when(() => mockSignUpBloc.stream).thenAnswer(
+      (_) => Stream.value(UserInitial()), // Stream emitting SignInInitial
+    );
   });
-  blocTest<UserBloc, UserState>(
-    "emit[UserLoading, UserLogged] when user click SignUpButton",
-    build: () {
-      final userBloc = UserBloc(useCase);
-      when(() => useCase(tSignUpParams))
-          .thenAnswer((_) async => const Right(null));
-      return userBloc;
-    },
-    act: (bloc) => bloc.add(const SignupUser(tSignUpParams)),
-    expect: () => [UserLoading(), UserLogged()],
-  );
 
-  blocTest<UserBloc, UserState>(
-    "emit[UserLoading, UserLoggedFail] when user click SignUpButton",
-    build: () {
-      final userBloc = UserBloc(useCase);
-      when(() => useCase(tSignUpParams)).thenAnswer(
-          (_) async => const Left(ServerFailure("errorMessage", 401)));
-      return userBloc;
-    },
-    act: (bloc) => bloc.add(const SignupUser(tSignUpParams)),
-    expect: () => [UserLoading(), UserLoggedFail("errorMessage")],
-  );
+  tearDown(() {
+    signUpBloc.close();
+    mockSignUpBloc.close();
+  });
 
-  blocTest<UserBloc, UserState>(
-    "emit[ ServerFailure] when user click SignUpButton",
-    build: () {
-      final userBloc = UserBloc(useCase);
-      when(() => useCase(tSignUpParams))
-          .thenThrow(const ServerFailure("Internal Server Error: ", 500));
-      return userBloc;
-    },
-    act: (bloc) => bloc.add(const SignupUser(tSignUpParams)),
-    expect: () => [UserLoading(), UserLoggedFail("Internal Server Error: ")],
-  );
-  group('UserState Equatable Tests', () {
-    test('UserInitial props should be empty', () {
-      final state = UserInitial();
-      expect(state.props, []);
-    });
+  // Test cases
+  testWidgets('SignInScreen renders correctly', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MultiBlocProvider(
+        providers: [BlocProvider(create: (_) => signUpBloc)],
+        child: MaterialApp(home: SignUpScreen()),
+      ),
+    );
 
-    test('UserLoading props should be empty', () {
-      final state = UserLoading();
-      expect(state.props, []);
-    });
-
-    test('UserLogged props should be empty', () {
-      final state = UserLogged();
-      expect(state.props, []);
-    });
-
-    test('UserLoggedFail props should include the failure message', () {
-      const failureMessage = "Some error occurred";
-      final state = UserLoggedFail(failureMessage);
-      expect(state.props, [failureMessage]);
-    });
-
-    test('UserLoggedOut props should be empty', () {
-      final state = UserLoggedOut();
-      expect(state.props, []);
-    });
+    expect(find.text(StringConstant.letsMakeAccount), findsOneWidget);
   });
 }

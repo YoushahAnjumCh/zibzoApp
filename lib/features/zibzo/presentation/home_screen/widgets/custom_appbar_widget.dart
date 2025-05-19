@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zibzo_app/core/constant/assets_path.dart';
-import 'package:zibzo_app/core/secure_storage/app_secure_storage.dart';
-import 'package:zibzo_app/core/service/service_locator.dart';
+import 'package:zibzo/core/secure_storage/app_secure_storage.dart';
+import 'package:zibzo/core/service/service_locator.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   CustomAppBar({Key? key}) : super(key: key);
@@ -12,8 +11,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, String?>>(
       future: Future.wait([
-        appSecureStorage.getToken("image"),
-        appSecureStorage.getToken("userName"),
+        appSecureStorage.getCredential("image"),
+        appSecureStorage.getCredential("userName"),
       ]).then((values) => {
             'image': values[0],
             'userName': values[1],
@@ -32,16 +31,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           final userName = snapshot.data?['userName'];
 
           return AppBar(
+            automaticallyImplyLeading: false,
             title: Row(
               children: [
-                CircleAvatar(
-                  backgroundImage: image?.startsWith('http') == true
-                      ? NetworkImage(image!)
-                      : const AssetImage(AssetsPath.appLogo) as ImageProvider,
-                  onBackgroundImageError: (exception, stackTrace) {
-                    debugPrint('Failed to load network image: $exception');
-                  },
-                ),
+                image != null && image.isNotEmpty
+                    ? CircleAvatar(
+                        backgroundImage: image.startsWith('http')
+                            ? NetworkImage(image)
+                            : null,
+                      )
+                    : SizedBox.shrink(),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
@@ -58,11 +57,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             actions: [
               IconButton(
                 onPressed: () {},
-                icon: const Icon(Icons.search, color: Colors.black),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.shopping_cart, color: Colors.black),
+                icon: const Icon(Icons.notifications_none_outlined,
+                    color: Colors.black),
               ),
             ],
           );

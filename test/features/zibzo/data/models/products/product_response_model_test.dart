@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zibzo_app/features/zibzo/data/models/products/product_response_model.dart';
+import 'package:zibzo/features/zibzo/data/models/products/product_response_model.dart';
 
 import '../../../../../fixture_reader/fixture_reader.dart';
 
@@ -15,11 +15,12 @@ void main() {
       final model = ProductResponseModel.fromJson(json.decode(jsonString));
 
       // Assert
-      expect(model.products.length, 8);
-      expect(model.products.first.title, 'Crewneck Mixed Texture');
+      expect(model.products.length, 2);
+      expect(model.products.first.productName, 'Women Overcoat');
       expect(model.homebanner.length, 4);
       expect(model.category.length, 3);
-      expect(model.offerbanner.isEmpty, true);
+      expect(model.offerdeal.length, 1);
+      expect(model.offerbanner.length, 1);
     });
 
     test('homeResponseModelFromJson should correctly parse JSON string',
@@ -31,11 +32,12 @@ void main() {
       final model = homeResponseModelFromJson(jsonString);
 
       // Assert: Check that the data is parsed correctly
-      expect(model.products.length, 8);
-      expect(model.products.first.title, 'Crewneck Mixed Texture');
+      expect(model.products.length, 2);
+      expect(model.products.first.productName, 'Women Overcoat');
       expect(model.homebanner.length, 4);
       expect(model.category.length, 3);
-      expect(model.offerbanner.isEmpty, true);
+      expect(model.offerdeal.length, 1);
+      expect(model.offerbanner.length, 1);
     });
 
     test(
@@ -52,10 +54,11 @@ void main() {
       // Assert: Check that the serialized JSON matches the expected structure
       final decodedJson = json.decode(serializedJson);
 
-      expect(decodedJson['products'].length, 8);
+      expect(decodedJson['products'].length, 2);
       expect(decodedJson['homebanner'].length, 4);
       expect(decodedJson['category'].length, 3);
-      expect(decodedJson['offerbanner'], isEmpty);
+      expect(decodedJson['offerdeal'].length, 1);
+      expect(decodedJson['offerbanner'].length, 1);
     });
 
     test('should serialize to JSON correctly', () async {
@@ -68,10 +71,11 @@ void main() {
       final serializedJson = model.toJson();
 
       // Assert
-      expect(serializedJson['products'].length, 8);
+      expect(serializedJson['products'].length, 2);
       expect(serializedJson['homebanner'].length, 4);
       expect(serializedJson['category'].length, 3);
-      expect(serializedJson['offerbanner'], isEmpty);
+      expect(serializedJson['offerdeal'].length, 1);
+      expect(serializedJson['offerbanner'].length, 1);
     });
 
     test('should handle empty lists gracefully', () async {
@@ -81,7 +85,9 @@ void main() {
         "products": [],
         "homebanner": [],
         "category": [],
-        "offerbanner": []
+        "offerbanner": [],
+        "offerdeal": [],
+        "cartProductCount:": 0
       }
       ''';
 
@@ -93,6 +99,8 @@ void main() {
       expect(model.homebanner, isEmpty);
       expect(model.category, isEmpty);
       expect(model.offerbanner, isEmpty);
+      expect(model.offerdeal, isEmpty);
+      expect(model.cartProductCount, 0);
     });
   });
 }
