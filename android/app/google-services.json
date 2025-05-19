@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "63227226451",
+    "project_id": "zibzo-eeea3",
+    "storage_bucket": "zibzo-eeea3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63227226451:android:bf3ce60bc4f442b15b19a6",
+        "android_client_info": {
+          "package_name": "com.youshah.zibzo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUpss-rFkzShYSM2BeSEJkgNgOA2zm7Jg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

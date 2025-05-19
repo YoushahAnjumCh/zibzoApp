@@ -1,45 +1,61 @@
-import 'package:zibzo_app/features/zibzo/domain/entities/home/home_products_entity.dart';
+import 'package:zibzo/features/zibzo/data/models/products/products_variants_model.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/home_products_entity.dart';
 
 class ProductModel extends ProductEntity {
   const ProductModel({
     required String id,
-    required String title,
+    required String productName,
     required double offerPrice,
-    required String subtitle,
+    required String brand,
+    required String category,
+    Map<String, ProductVariantModel> variants = const {},
+    required String description,
     required double offerPercentage,
     required double actualPrice,
     required List<String> image,
   }) : super(
           id: id,
-          title: title,
-          subtitle: subtitle,
+          productName: productName,
+          brand: brand,
+          category: category,
+          description: description,
+          variants: variants,
           image: image,
           offerPercentage: offerPercentage,
           actualPrice: actualPrice,
           offerPrice: offerPrice,
         );
 
-  // Factory constructor to create a ProductEntity from a JSON map
   factory ProductModel.fromJson(Map<String, dynamic> json) {
+    var variantsJson = json['variants'] as Map<String, dynamic>;
+    var variantsMap = <String, ProductVariantModel>{};
+    variantsJson.forEach((key, value) {
+      variantsMap[key] =
+          ProductVariantModel.fromJson(value as Map<String, dynamic>);
+    });
     return ProductModel(
       id: json['_id'],
-      title: json['title'],
-      offerPrice: (json['offerPrice'] as num).toDouble(),
-      actualPrice: (json['actualPrice'] as num).toDouble(),
-      subtitle: json['subtitle'],
-      offerPercentage: (json['offerPercentage'] as num).toDouble(),
+      productName: json['productName'],
+      brand: json['brand'],
+      category: json['category'],
+      description: json['description'],
+      variants: variantsMap,
+      offerPrice: (json['offerPrice'] as num?)?.toDouble() ?? 0.0,
+      actualPrice: (json['actualPrice'] as num?)?.toDouble() ?? 0.0,
+      offerPercentage: (json['discount'] as num?)?.toDouble() ?? 0.0,
       image: List<String>.from(json['image'] as List),
     );
   }
 
-  // Method to convert a ProductEntity instance to a JSON map
   Map<String, dynamic> toJson() {
     return {
       '_id': id,
-      'title': title,
+      'productName': productName,
+      'brand': brand,
+      'category': category,
+      'description': description,
       'offerPrice': offerPrice,
       'actualPrice': actualPrice,
-      'subtitle': subtitle,
       'offerPercentage': offerPercentage,
       'image': image,
     };

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/widgets/attributes/text_form_button_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/text_form_button_attributes.dart';
 
 class InputFormButton extends StatelessWidget {
   final TextFormButtonAttributes attributes;
@@ -8,22 +8,10 @@ class InputFormButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         onPressed: attributes.onClick,
-        // style: ButtonStyle(
-        //   padding: MaterialStateProperty.all<EdgeInsets>(attributes.padding),
-        //   minimumSize:
-        //       MaterialStateProperty.all<Size?>(attributes.buttonWidthHeight),
-        //   backgroundColor: MaterialStateProperty.all<Color>(
-        //       attributes.color ?? Theme.of(context).primaryColor),
-        //   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-        //     RoundedRectangleBorder(
-        //         borderRadius:
-        //             BorderRadius.circular(attributes.cornerRadius ?? 12.0)),
-        //   ),
-        // ),
         style: ElevatedButton.styleFrom(
+          backgroundColor: attributes.color,
           padding: attributes.padding,
-          minimumSize: attributes.buttonWidthHeight ??
-              Size(100, 48), // Default size if null
+          minimumSize: attributes.buttonWidthHeight ?? Size(100, 48),
           shape: RoundedRectangleBorder(
             borderRadius:
                 BorderRadius.circular(attributes.cornerRadius ?? 12.0),
@@ -35,7 +23,7 @@ class InputFormButton extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
-                    .copyWith(color: Colors.white),
+                    .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
               )
             : Container());
   }

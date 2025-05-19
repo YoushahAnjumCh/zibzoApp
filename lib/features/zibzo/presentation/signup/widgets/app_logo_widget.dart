@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:zibzo_app/features/zibzo/presentation/signup/widgets/attributes/app_logo_widget_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/app_logo_widget_attributes.dart';
 
 class AppLogoWidget extends StatelessWidget {
   final AppLogoWidgetAttributes attributes;

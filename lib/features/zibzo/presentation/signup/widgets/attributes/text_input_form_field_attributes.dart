@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zibzo_app/common/password_notifier.dart';
+import 'package:zibzo/common/password_notifier.dart';
 
 class InputTextFormFieldAttributes {
   final TextEditingController controller;
@@ -9,11 +9,14 @@ class InputTextFormFieldAttributes {
   final EdgeInsets? contentPadding;
   final String? Function(String?)? validation;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final double hintTextSize;
+  final InputDecoration? decoration;
   final bool enable;
   final Color? hintColor;
   final TextInputAction? textInputAction;
   final Function(String)? onFieldSubmitted;
+  void Function(String)? onChanged;
   final VoidCallback? onPasswordVisible;
   final PasswordVisibilityNotifier? passwordVisibilityNotifier;
   InputTextFormFieldAttributes(
@@ -22,7 +25,10 @@ class InputTextFormFieldAttributes {
       this.autoCorrect = false,
       this.enable = true,
       this.hint,
+      this.decoration,
+      this.onChanged,
       this.validation,
+      this.suffixIcon,
       this.contentPadding,
       this.textInputAction,
       this.prefixIcon,

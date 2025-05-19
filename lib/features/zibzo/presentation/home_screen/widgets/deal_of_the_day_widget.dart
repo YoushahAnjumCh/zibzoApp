@@ -1,52 +1,51 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:zibzo_app/core/constant/string_constant.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/home/home_banner_entity.dart';
+import 'package:zibzo/features/zibzo/domain/entities/home/offer_deal_entity.dart';
 
 class DealOfTheDayWidget extends StatelessWidget {
-  final List<HomeBannerEntity> homebanner;
-  const DealOfTheDayWidget({super.key, required this.homebanner});
+  final List<OfferDealEntity> offerDeal;
+
+  const DealOfTheDayWidget({super.key, required this.offerDeal});
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Wrap(
-        direction: Axis.horizontal,
-        spacing: 10,
-        runSpacing: 15,
-        children: homebanner.map((trendingOffers) {
+        spacing: 10.0,
+        runSpacing: 10.0,
+        children: offerDeal.map((dealofDays) {
+          final itemWidth = (screenWidth - 30) / 2;
           return SizedBox(
+            width: itemWidth,
             child: Column(
-              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  height: 194,
-                  margin: const EdgeInsets.symmetric(horizontal: 6),
-                  child: CachedNetworkImage(
-                    imageUrl: "http://localhost:4000/${trendingOffers.image}",
-                    imageBuilder: (context, imageProvider) => Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                  height: 200,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                      image: CachedNetworkImageProvider(dealofDays.image),
+                      fit: BoxFit.cover,
                     ),
-                    placeholder: (context, url) =>
-                        const CircularProgressIndicator(),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
                   ),
                 ),
                 const SizedBox(height: 5),
-                const Icon(Icons.access_time),
+                Text(
+                  dealofDays.title,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.normal,
+                      ),
+                ),
                 const SizedBox(height: 5),
                 Text(
-                  StringConstant.endInDays,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontWeight: FontWeight.w500,
+                  textAlign: TextAlign.center,
+                  dealofDays.offer ?? "",
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
                       ),
                 ),
               ],

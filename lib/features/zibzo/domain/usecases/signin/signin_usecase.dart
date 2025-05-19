@@ -1,9 +1,9 @@
 import 'package:either_dart/either.dart';
 
-import 'package:zibzo_app/core/failure/failure.dart';
-import 'package:zibzo_app/core/usecase/usecase.dart';
-import 'package:zibzo_app/features/zibzo/domain/entities/signup/user.dart';
-import 'package:zibzo_app/features/zibzo/domain/repositories/signup/signup_repository.dart';
+import 'package:zibzo/core/failure/failure.dart';
+import 'package:zibzo/core/usecase/usecase.dart';
+import 'package:zibzo/features/zibzo/domain/entities/signup/user.dart';
+import 'package:zibzo/features/zibzo/domain/repositories/signup/signup_repository.dart';
 
 class SignInUseCase implements UseCase<User, SignInParams> {
   final UserRepository repository;
