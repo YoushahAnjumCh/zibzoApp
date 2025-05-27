@@ -48,8 +48,8 @@ jobs:
   build:
     name: Build APK
     runs-on: macos-latest
-    needs: test # Ensures that the test job runs before this job
-    if: startsWith(github.ref, 'refs/heads/main_') || startsWith(github.ref, 'refs/heads/test_')
+    needs: test
+    if: startsWith(github.ref, 'refs/heads/main')
     steps:
       # Checkout the repository
       - name: Checkout Code
