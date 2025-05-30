@@ -96,7 +96,10 @@ class _CartContent extends StatelessWidget {
                   child: PriceBottomBar(totalPrice: totalPrice))
             ],
           )
-        : cartEmptyWidget(context);
+        : _CartError(
+            message: StringConstant.cartEmpty,
+            isEmptyCart: true,
+          );
   }
 
   Widget _buildCartItems() {
@@ -125,31 +128,6 @@ class _CartContent extends StatelessWidget {
   }
 }
 
-Widget cartEmptyWidget(BuildContext context) {
-  return Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Center(
-        child: Image.asset(
-          AssetsPath.cartEmpty,
-          width: 200,
-          height: 200,
-        ),
-      ),
-      const SizedBox(height: 20),
-      CustomText(
-        attributes: CustomTextAttributes(
-          title: StringConstant.cartEmpty,
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.w500,
-                color: Colors.black,
-              ),
-        ),
-      )
-    ],
-  );
-}
-
 class _CartError extends StatelessWidget {
   final String message;
   final bool isEmptyCart;
@@ -167,28 +145,27 @@ class _CartError extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const CustomText(
-            attributes: CustomTextAttributes(
-              title: StringConstant.myCart,
-              style: AppTextStyles.headingMedium,
-            ),
-          ),
-          const SizedBox(height: 24),
-          Expanded(
-            child: Center(
-              child: CustomText(
-                attributes: CustomTextAttributes(
-                  title: message,
-                  style:
-                      AppTextStyles.headingMedium.copyWith(color: Colors.black),
-                ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: Image.asset(
+                AssetsPath.cartEmpty,
+                width: 200,
+                height: 200,
               ),
             ),
-          ),
-        ],
+            const SizedBox(height: 20),
+            CustomText(
+              attributes: CustomTextAttributes(
+                title: message,
+                style:
+                    AppTextStyles.headingMedium.copyWith(color: Colors.black),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
