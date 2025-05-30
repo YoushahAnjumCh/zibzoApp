@@ -13,9 +13,9 @@ class CartCheckoutButton extends StatelessWidget {
         onClick: () {},
         color: Theme.of(context).colorScheme.primary,
         titleColor: Colors.white,
-        buttonWidthHeight: const Size(double.maxFinite, 50),
+        buttonWidthHeight: const Size(40, 56),
         titleText: StringConstant.checkout,
-        cornerRadius: 8,
+        cornerRadius: 26,
       ),
     );
   }

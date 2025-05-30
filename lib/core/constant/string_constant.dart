@@ -45,6 +45,9 @@ class StringConstant {
   static const exit = "Exit";
   //Cart
   static const checkout = "Checkout";
+  static const myCart = "My Cart";
+  static const totalPrice = "Total Price";
+  static const cartEmpty = "Your cart is empty";
   //Onboard
   static const onBoardTitle = "STEP INTO STYLE LIKE NEVER BEFORE";
   static const onBoardSubtitle =
@@ -57,4 +60,7 @@ class StringConstant {
   static const startTypingSearch = "Start typing to search...";
   static const searchKeywordNotFound =
       "Sorry the keyword you entered cannot found, please try again with another keyword";
+  //Profile
+  static const profilePrivacyPolicy = "Privacy Policy | Terms and Conditions";
+  static const profileLogout = "Log Out";
 }

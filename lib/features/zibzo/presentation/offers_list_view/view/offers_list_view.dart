@@ -6,7 +6,8 @@ import 'package:zibzo/features/zibzo/domain/entities/home/home_response_entity.d
 import 'package:zibzo/features/zibzo/presentation/cart/widgets/cart_loading_widget.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/bloc/product_bloc.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/deal_of_the_day_widget.dart';
-import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/section_title.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/attributes/custom_text_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/custom_text.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/trending_offer_widget.dart';
 import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
@@ -33,9 +34,11 @@ class OffersListView extends StatelessWidget {
           color: Colors.black,
           onPressed: () => context.go(GoRouterPaths.homeScreenRoute),
         ),
-        title: Text(
-          StringConstant.specialOffers,
-          style: Theme.of(context).textTheme.headlineSmall,
+        title: CustomText(
+          attributes: CustomTextAttributes(
+            title: StringConstant.specialOffers,
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
         ),
       ),
       body: productState is ProductLoading
@@ -43,22 +46,26 @@ class OffersListView extends StatelessWidget {
           : SingleChildScrollView(
               child: Column(
                 children: [
-                  SectionTitle(
-                    title: StringConstant.trendingOffer,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontWeight: FontWeight.w500,
-                        ),
+                  CustomText(
+                    attributes: CustomTextAttributes(
+                      title: StringConstant.trendingOffer,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.w500,
+                          ),
+                    ),
                   ),
                   Visibility(
                     visible: product.offerbanner.isNotEmpty,
                     child:
                         TrendingOfferWidget(offerbanner: product.offerbanner),
                   ),
-                  SectionTitle(
-                    title: StringConstant.dealOfDay,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontWeight: FontWeight.w500,
-                        ),
+                  CustomText(
+                    attributes: CustomTextAttributes(
+                      title: StringConstant.dealOfDay,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.w500,
+                          ),
+                    ),
                   ),
                   Visibility(
                     visible: product.offerdeal.isNotEmpty,

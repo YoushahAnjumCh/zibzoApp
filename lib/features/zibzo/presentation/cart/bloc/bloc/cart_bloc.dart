@@ -23,6 +23,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       cart.fold(
           (left) => emit(CartFailure(message: left.errorMessage.toString())),
           (cart) {
+        cart.products.isEmpty
+            ? emit(CartEmpty(
+                message: 'Your cart is empty',
+              ))
+            : emit(CartSuccess(cartResponseEntity: cart));
         emit(CartSuccess(cartResponseEntity: cart));
       });
     } on ServerFailure catch (e) {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:zibzo/core/secure_storage/app_secure_storage.dart';
 import 'package:zibzo/core/service/service_locator.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/attributes/custom_text_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/custom_text.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   CustomAppBar({Key? key}) : super(key: key);
@@ -20,11 +22,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return AppBar(
-            title: Text(''),
+            title: CustomText(
+                attributes: CustomTextAttributes(
+              title: '',
+            )),
           );
         } else if (snapshot.hasError) {
           return AppBar(
-            title: Text(''),
+            title: CustomText(
+                attributes: CustomTextAttributes(
+              title: '',
+            )),
           );
         } else {
           final image = snapshot.data?['image'];
@@ -43,14 +51,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     : SizedBox.shrink(),
                 const SizedBox(width: 10),
                 Expanded(
-                  child: Text(
-                    userName ?? 'Guest',
+                  child: CustomText(
+                      attributes: CustomTextAttributes(
+                    title: userName ?? 'Guest',
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           fontWeight: FontWeight.w500,
                         ),
-                  ),
+                  )),
                 ),
               ],
             ),

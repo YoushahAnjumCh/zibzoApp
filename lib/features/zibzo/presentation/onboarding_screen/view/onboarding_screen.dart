@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zibzo/core/constant/assets_path.dart';
 import 'package:zibzo/core/constant/string_constant.dart';
 import 'package:zibzo/core/routes/app_routes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/attributes/custom_text_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/custom_text.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -33,22 +35,24 @@ class OnboardingScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
-                  StringConstant.onBoardTitle,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
+                CustomText(
+                  attributes: CustomTextAttributes(
+                    title: StringConstant.onBoardTitle,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                 ),
                 const SizedBox(height: 10),
-                const Text(
-                  StringConstant.onBoardSubtitle,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 16,
+                CustomText(
+                  attributes: CustomTextAttributes(
+                    title: StringConstant.onBoardSubtitle,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Colors.white70,
+                        ),
                   ),
                 ),
                 const SizedBox(height: 30),
@@ -74,13 +78,16 @@ class OnboardingScreen extends StatelessWidget {
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      Text(
-                        StringConstant.onBoardButtonText,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                    children: [
+                      CustomText(
+                        attributes: CustomTextAttributes(
+                          title: StringConstant.onBoardButtonText,
+                          textAlign: TextAlign.center,
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
                       ),
                       SizedBox(width: 10),

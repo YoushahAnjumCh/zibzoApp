@@ -9,4 +9,7 @@ class AssetsPath {
   static const notFound = "assets/not_found.png";
   static const searchingIcon = "assets/search.gif";
   static const searchIcon = "assets/search_icon.png";
+  static const trash = "assets/trash.png";
+  static const rightArrow = "assets/right.png";
+  static const cartEmpty = "assets/cart.png";
 }

@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:zibzo/features/zibzo/domain/entities/home/offer_deal_entity.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/attributes/custom_text_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/custom_text.dart';
 
 class DealOfTheDayWidget extends StatelessWidget {
   final List<OfferDealEntity> offerDeal;
@@ -34,20 +36,18 @@ class DealOfTheDayWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 5),
-                Text(
-                  dealofDays.title,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.normal,
-                      ),
-                ),
+                CustomText(
+                    attributes: CustomTextAttributes(
+                        title: dealofDays.title,
+                        style: Theme.of(context).textTheme.titleMedium)),
                 const SizedBox(height: 5),
-                Text(
-                  textAlign: TextAlign.center,
-                  dealofDays.offer ?? "",
+                CustomText(
+                    attributes: CustomTextAttributes(
+                  title: dealofDays.offer ?? "",
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
-                ),
+                )),
               ],
             ),
           );

@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:zibzo/core/constant/assets_path.dart';
 import 'package:zibzo/core/constant/string_constant.dart';
 import 'package:zibzo/features/zibzo/domain/entities/home/category_entity.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/attributes/custom_text_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/custom_text.dart';
 import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
 class CategoryItems extends StatelessWidget {
@@ -44,11 +46,14 @@ class CategoryItems extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Text(
-                    textAlign: TextAlign.center,
-                    StringConstant.categories,
-                    style: TextStyle(fontSize: 14, color: Colors.black),
-                  ),
+                  CustomText(
+                    attributes: CustomTextAttributes(
+                      title: StringConstant.categories,
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: Colors.black,
+                          ),
+                    ),
+                  )
                 ],
               ),
             );
@@ -91,9 +96,13 @@ class CategoryItems extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    categoryitems.title,
-                    style: TextStyle(fontSize: 14, color: Colors.black),
+                  CustomText(
+                    attributes: CustomTextAttributes(
+                      title: categoryitems.title,
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: Colors.black,
+                          ),
+                    ),
                   ),
                 ],
               ),

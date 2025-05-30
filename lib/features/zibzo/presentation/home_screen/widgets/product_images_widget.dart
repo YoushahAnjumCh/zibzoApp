@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/attributes/custom_text_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/custom_text.dart';
 
 class CustomImageRow extends StatelessWidget {
   final List<String> imageUrls;
@@ -70,7 +72,7 @@ class _MultipleImages extends StatelessWidget {
                 child: _ImageContainer(url: urls[1], height: 105),
               ),
               const SizedBox(height: 5),
-              _buildOverlayImage(urls),
+              _buildOverlayImage(urls, context),
             ],
           ),
         ),
@@ -78,39 +80,38 @@ class _MultipleImages extends StatelessWidget {
     );
   }
 
-  Widget _buildOverlayImage(List<String> urls) {
+  Widget _buildOverlayImage(List<String> urls, BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(left: 5),
       child: Stack(
         alignment: Alignment.center,
         children: [
           _ImageContainer(url: urls[2], height: 105),
-          if (urls.length > 3) _buildCountOverlay(urls.length - 2),
+          if (urls.length > 3) _buildCountOverlay(urls.length - 2, context),
         ],
       ),
     );
   }
 
-  Widget _buildCountOverlay(int count) {
+  Widget _buildCountOverlay(int count, BuildContext context) {
     return Container(
-      width: double.infinity,
-      height: 105,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Color.fromRGBO(0, 0, 0, 0.5),
-      ),
-      alignment: Alignment.center,
-      child: Center(
-        child: Text(
-          '+$count',
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+        width: double.infinity,
+        height: 105,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Color.fromRGBO(0, 0, 0, 0.5),
         ),
-      ),
-    );
+        alignment: Alignment.center,
+        child: Center(
+          child: CustomText(
+            attributes: CustomTextAttributes(
+                title: '+$count',
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    )),
+          ),
+        ));
   }
 }
 
@@ -135,7 +136,7 @@ class _ImageContainer extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             image: DecorationImage(
               image: imageProvider,
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
             ),
           ),
         ),

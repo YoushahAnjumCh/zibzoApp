@@ -9,12 +9,14 @@ class CartProductImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 80,
-      height: 80,
+      width: 100,
+      height: 90,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         image: DecorationImage(
-          image: NetworkImage(imageUrl),
+          image: NetworkImage(
+            imageUrl,
+          ),
           fit: BoxFit.cover,
         ),
       ),

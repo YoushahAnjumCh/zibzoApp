@@ -30,3 +30,12 @@ class CartFailure extends CartState {
   @override
   List<Object> get props => [message];
 }
+
+class CartEmpty extends CartState {
+  final String message;
+
+  const CartEmpty({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}

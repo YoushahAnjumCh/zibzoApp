@@ -10,6 +10,8 @@ import 'package:zibzo/features/zibzo/domain/entities/home/home_products_entity.d
 import 'package:zibzo/features/zibzo/domain/usecases/cart/add_cart_usecase.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/cubit/add_cart/add_cart_cubit.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/product_images_widget.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/attributes/custom_text_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/custom_text.dart';
 import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
 class ProductCard extends StatelessWidget {
@@ -59,10 +61,11 @@ class ProductCard extends StatelessWidget {
 
   Widget _buildText(BuildContext context, String text, TextStyle? style,
       FontWeight fontWeight) {
-    return Text(
-      text,
+    return CustomText(
+        attributes: CustomTextAttributes(
+      title: text,
       style: style?.copyWith(fontWeight: fontWeight),
-    );
+    ));
   }
 
   Widget _buildPriceRow(BuildContext context, double actualPrice,
@@ -70,24 +73,29 @@ class ProductCard extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
-          '₹ ${Stringformatter.removeTrailingZeros(actualPrice)}',
+        CustomText(
+            attributes: CustomTextAttributes(
+          title: '₹ ${Stringformatter.removeTrailingZeros(actualPrice)}',
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
                 decoration: TextDecoration.lineThrough,
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
               ),
-        ),
+        )),
         const SizedBox(width: 13),
-        Text(
-          '₹ ${Stringformatter.removeTrailingZeros(offerPrice)}',
+        CustomText(
+            attributes: CustomTextAttributes(
+          title: '₹ ${Stringformatter.removeTrailingZeros(offerPrice)}',
           style: Theme.of(context).textTheme.labelLarge,
-        ),
+        )),
         const SizedBox(width: 13),
-        Text(
-          "(${Stringformatter.removeTrailingZeros(offerPercentage)}% Off)",
-          style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: Theme.of(context).colorScheme.scrim,
-              ),
+        CustomText(
+          attributes: CustomTextAttributes(
+            title:
+                "(${Stringformatter.removeTrailingZeros(offerPercentage)}% Off)",
+            style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.scrim,
+                ),
+          ),
         ),
       ],
     );
@@ -97,7 +105,7 @@ class ProductCard extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        _buildOutlinedButton("Wishlist", Icons.favorite_border, () {}),
+        _buildOutlinedButton("Wishlist", Icons.favorite_border, () {}, context),
         const SizedBox(width: 10),
         Expanded(
           child: BlocConsumer<AddCartCubit, AddCartState>(
@@ -144,12 +152,16 @@ class ProductCard extends StatelessWidget {
                           )
                         : Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: const [
-                              Text(
-                                "Add to Bag",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
+                            children: [
+                              CustomText(
+                                attributes: CustomTextAttributes(
+                                  title: "Add to Bag",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.copyWith(
+                                        color: Colors.white,
+                                      ),
                                 ),
                               ),
                               Icon(Icons.shopping_bag_outlined,
@@ -166,8 +178,8 @@ class ProductCard extends StatelessWidget {
     );
   }
 
-  Widget _buildOutlinedButton(
-      String label, IconData icon, VoidCallback onPressed) {
+  Widget _buildOutlinedButton(String label, IconData icon,
+      VoidCallback onPressed, BuildContext context) {
     return Expanded(
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
@@ -180,9 +192,9 @@ class ProductCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text(
-              label,
-              style: const TextStyle(fontSize: 14),
+            CustomText(
+              attributes: CustomTextAttributes(
+                  title: label, style: Theme.of(context).textTheme.bodyMedium),
             ),
             Icon(icon),
           ],

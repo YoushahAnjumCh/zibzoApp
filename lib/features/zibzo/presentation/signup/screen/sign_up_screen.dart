@@ -22,6 +22,8 @@ import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/text
 import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/text_input_form_field_attributes.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/widgets/input_form_button.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/widgets/text_input_form_field.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/attributes/custom_text_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/custom_text.dart';
 import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -161,13 +163,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Text(
-            StringConstant.letsMakeAccount,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
+          child: CustomText(
+            attributes: CustomTextAttributes(
+              title: StringConstant.letsMakeAccount,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
           ),
         ),
       ],
@@ -181,11 +185,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
         return errorMessage.isNotEmpty
             ? Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: Text(
-                  errorMessage,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.error,
-                    fontWeight: FontWeight.bold,
+                child: CustomText(
+                  attributes: CustomTextAttributes(
+                    title: errorMessage,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.error,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               )
@@ -329,22 +335,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            StringConstant.alreadyHaveAccount,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.primaryContainer,
-                ),
+          CustomText(
+            attributes: CustomTextAttributes(
+              title: StringConstant.alreadyHaveAccount,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                  ),
+            ),
           ),
           GestureDetector(
             onTap: () {
               context.push(GoRouterPaths.loginRoute);
             },
-            child: Text(
-              StringConstant.login,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
+            child: CustomText(
+              attributes: CustomTextAttributes(
+                title: StringConstant.login,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
             ),
           ),
         ],

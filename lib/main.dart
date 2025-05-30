@@ -38,12 +38,12 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({
+  MyApp({
     super.key,
   });
+  final AppRouter appRouter = AppRouter();
   @override
   Widget build(BuildContext context) {
-    final AppRouter appRouter = AppRouter();
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => CartCountProvider()),

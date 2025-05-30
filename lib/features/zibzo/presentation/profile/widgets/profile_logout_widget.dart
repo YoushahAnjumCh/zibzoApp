@@ -3,8 +3,11 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zibzo/common/provider/cart_count_provider.dart';
+import 'package:zibzo/core/constant/string_constant.dart';
 import 'package:zibzo/core/routes/app_routes.dart';
 import 'package:zibzo/core/theme/app_text_styles.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/attributes/custom_text_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/custom_text.dart';
 import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
 class ProfileLogoutWidget extends StatelessWidget {
@@ -38,11 +41,13 @@ class ProfileLogoutWidget extends StatelessWidget {
             const SizedBox(
               width: 12,
             ),
-            Text(
-              "Log Out",
-              style: AppTextStyles.bodyMedium.copyWith(
-                fontWeight: FontWeight.w700,
-                color: Theme.of(context).colorScheme.error,
+            CustomText(
+              attributes: CustomTextAttributes(
+                title: StringConstant.profileLogout,
+                style: AppTextStyles.bodyMedium.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: Theme.of(context).colorScheme.error,
+                ),
               ),
             ),
           ],

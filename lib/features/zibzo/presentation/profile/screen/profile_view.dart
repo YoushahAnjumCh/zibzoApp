@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:zibzo/core/constant/string_constant.dart';
 import 'package:zibzo/core/theme/app_text_styles.dart';
 import 'package:zibzo/features/zibzo/presentation/profile/widgets/profile_details_widget.dart';
 import 'package:zibzo/features/zibzo/presentation/profile/widgets/profile_items_widget.dart';
 import 'package:zibzo/features/zibzo/presentation/profile/widgets/profile_logout_widget.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/attributes/custom_text_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/custom_text.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -61,12 +64,14 @@ class ProfileView extends StatelessWidget {
                   const SizedBox(
                     height: 37,
                   ),
-                  Text(
-                    "Privacy Policy | Terms and Conditions",
-                    style: AppTextStyles.bodyMedium.copyWith(
-                        fontWeight: FontWeight.normal,
-                        color:
-                            Theme.of(context).colorScheme.onPrimaryContainer),
+                  CustomText(
+                    attributes: CustomTextAttributes(
+                      title: StringConstant.profilePrivacyPolicy,
+                      style: AppTextStyles.bodyMedium.copyWith(
+                          fontWeight: FontWeight.normal,
+                          color:
+                              Theme.of(context).colorScheme.onPrimaryContainer),
+                    ),
                   ),
                   const SizedBox(
                     height: 30,

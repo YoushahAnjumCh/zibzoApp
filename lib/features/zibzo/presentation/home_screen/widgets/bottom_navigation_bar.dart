@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:zibzo/common/bottom_nav_bar_notifier.dart';
 import 'package:zibzo/common/provider/cart_count_provider.dart';
 import 'package:zibzo/features/zibzo/presentation/cart/bloc/bloc/cart_bloc.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/attributes/custom_text_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/custom_text.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({Key? key}) : super(key: key);
@@ -44,11 +46,13 @@ class CustomBottomNavBar extends StatelessWidget {
                       child: CircleAvatar(
                         radius: 8,
                         backgroundColor: Colors.red,
-                        child: Text(
-                          cartProvider.cartCount.toString(),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
+                        child: CustomText(
+                          attributes: CustomTextAttributes(
+                            title: cartProvider.cartCount.toString(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                            ),
                           ),
                         ),
                       ),
