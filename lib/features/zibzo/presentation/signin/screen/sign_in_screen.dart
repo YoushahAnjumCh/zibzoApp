@@ -22,6 +22,8 @@ import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/text
 import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/text_input_form_field_attributes.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/widgets/input_form_button.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/widgets/text_input_form_field.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/attributes/custom_text_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/custom_text.dart';
 import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -152,13 +154,15 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget _buildWelcomeText(BuildContext context) {
     return Column(
       children: [
-        Text(
-          StringConstant.signIn,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Theme.of(context).colorScheme.primary,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+        CustomText(
+          attributes: CustomTextAttributes(
+            title: StringConstant.signIn,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
         ),
       ],
     );
@@ -169,11 +173,13 @@ class _SignInScreenState extends State<SignInScreen> {
       valueListenable: errorMessageNotifier,
       builder: (context, errorMessage, child) {
         return errorMessage.isNotEmpty
-            ? Text(
-                errorMessage,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.error,
-                  fontWeight: FontWeight.bold,
+            ? CustomText(
+                attributes: CustomTextAttributes(
+                  title: errorMessage,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.error,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               )
             : SizedBox.shrink();
@@ -275,22 +281,26 @@ class _SignInScreenState extends State<SignInScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              StringConstant.dontHaveAccount,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.primaryContainer,
-                  ),
+            CustomText(
+              attributes: CustomTextAttributes(
+                title: StringConstant.dontHaveAccount,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.primaryContainer,
+                    ),
+              ),
             ),
             GestureDetector(
               onTap: () {
                 context.push(GoRouterPaths.signupRoute);
               },
-              child: Text(
-                StringConstant.register,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.bold,
-                    ),
+              child: CustomText(
+                attributes: CustomTextAttributes(
+                  title: StringConstant.register,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
               ),
             ),
           ],

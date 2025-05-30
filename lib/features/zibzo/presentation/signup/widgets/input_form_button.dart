@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/text_form_button_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/attributes/custom_text_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/custom_text.dart';
 
 class InputFormButton extends StatelessWidget {
   final TextFormButtonAttributes attributes;
@@ -18,12 +20,12 @@ class InputFormButton extends StatelessWidget {
           ),
         ),
         child: attributes.titleText != null
-            ? Text(
-                attributes.titleText!,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge!
-                    .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+            ? CustomText(
+                attributes: CustomTextAttributes(
+                  title: attributes.titleText!,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
               )
             : Container());
   }

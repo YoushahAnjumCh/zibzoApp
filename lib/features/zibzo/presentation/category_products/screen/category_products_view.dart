@@ -10,6 +10,8 @@ import 'package:zibzo/features/zibzo/presentation/category_products/widgets/cate
 import 'package:zibzo/features/zibzo/presentation/category_products/widgets/category_not_found.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/cubit/add_cart/add_cart_cubit.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/product_card_widget.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/attributes/custom_text_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/custom_text.dart';
 import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
 
 class CategoryProductsView extends StatelessWidget {
@@ -36,7 +38,10 @@ class CategoryProductsView extends StatelessWidget {
           } else if (state is CategoryProductFailure) {
             return ErrorMessage(message: state.message);
           } else {
-            return const Center(child: Text('No products available.'));
+            return const Center(
+                child: CustomText(
+                    attributes:
+                        CustomTextAttributes(title: 'No products available.')));
           }
         },
       ),
@@ -46,10 +51,13 @@ class CategoryProductsView extends StatelessWidget {
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
       leading: BackButton(color: Colors.black, onPressed: () => context.pop()),
-      title: Text(categoryName,
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.w500,
-              )),
+      title: CustomText(
+        attributes: CustomTextAttributes(
+            title: categoryName,
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.w500,
+                )),
+      ),
       actions: [
         Consumer<CartCountProvider>(builder: (context, cartProvider, child) {
           return Padding(
@@ -65,16 +73,18 @@ class CategoryProductsView extends StatelessWidget {
                   Positioned(
                     right: 0,
                     child: CircleAvatar(
-                      radius: 8,
-                      backgroundColor: Colors.red,
-                      child: Text(
-                        cartProvider.cartCount.toString(),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ),
+                        radius: 8,
+                        backgroundColor: Colors.red,
+                        child: CustomText(
+                          attributes: CustomTextAttributes(
+                            title: cartProvider.cartCount.toString(),
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                          ),
+                        )),
                   ),
               ],
             ),

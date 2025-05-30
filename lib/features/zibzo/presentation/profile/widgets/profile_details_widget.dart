@@ -3,6 +3,8 @@ import 'package:zibzo/core/constant/assets_path.dart';
 import 'package:zibzo/core/secure_storage/app_secure_storage.dart';
 import 'package:zibzo/core/service/service_locator.dart';
 import 'package:zibzo/core/theme/app_text_styles.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/attributes/custom_text_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/custom_text.dart';
 
 class ProfileDetailsWidget extends StatelessWidget {
   ProfileDetailsWidget({super.key});
@@ -26,7 +28,10 @@ class ProfileDetailsWidget extends StatelessWidget {
         }
 
         if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
+          return Center(
+              child: CustomText(
+            attributes: CustomTextAttributes(title: 'Error: ${snapshot.error}'),
+          ));
         }
 
         if (snapshot.connectionState == ConnectionState.done) {
@@ -55,21 +60,25 @@ class ProfileDetailsWidget extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        userName ?? "",
-                        style: AppTextStyles.headingMedium
-                            .copyWith(color: Colors.black),
+                      CustomText(
+                        attributes: CustomTextAttributes(
+                          title: userName ?? "",
+                          style: AppTextStyles.headingMedium
+                              .copyWith(color: Colors.black),
+                        ),
                       ),
                       const SizedBox(
                         height: 3,
                       ),
-                      Text(
-                        email ?? "",
-                        style: AppTextStyles.bodyMedium.copyWith(
-                            fontWeight: FontWeight.normal,
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onPrimaryContainer),
+                      CustomText(
+                        attributes: CustomTextAttributes(
+                          title: email ?? "",
+                          style: AppTextStyles.bodyMedium.copyWith(
+                              fontWeight: FontWeight.normal,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onPrimaryContainer),
+                        ),
                       ),
                     ],
                   ),
@@ -77,7 +86,10 @@ class ProfileDetailsWidget extends StatelessWidget {
               ),
             );
           } else {
-            return Center(child: Text(''));
+            return Center(
+                child: CustomText(
+              attributes: CustomTextAttributes(title: ''),
+            ));
           }
         }
 

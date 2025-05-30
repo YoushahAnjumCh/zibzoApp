@@ -9,6 +9,8 @@ import 'package:zibzo/features/zibzo/presentation/home_screen/screen/home_view.d
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/bottom_navigation_bar.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/custom_bottom_sheet.dart';
 import 'package:zibzo/features/zibzo/presentation/profile/screen/profile_view.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/attributes/custom_text_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/custom_text.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -55,6 +57,13 @@ class WishListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Wishlist View'));
+    return Center(
+        child: CustomText(
+            attributes: CustomTextAttributes(
+      title: 'Wish List',
+      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+    )));
   }
 }

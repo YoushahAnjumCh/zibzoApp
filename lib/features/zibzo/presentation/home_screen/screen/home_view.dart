@@ -14,7 +14,8 @@ import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/category_i
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/custom_appbar_widget.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/home_loading_widget.dart';
 import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/product_card_widget.dart';
-import 'package:zibzo/features/zibzo/presentation/home_screen/widgets/section_title.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/attributes/custom_text_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/custom_text.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/widgets/attributes/text_input_form_field_attributes.dart';
 import 'package:zibzo/features/zibzo/presentation/signup/widgets/text_input_form_field.dart';
 import 'package:zibzo/firebase/analytics/firebase_analytics.dart';
@@ -51,7 +52,11 @@ class HomeView extends StatelessWidget {
                 state: state,
               );
             } else {
-              return const Center(child: Text(StringConstant.somethingWrong));
+              return const Center(
+                  child: CustomText(
+                      attributes: CustomTextAttributes(
+                title: StringConstant.somethingWrong,
+              )));
             }
           },
         ),
@@ -121,12 +126,13 @@ class _HomeContentState extends State<HomeContent> {
 
             const SizedBox(height: 10),
 
-            SectionTitle(
+            CustomText(
+                attributes: CustomTextAttributes(
               title: StringConstant.ourCollection,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.w500,
                   ),
-            ),
+            )),
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,

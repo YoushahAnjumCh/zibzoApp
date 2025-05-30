@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zibzo/core/theme/app_text_styles.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/attributes/custom_text_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/custom_text.dart';
 
 class ProfileItemsWidget extends StatelessWidget {
   final IconData icons;
@@ -28,10 +30,12 @@ class ProfileItemsWidget extends StatelessWidget {
             const SizedBox(
               width: 18,
             ),
-            Text(
-              itemName,
-              style: AppTextStyles.bodyMedium
-                  .copyWith(fontWeight: FontWeight.w600),
+            CustomText(
+              attributes: CustomTextAttributes(
+                title: itemName,
+                style: AppTextStyles.bodyMedium
+                    .copyWith(fontWeight: FontWeight.w600),
+              ),
             ),
             Spacer(),
             Icon(Icons.arrow_forward_ios),

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:zibzo/core/constant/string_constant.dart';
 import 'package:zibzo/core/theme/app_colors.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/attributes/custom_text_attributes.dart';
+import 'package:zibzo/features/zibzo/presentation/widgets/custom_text.dart';
 
 class CustomBottomSheet {
   static void show({
@@ -33,9 +35,12 @@ class CustomBottomSheet {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
               ),
-              Text(
-                StringConstant.doYouWantExit,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              CustomText(
+                attributes: CustomTextAttributes(
+                    title: StringConstant.doYouWantExit,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        )),
               ),
               SizedBox(height: 24),
               Row(
@@ -50,9 +55,10 @@ class CustomBottomSheet {
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      child: Text(
-                        StringConstant.cancel,
-                        style: TextStyle(fontSize: 16),
+                      child: CustomText(
+                        attributes: CustomTextAttributes(
+                            title: StringConstant.cancel,
+                            style: Theme.of(context).textTheme.bodyLarge),
                       ),
                     ),
                   ),
@@ -73,10 +79,13 @@ class CustomBottomSheet {
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      child: Text(
-                        StringConstant.exit,
-                        style: TextStyle(
-                            fontSize: 16, color: AppColors.onPrimaryLight),
+                      child: CustomText(
+                        attributes: CustomTextAttributes(
+                            title: StringConstant.exit,
+                            style:
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                      color: AppColors.onPrimaryLight,
+                                    )),
                       ),
                     ),
                   ),

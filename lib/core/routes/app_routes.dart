@@ -18,19 +18,17 @@ import 'package:zibzo/features/zibzo/presentation/signup/screen/sign_up_screen.d
 import 'package:zibzo/features/zibzo/presentation/splash_screen/view/splash_screen.dart';
 
 class AppRouter {
-  AppRouter();
-  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-  static FirebaseAnalyticsObserver observer =
+  static final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  static final FirebaseAnalyticsObserver observer =
       FirebaseAnalyticsObserver(analytics: analytics);
-
+  final GlobalKey<NavigatorState> _rootNavigatorKey =
+      GlobalKey<NavigatorState>();
+  AppRouter();
   late final GoRouter router = GoRouter(
+    navigatorKey: _rootNavigatorKey,
     initialLocation: GoRouterPaths.splashRoute,
     observers: [observer],
     routes: [
-      GoRoute(
-        path: GoRouterPaths.loginRoute,
-        builder: (context, state) => SignInScreen(),
-      ),
       GoRoute(
         path: GoRouterPaths.offerListViewRoute,
         pageBuilder: (context, state) {
